@@ -1,6 +1,8 @@
 aid: sendbird
 name: Sendbird
-description: "Supercharge customer engagement in and outside your app, with APIs and software for chat,\_voice and\_video, AI chatbots, and omnichannel business messaging. "
+description: >-
+  Supercharge customer engagement in and outside your app, with APIs and software
+  for chat, voice and video, AI chatbots, and omnichannel business messaging.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -15,7 +17,9 @@ specificationVersion: '0.19'
 apis:
   - aid: sendbird:sendbird
     name: Sendbird
-    description: "Supercharge customer engagement in and outside your app, with APIs and software for chat,\_voice and\_video, AI chatbots, and omnichannel business messaging. "
+    description: >-
+      Supercharge customer engagement in and outside your app, with APIs and software
+      for chat, voice and video, AI chatbots, and omnichannel business messaging.
     humanURL: ' https://sendbird.com/'
     tags:
       - API
