@@ -1,0 +1,70 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "sendbird": "https://sendbird.com/vocab/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "User": {
+      "@id": "sendbird:User",
+      "@type": "@id",
+      "subClassOf": "schema:Person"
+    },
+    "GroupChannel": {
+      "@id": "sendbird:GroupChannel",
+      "@type": "@id",
+      "subClassOf": "schema:ConversationThread"
+    },
+    "Message": {
+      "@id": "sendbird:Message",
+      "@type": "@id",
+      "subClassOf": "schema:Message"
+    },
+
+    "user_id": "@id",
+    "nickname": "schema:name",
+    "profile_url": {
+      "@id": "schema:image",
+      "@type": "@id"
+    },
+    "is_online": {
+      "@id": "sendbird:isOnline",
+      "@type": "xsd:boolean"
+    },
+    "is_active": {
+      "@id": "sendbird:isActive",
+      "@type": "xsd:boolean"
+    },
+    "created_at": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:integer"
+    },
+    "last_seen_at": {
+      "@id": "sendbird:lastSeenAt",
+      "@type": "xsd:integer"
+    },
+    "metadata": "sendbird:metadata",
+
+    "channel_url": "@id",
+    "name": "schema:name",
+    "member_count": {
+      "@id": "schema:numberOfItems",
+      "@type": "xsd:integer"
+    },
+    "cover_url": {
+      "@id": "schema:image",
+      "@type": "@id"
+    },
+    "is_distinct": {
+      "@id": "sendbird:isDistinct",
+      "@type": "xsd:boolean"
+    },
+
+    "message_id": "@id",
+    "message": "schema:text",
+    "type": "sendbird:messageType",
+    "custom_type": "sendbird:customType",
+    "data": "sendbird:customData",
+    "mention_type": "sendbird:mentionType"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/sendbird/json-schema/sendbird-user-schema.json",
+  "title": "Sendbird User",
+  "description": "A user registered in the Sendbird application.",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Unique identifier of the user within the Sendbird application."
+    },
+    "nickname": {
+      "type": "string",
+      "description": "Display nickname of the user shown in chat."
+    },
+    "profile_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the user's profile image."
+    },
+    "is_online": {
+      "type": "boolean",
+      "description": "Whether the user is currently online."
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Whether the user account is active (not deactivated)."
+    },
+    "last_seen_at": {
+      "type": "integer",
+      "description": "Unix timestamp (milliseconds) of the user's last activity."
+    },
+    "access_token": {
+      "type": "string",
+      "description": "Session token for the user. Returned when issue_access_token is true during creation."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Custom metadata key-value pairs associated with the user.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "created_at": {
+      "type": "integer",
+      "description": "Unix timestamp (milliseconds) when the user was created."
+    }
+  },
+  "required": ["user_id", "nickname", "profile_url"]
+}

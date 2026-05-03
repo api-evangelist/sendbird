@@ -1,0 +1,195 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Sendbird Customer Support Messaging"
+  description: >-
+    Workflow capability for customer support messaging using Sendbird — enabling
+    support teams to manage customer conversations, assign agents, send messages,
+    moderate users, and monitor channel activity for customer service operations.
+  tags:
+    - Sendbird
+    - Customer Support
+    - Messaging
+    - Chat
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SENDBIRD_API_TOKEN: SENDBIRD_API_TOKEN
+      SENDBIRD_APP_ID: SENDBIRD_APP_ID
+
+capability:
+  consumes:
+    - import: sendbird-platform
+      location: ./shared/platform-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: sendbird-support-api
+      description: "Unified REST API for Sendbird customer support messaging."
+      resources:
+        - path: /v1/users
+          name: users
+          description: "Manage support users and customers."
+          operations:
+            - method: GET
+              name: list-users
+              description: "List users (customers and agents)."
+              call: "sendbird-platform.list-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-user
+              description: "Create a new user."
+              call: "sendbird-platform.create-user"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/users/{user_id}
+          name: user
+          description: "Manage a specific user."
+          operations:
+            - method: GET
+              name: get-user
+              description: "Get user details."
+              call: "sendbird-platform.get-user"
+              with:
+                user_id: "rest.user_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/channels
+          name: channels
+          description: "Manage support conversation channels."
+          operations:
+            - method: GET
+              name: list-channels
+              description: "List group channels."
+              call: "sendbird-platform.list-group-channels"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-channel
+              description: "Create a support channel."
+              call: "sendbird-platform.create-group-channel"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/channels/{channel_url}/messages
+          name: messages
+          description: "Manage channel messages."
+          operations:
+            - method: GET
+              name: list-messages
+              description: "List messages in a channel."
+              call: "sendbird-platform.list-messages"
+              with:
+                channel_url: "rest.channel_url"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: send-message
+              description: "Send a message."
+              call: "sendbird-platform.send-message"
+              with:
+                channel_url: "rest.channel_url"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: sendbird-support-mcp
+      transport: http
+      description: "MCP server for AI-assisted Sendbird customer support."
+      tools:
+        - name: list-users
+          description: "List customers and agents in the Sendbird application."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sendbird-platform.list-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-user
+          description: "Get details of a specific customer or agent."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sendbird-platform.get-user"
+          with:
+            user_id: "tools.user_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-support-channel
+          description: "Create a new support conversation channel between a customer and agent."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "sendbird-platform.create-group-channel"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-channels
+          description: "List all support conversation channels."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sendbird-platform.list-group-channels"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-messages
+          description: "List messages in a support conversation channel."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sendbird-platform.list-messages"
+          with:
+            channel_url: "tools.channel_url"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: send-support-message
+          description: "Send a message to a customer in a support channel."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "sendbird-platform.send-message"
+          with:
+            channel_url: "tools.channel_url"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: ban-user
+          description: "Ban a disruptive user from a channel."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "sendbird-platform.ban-user"
+          with:
+            user_id: "tools.user_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: mute-user
+          description: "Temporarily mute a user in a channel."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "sendbird-platform.mute-user"
+          with:
+            user_id: "tools.user_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

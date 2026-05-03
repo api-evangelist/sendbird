@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/sendbird/json-schema/sendbird-message-schema.json",
+  "title": "Sendbird Message",
+  "description": "A message sent in a Sendbird channel.",
+  "type": "object",
+  "properties": {
+    "message_id": {
+      "type": "integer",
+      "description": "Unique identifier of the message."
+    },
+    "type": {
+      "type": "string",
+      "description": "Type of message: MESG (text), FILE (file), ADMM (admin).",
+      "enum": ["MESG", "FILE", "ADMM"]
+    },
+    "message": {
+      "type": "string",
+      "description": "Text content of the message."
+    },
+    "channel_url": {
+      "type": "string",
+      "description": "URL of the channel containing this message."
+    },
+    "created_at": {
+      "type": "integer",
+      "description": "Unix timestamp (milliseconds) when the message was sent."
+    },
+    "updated_at": {
+      "type": "integer",
+      "description": "Unix timestamp (milliseconds) when the message was last updated."
+    },
+    "custom_type": {
+      "type": "string",
+      "description": "Custom type for message categorization."
+    },
+    "data": {
+      "type": "string",
+      "description": "Custom data string attached to the message."
+    },
+    "mention_type": {
+      "type": "string",
+      "description": "Type of user mention: 'users' for specific users, 'channel' for all members.",
+      "enum": ["users", "channel"]
+    },
+    "mentioned_users": {
+      "type": "array",
+      "description": "Users mentioned in the message.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "user_id": {"type": "string"},
+          "nickname": {"type": "string"}
+        }
+      }
+    }
+  },
+  "required": ["message_id", "type", "channel_url", "created_at"]
+}

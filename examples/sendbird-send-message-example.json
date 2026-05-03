@@ -1,0 +1,44 @@
+{
+  "operation": "sendMessage",
+  "method": "POST",
+  "path": "/group_channels/{channel_url}/messages",
+  "description": "Send a text message to a group channel.",
+  "request": {
+    "url": "https://api-YOUR_APP_ID.sendbird.com/v3/group_channels/sendbird_group_channel_12345/messages",
+    "method": "POST",
+    "headers": {
+      "Api-Token": "{api_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "message_type": "MESG",
+      "user_id": "agent_001",
+      "message": "Hi Jane! I'm looking into your order issue right now. Can you confirm your order number?",
+      "custom_type": "support_response",
+      "data": "{\"ticket_id\": \"TKT-9876\", \"priority\": \"high\"}"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "message_id": 987654321,
+      "type": "MESG",
+      "message": "Hi Jane! I'm looking into your order issue right now. Can you confirm your order number?",
+      "channel_url": "sendbird_group_channel_12345",
+      "user": {
+        "user_id": "agent_001",
+        "nickname": "Support Agent Alex",
+        "profile_url": "https://example.com/avatars/alex.png"
+      },
+      "created_at": 1746172900000,
+      "updated_at": 1746172900000,
+      "custom_type": "support_response",
+      "data": "{\"ticket_id\": \"TKT-9876\", \"priority\": \"high\"}",
+      "mention_type": null,
+      "mentioned_users": []
+    }
+  }
+}

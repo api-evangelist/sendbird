@@ -1,0 +1,46 @@
+{
+  "operation": "createUser",
+  "method": "POST",
+  "path": "/users",
+  "description": "Create a new user in the Sendbird application.",
+  "request": {
+    "url": "https://api-YOUR_APP_ID.sendbird.com/v3/users",
+    "method": "POST",
+    "headers": {
+      "Api-Token": "{api_token}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "user_id": "user_jane_smith_001",
+      "nickname": "Jane Smith",
+      "profile_url": "https://example.com/avatars/jane.png",
+      "issue_access_token": true,
+      "metadata": {
+        "role": "customer",
+        "plan": "premium",
+        "region": "us-west"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "user_id": "user_jane_smith_001",
+      "nickname": "Jane Smith",
+      "profile_url": "https://example.com/avatars/jane.png",
+      "is_online": false,
+      "is_active": true,
+      "last_seen_at": 0,
+      "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.sample_token_here",
+      "metadata": {
+        "role": "customer",
+        "plan": "premium",
+        "region": "us-west"
+      },
+      "created_at": 1746172800000
+    }
+  }
+}

@@ -1,0 +1,192 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Sendbird Community Chat"
+  description: >-
+    Workflow capability for building and managing community chat experiences with
+    Sendbird — covering channel management, user onboarding, message delivery,
+    and community moderation for marketplaces, communities, and social platforms.
+  tags:
+    - Sendbird
+    - Community
+    - Chat
+    - Moderation
+    - Social
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SENDBIRD_API_TOKEN: SENDBIRD_API_TOKEN
+      SENDBIRD_APP_ID: SENDBIRD_APP_ID
+
+capability:
+  consumes:
+    - import: sendbird-platform
+      location: ./shared/platform-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: sendbird-community-api
+      description: "Unified REST API for Sendbird community chat management."
+      resources:
+        - path: /v1/members
+          name: members
+          description: "Manage community members."
+          operations:
+            - method: GET
+              name: list-members
+              description: "List community members."
+              call: "sendbird-platform.list-users"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: register-member
+              description: "Register a new community member."
+              call: "sendbird-platform.create-user"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/rooms
+          name: rooms
+          description: "Manage community chat rooms."
+          operations:
+            - method: GET
+              name: list-rooms
+              description: "List chat rooms."
+              call: "sendbird-platform.list-group-channels"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-room
+              description: "Create a new chat room."
+              call: "sendbird-platform.create-group-channel"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/rooms/{channel_url}/messages
+          name: room-messages
+          description: "Manage messages in a chat room."
+          operations:
+            - method: GET
+              name: list-room-messages
+              description: "List messages in a room."
+              call: "sendbird-platform.list-messages"
+              with:
+                channel_url: "rest.channel_url"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: post-message
+              description: "Post a message to a room."
+              call: "sendbird-platform.send-message"
+              with:
+                channel_url: "rest.channel_url"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: sendbird-community-mcp
+      transport: http
+      description: "MCP server for AI-assisted Sendbird community management."
+      tools:
+        - name: list-community-members
+          description: "List members of the Sendbird community."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sendbird-platform.list-users"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: register-member
+          description: "Register a new community member in Sendbird."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "sendbird-platform.create-user"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-member-profile
+          description: "Get the profile of a community member."
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "sendbird-platform.get-user"
+          with:
+            user_id: "tools.user_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-chat-rooms
+          description: "List all community chat rooms and channels."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sendbird-platform.list-group-channels"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-chat-room
+          description: "Create a new community chat room or group channel."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "sendbird-platform.create-group-channel"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-room-messages
+          description: "List messages in a community chat room."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "sendbird-platform.list-messages"
+          with:
+            channel_url: "tools.channel_url"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: post-message
+          description: "Post a message to a community chat room."
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "sendbird-platform.send-message"
+          with:
+            channel_url: "tools.channel_url"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: moderate-ban-member
+          description: "Ban a member from a community channel for violation of rules."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "sendbird-platform.ban-user"
+          with:
+            user_id: "tools.user_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: moderate-mute-member
+          description: "Temporarily mute a community member."
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "sendbird-platform.mute-user"
+          with:
+            user_id: "tools.user_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

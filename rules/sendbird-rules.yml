@@ -1,0 +1,87 @@
+extends: spectral:oas
+rules:
+  sendbird-summary-title-case:
+    description: Operation summaries must use Title Case.
+    message: "Summary '{{value}}' must use Title Case."
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9\\s]*$"
+
+  sendbird-api-token-auth:
+    description: All operations must use Api-Token authentication.
+    message: "Operation must define security with apiTokenAuth."
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: security
+      function: defined
+
+  sendbird-server-https:
+    description: All server URLs must use HTTPS.
+    message: "Server URL must use HTTPS."
+    severity: error
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  sendbird-operationid-camelcase:
+    description: OperationId must be camelCase.
+    message: "OperationId '{{value}}' must be camelCase."
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  sendbird-response-200-defined:
+    description: Operations must have a 200 response.
+    message: "Operation must define a 200 response."
+    severity: error
+    given: "$.paths[*][get,post,put,patch].responses"
+    then:
+      field: "200"
+      function: defined
+
+  sendbird-tags-required:
+    description: Operations must include at least one tag.
+    message: "Operation must have at least one tag."
+    severity: warn
+    given: "$.paths[*][*].tags"
+    then:
+      function: length
+      functionOptions:
+        min: 1
+
+  sendbird-error-schema:
+    description: API must define an Error schema in components.
+    message: "components.schemas must include an Error schema."
+    severity: warn
+    given: "$.components.schemas"
+    then:
+      field: Error
+      function: defined
+
+  sendbird-info-contact:
+    description: API info must include contact information.
+    message: "API info.contact must be defined."
+    severity: warn
+    given: "$.info"
+    then:
+      field: contact
+      function: defined
+
+  sendbird-paths-snake-case-query-params:
+    description: Query parameters should use snake_case.
+    message: "Query parameter '{{value}}' should use snake_case."
+    severity: info
+    given: "$.paths[*][*].parameters[?(@.in == 'query')].name"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"

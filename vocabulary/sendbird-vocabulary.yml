@@ -1,0 +1,200 @@
+name: Sendbird Vocabulary
+description: >-
+  Vocabulary and taxonomy for the Sendbird in-app messaging platform, covering
+  chat, channels, messages, real-time communication, moderation, and business
+  messaging concepts.
+created: "2026-05-02"
+modified: "2026-05-02"
+
+terms:
+  - term: Application
+    definition: >-
+      A Sendbird application instance identified by a unique application ID.
+      Each application has its own users, channels, and configuration. Applications
+      are isolated from each other.
+    aliases:
+      - App
+      - Sendbird App
+    related:
+      - Application ID
+      - API Token
+
+  - term: Application ID
+    definition: >-
+      The unique identifier for a Sendbird application, used in API endpoint URLs
+      (e.g., api-{application_id}.sendbird.com). Obtained from the Sendbird Dashboard.
+    aliases:
+      - App ID
+
+  - term: API Token
+    definition: >-
+      A server-side authentication token used in the Api-Token header to authenticate
+      Platform API requests. Should be kept secret and used only in server-side code.
+    aliases:
+      - Master API Token
+      - Server-Side Token
+
+  - term: Access Token
+    definition: >-
+      A user-specific authentication token issued by Sendbird that authenticates
+      client SDK sessions for a particular user. Generated when creating a user
+      with issue_access_token=true.
+    aliases:
+      - User Access Token
+      - Session Token
+
+  - term: User
+    definition: >-
+      A registered participant in a Sendbird application who can join channels and
+      exchange messages. Users have a user_id, nickname, and profile image. They
+      can be online, offline, or deactivated.
+    related:
+      - Channel
+      - Message
+
+  - term: Group Channel
+    definition: >-
+      A private channel for messaging between a specific set of users. Group channels
+      can be distinct (only one per member set) or non-distinct. Supports direct
+      messages (2 users) and group conversations.
+    aliases:
+      - Private Channel
+      - Group Chat
+    related:
+      - Open Channel
+      - Channel URL
+
+  - term: Open Channel
+    definition: >-
+      A public channel that any user can join without invitation. Supports large
+      communities (up to tens of thousands of participants) but has fewer features
+      than group channels.
+    aliases:
+      - Public Channel
+    related:
+      - Group Channel
+
+  - term: Channel URL
+    definition: >-
+      The unique string identifier for a channel within a Sendbird application.
+      Used as the path parameter in API calls. Can be auto-generated or custom-set.
+    aliases:
+      - Channel Identifier
+
+  - term: Message
+    definition: >-
+      Content sent by a user in a channel. Sendbird supports MESG (text), FILE
+      (file attachment), and ADMM (admin/system) message types. Messages have
+      IDs, timestamps, and optional custom data.
+    related:
+      - Message Type
+      - Channel
+
+  - term: Message Type
+    definition: >-
+      The classification of a message: MESG for text messages, FILE for file
+      attachments, or ADMM for administrative messages sent by the system.
+    aliases:
+      - Message Category
+
+  - term: Mention
+    definition: >-
+      A way to notify specific users in a message using @mentions. Can target
+      individual users (mention_type: users) or all channel members (mention_type: channel).
+    aliases:
+      - User Mention
+      - Channel Mention
+
+  - term: Custom Type
+    definition: >-
+      A user-defined string that categorizes channels or messages for application-specific
+      filtering and handling. For example, "support_ticket" or "promotion".
+    aliases:
+      - Channel Custom Type
+      - Message Custom Type
+
+  - term: Metadata
+    definition: >-
+      Custom key-value pairs attached to users or channels for storing application-specific
+      data. Metadata can be used for filtering, display, or business logic.
+    aliases:
+      - Custom Metadata
+
+  - term: Ban
+    definition: >-
+      A moderation action that prevents a user from sending messages in a specific
+      channel. Bans can be permanent (-1 seconds) or time-limited.
+    related:
+      - Mute
+      - Moderation
+
+  - term: Mute
+    definition: >-
+      A moderation action that silences a user in a channel, preventing them from
+      sending messages for a specified duration without removing them from the channel.
+    related:
+      - Ban
+      - Moderation
+
+  - term: Moderation
+    definition: >-
+      The set of tools and actions available to manage user behavior in channels,
+      including banning, muting, and reporting. Helps maintain community standards.
+    related:
+      - Ban
+      - Mute
+
+  - term: Distinct Channel
+    definition: >-
+      A property of group channels that ensures only one channel can exist for a
+      given set of members. When is_distinct is true, creating a channel with the
+      same members returns the existing channel.
+    related:
+      - Group Channel
+
+  - term: Webhook
+    definition: >-
+      An HTTP callback from Sendbird to your server triggered by platform events
+      such as new messages, user joins, or moderation actions. Enables real-time
+      event handling.
+    related:
+      - Platform API
+
+categories:
+  - name: Authentication
+    description: Concepts for authenticating with Sendbird APIs.
+    terms:
+      - Application
+      - Application ID
+      - API Token
+      - Access Token
+
+  - name: Users
+    description: Concepts related to Sendbird user management.
+    terms:
+      - User
+      - Metadata
+
+  - name: Channels
+    description: Concepts related to chat channels.
+    terms:
+      - Group Channel
+      - Open Channel
+      - Channel URL
+      - Distinct Channel
+      - Custom Type
+
+  - name: Messages
+    description: Concepts related to messaging.
+    terms:
+      - Message
+      - Message Type
+      - Mention
+      - Custom Type
+
+  - name: Moderation
+    description: Concepts for managing user behavior.
+    terms:
+      - Ban
+      - Mute
+      - Moderation

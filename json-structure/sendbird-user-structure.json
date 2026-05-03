@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Sendbird User Structure",
+  "description": "Structure documentation for the Sendbird User resource.",
+  "type": "object",
+  "structure": {
+    "user_id": {
+      "type": "string",
+      "description": "Unique identifier for the user within the Sendbird application.",
+      "example": "user_12345"
+    },
+    "nickname": {
+      "type": "string",
+      "description": "Display name shown in chat.",
+      "example": "Jane Smith"
+    },
+    "profile_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the user's profile image.",
+      "example": "https://example.com/avatars/jane.png"
+    },
+    "is_online": {
+      "type": "boolean",
+      "description": "Real-time online presence status.",
+      "example": true
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Whether the user account is active (not deactivated).",
+      "example": true
+    },
+    "last_seen_at": {
+      "type": "integer",
+      "description": "Unix timestamp (ms) of last activity.",
+      "example": 1746172800000
+    },
+    "access_token": {
+      "type": "string",
+      "description": "Session access token for SDK authentication.",
+      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Custom key-value metadata.",
+      "example": {"role": "support-agent", "department": "tier-1"}
+    },
+    "created_at": {
+      "type": "integer",
+      "description": "Unix timestamp (ms) when the user was created.",
+      "example": 1704067200000
+    }
+  }
+}

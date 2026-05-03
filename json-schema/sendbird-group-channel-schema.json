@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://api-evangelist.github.io/sendbird/json-schema/sendbird-group-channel-schema.json",
+  "title": "Sendbird Group Channel",
+  "description": "A group channel for messaging between users in Sendbird.",
+  "type": "object",
+  "properties": {
+    "channel_url": {
+      "type": "string",
+      "description": "Unique URL identifier for the channel."
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the group channel."
+    },
+    "cover_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL for the channel cover image."
+    },
+    "member_count": {
+      "type": "integer",
+      "description": "Total number of members in the channel."
+    },
+    "joined_member_count": {
+      "type": "integer",
+      "description": "Number of members who have joined (not left) the channel."
+    },
+    "unread_message_count": {
+      "type": "integer",
+      "description": "Number of unread messages for the requesting user."
+    },
+    "is_distinct": {
+      "type": "boolean",
+      "description": "Whether this is a distinct channel — only one channel can exist for a given set of members."
+    },
+    "created_at": {
+      "type": "integer",
+      "description": "Unix timestamp (milliseconds) when the channel was created."
+    },
+    "data": {
+      "type": "string",
+      "description": "Custom data string associated with the channel."
+    },
+    "custom_type": {
+      "type": "string",
+      "description": "Custom type for channel categorization."
+    }
+  },
+  "required": ["channel_url"]
+}
