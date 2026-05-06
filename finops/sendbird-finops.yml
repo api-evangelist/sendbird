@@ -1,157 +1,96 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Sendbird
+providerId: sendbird
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
+tags:
+  - Chat
+  - Messaging
+  - FinOps
+  - FOCUS
+description: FOCUS-aligned FinOps shape for Sendbird — MAU-tiered subscription with included message
+  allowances and add-on products. The dominant cost driver is the MAU tier purchased; secondary drivers
+  are peak concurrent connections (capped at 5% of MAU on Starter/Pro), Business Messaging volume, and
+  Enterprise add-ons. Annual billing carries a discount over monthly.
+sources:
+  - https://sendbird.com/pricing/chat
+  - https://sendbird.com/docs/chat/platform-api/v3/error-codes/rate-limits
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: Sendbird
-providerId: sendbird
-publisherName: Sendbird
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the Sendbird API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+publisherName: Sendbird, Inc.
+serviceCategory: Communications PaaS
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Tiered Subscription
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
+    - Usage
 focusColumns:
   ServiceName: Sendbird
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: Communications PaaS
   ProviderName: Sendbird
-  PublisherName: Sendbird
-  InvoiceIssuerName: Sendbird
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Sendbird, Inc.
+  InvoiceIssuerName: Sendbird, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: mau
+    description: Monthly Active Users — primary tier-pricing meter
+    unit: mau
+    aggregation: max
+    dimensions:
+      - application
+      - plan
+  - name: peak_connections
+    description: Peak concurrent WebSocket connections in the billing period (capped at 5% of MAU on
+      Starter/Pro)
+    unit: connection
+    aggregation: max
+    dimensions:
+      - application
+  - name: business_messages
+    description: In-app Business Messaging messages sent (30K included on Starter/Pro)
+    unit: message
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - application
+      - channel
+  - name: subscription_fee
+    description: Recurring monthly plan fee (Starter, Pro at MAU tier; Enterprise custom)
+    unit: month
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - plan
+      - billing_term
+  - name: addon_fees
+    description: Enterprise add-on products (e.g., dedicated server, advanced moderation)
+    unit: addon
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Sendbird Platform API
-    baseURL: https://api-{application_id}.sendbird.com/v3
-    tags:
-      - Chat
-      - Messaging
-      - Real-Time Communication
-      - Push Notifications
-    serviceName: Sendbird Platform API
-    serviceCategory: API
-  - name: Sendbird Calls API
-    baseURL: https://api-{application_id}.sendbird.com/v3
-    tags:
-      - Voice
-      - Video
-      - Calls
-      - Real-Time Communication
-    serviceName: Sendbird Calls API
-    serviceCategory: API
-  - name: Sendbird Business Messaging API
-    baseURL: https://api-{application_id}.sendbird.com/v3
-    tags:
-      - Business Messaging
-      - Omnichannel
-      - Customer Support
-      - WhatsApp
-      - SMS
-    serviceName: Sendbird Business Messaging API
-    serviceCategory: API
-  - name: Sendbird AI Chatbot API
-    baseURL: https://api-{application_id}.sendbird.com/v3
-    tags:
-      - AI
-      - Chatbot
-      - Customer Support
-      - Automation
-    serviceName: Sendbird AI Chatbot API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - addon
+principles:
+  - name: Visibility
+    description: Use the Sendbird Dashboard's MAU and peak-connection charts plus the Platform API's
+      usage endpoints to track tier headroom in real time. Watch for stricter-endpoint throttling (5/sec
+      cap) as a leading indicator of write-heavy workloads.
+  - name: Allocation
+    description: A Sendbird application is the natural allocation unit — split apps per product or environment
+      so MAU and message volume map cleanly to teams. Enterprise add-ons are line-item allocated to the
+      requesting product.
+  - name: Optimization
+    description: Stay just under the next MAU tier (5K/10K/25K) to avoid step-function price jumps; prefer
+      annual billing for ~12% savings over monthly. Batch user updates and channel creation to respect
+      the 5/sec stricter-endpoint cap.
+  - name: Accountability
+    description: Product engineering owns MAU growth and Platform API hygiene; finance owns the annual
+      vs monthly billing decision and Enterprise renewal negotiation.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
-    url: https://apievangelist.com
