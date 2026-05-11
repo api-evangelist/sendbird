@@ -127,6 +127,16 @@ common:
     url: capabilities/customer-support-messaging.yaml
   - type: NaftikoCapabilities
     url: capabilities/community-chat.yaml
+  - type: Integrations
+    url: https://sendbird.com/partners
+integrations:
+  - name: Img partners
+  - name: Partners aws
+  - name: Partners brightcove
+  - name: Partners megazone
+  - name: Braze partner thumbnail
+  - name: Live Ramp partner thumbnail
+  - name: Frame 2043684008
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
