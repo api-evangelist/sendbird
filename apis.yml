@@ -30,7 +30,7 @@ apis:
         url: openapi/sendbird-platform-openapi.yml
       - type: Authentication
         url: https://sendbird.com/docs/chat/platform-api/v3/authentication
-      - type: Rate Limits
+      - type: RateLimits
         url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
     contact:
       - FN: Sendbird Support
@@ -95,13 +95,13 @@ common:
     url: https://sendbird.com/docs/
   - type: Authentication
     url: https://sendbird.com/docs/chat/platform-api/v3/authentication
-  - type: Rate Limits
+  - type: RateLimits
     url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
   - type: Webhooks
     url: https://sendbird.com/docs/chat/platform-api/v3/webhooks
-  - type: Changelog
+  - type: ChangeLog
     url: https://sendbird.com/release-notes/
-  - type: Status
+  - type: StatusPage
     url: https://status.sendbird.com/
   - type: Support
     url: https://sendbird.com/contact-us/
@@ -109,9 +109,9 @@ common:
     url: https://sendbird.com/pricing/
   - type: Blog
     url: https://sendbird.com/blog/
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://sendbird.com/privacy-policy/
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://sendbird.com/terms-of-service/
   - type: Website
     url: https://sendbird.com
