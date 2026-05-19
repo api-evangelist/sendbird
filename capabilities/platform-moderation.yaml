@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sendbird Platform API — Moderation
+  description: 'Sendbird Platform API — Moderation. 2 operations. Lead operation: Ban a User from a Channel. Self-contained
+    Naftiko capability covering one Sendbird business surface.'
+  tags:
+  - Sendbird
+  - Moderation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENDBIRD_API_KEY: SENDBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-moderation
+    baseUri: https://api-{application_id}.sendbird.com/v3
+    description: Sendbird Platform API — Moderation business capability. Self-contained, no shared references.
+    resources:
+    - name: users-user_id-ban
+      path: /users/{user_id}/ban
+      operations:
+      - name: banuser
+        method: POST
+        description: Ban a User from a Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-user_id-mute
+      path: /users/{user_id}/mute
+      operations:
+      - name: muteuser
+        method: POST
+        description: Mute a User in a Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Api-Token
+      value: '{{env.SENDBIRD_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: platform-moderation-rest
+    port: 8080
+    description: REST adapter for Sendbird Platform API — Moderation. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/users/{user-id}/ban
+      name: users-user-id-ban
+      description: REST surface for users-user_id-ban.
+      operations:
+      - method: POST
+        name: banuser
+        description: Ban a User from a Channel
+        call: platform-moderation.banuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{user-id}/mute
+      name: users-user-id-mute
+      description: REST surface for users-user_id-mute.
+      operations:
+      - method: POST
+        name: muteuser
+        description: Mute a User in a Channel
+        call: platform-moderation.muteuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-moderation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sendbird Platform API — Moderation. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: ban-user-channel
+      description: Ban a User from a Channel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-moderation.banuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mute-user-channel
+      description: Mute a User in a Channel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-moderation.muteuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,244 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sendbird Platform API — Users
+  description: 'Sendbird Platform API — Users. 5 operations. Lead operation: List Users. Self-contained Naftiko capability
+    covering one Sendbird business surface.'
+  tags:
+  - Sendbird
+  - Users
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENDBIRD_API_KEY: SENDBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-users
+    baseUri: https://api-{application_id}.sendbird.com/v3
+    description: Sendbird Platform API — Users business capability. Self-contained, no shared references.
+    resources:
+    - name: users
+      path: /users
+      operations:
+      - name: listusers
+        method: GET
+        description: List Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: token
+          in: query
+          type: string
+          description: Pagination token for the next page.
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of users to return (1-100).
+        - name: active_mode
+          in: query
+          type: string
+          description: Filter by user active mode.
+        - name: show_bot
+          in: query
+          type: boolean
+          description: Whether to include bot users in results.
+        - name: user_ids
+          in: query
+          type: string
+          description: Comma-separated list of user IDs to filter.
+        - name: nickname
+          in: query
+          type: string
+          description: Filter users by nickname (partial match).
+        - name: nickname_startswith
+          in: query
+          type: string
+          description: Filter users whose nickname starts with this value.
+      - name: createuser
+        method: POST
+        description: Create a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-user_id
+      path: /users/{user_id}
+      operations:
+      - name: getuser
+        method: GET
+        description: Get a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateuser
+        method: PUT
+        description: Update a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteuser
+        method: DELETE
+        description: Delete a User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Api-Token
+      value: '{{env.SENDBIRD_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: platform-users-rest
+    port: 8080
+    description: REST adapter for Sendbird Platform API — Users. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/users
+      name: users
+      description: REST surface for users.
+      operations:
+      - method: GET
+        name: listusers
+        description: List Users
+        call: platform-users.listusers
+        with:
+          token: rest.token
+          limit: rest.limit
+          active_mode: rest.active_mode
+          show_bot: rest.show_bot
+          user_ids: rest.user_ids
+          nickname: rest.nickname
+          nickname_startswith: rest.nickname_startswith
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createuser
+        description: Create a User
+        call: platform-users.createuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/{user-id}
+      name: users-user-id
+      description: REST surface for users-user_id.
+      operations:
+      - method: GET
+        name: getuser
+        description: Get a User
+        call: platform-users.getuser
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateuser
+        description: Update a User
+        call: platform-users.updateuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteuser
+        description: Delete a User
+        call: platform-users.deleteuser
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-users-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sendbird Platform API — Users. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-users
+      description: List Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-users.listusers
+      with:
+        token: tools.token
+        limit: tools.limit
+        active_mode: tools.active_mode
+        show_bot: tools.show_bot
+        user_ids: tools.user_ids
+        nickname: tools.nickname
+        nickname_startswith: tools.nickname_startswith
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-user
+      description: Create a User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-users.createuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user
+      description: Get a User
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-users.getuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user
+      description: Update a User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: platform-users.updateuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-user
+      description: Delete a User
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: platform-users.deleteuser
+      outputParameters:
+      - type: object
+        mapping: $.

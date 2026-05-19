@@ -1,0 +1,191 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Sendbird Platform API — Channels
+  description: 'Sendbird Platform API — Channels. 4 operations. Lead operation: List Group Channels. Self-contained Naftiko
+    capability covering one Sendbird business surface.'
+  tags:
+  - Sendbird
+  - Channels
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SENDBIRD_API_KEY: SENDBIRD_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-channels
+    baseUri: https://api-{application_id}.sendbird.com/v3
+    description: Sendbird Platform API — Channels business capability. Self-contained, no shared references.
+    resources:
+    - name: group_channels
+      path: /group_channels
+      operations:
+      - name: listgroupchannels
+        method: GET
+        description: List Group Channels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: token
+          in: query
+          type: string
+          description: Pagination token.
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of channels to return.
+        - name: channel_url
+          in: query
+          type: string
+          description: Filter by specific channel URL.
+        - name: members_include_in
+          in: query
+          type: string
+          description: Filter channels that include specific user IDs.
+      - name: creategroupchannel
+        method: POST
+        description: Create a Group Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: group_channels-channel_url
+      path: /group_channels/{channel_url}
+      operations:
+      - name: getgroupchannel
+        method: GET
+        description: Get a Group Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletegroupchannel
+        method: DELETE
+        description: Delete a Group Channel
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Api-Token
+      value: '{{env.SENDBIRD_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: platform-channels-rest
+    port: 8080
+    description: REST adapter for Sendbird Platform API — Channels. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/group-channels
+      name: group-channels
+      description: REST surface for group_channels.
+      operations:
+      - method: GET
+        name: listgroupchannels
+        description: List Group Channels
+        call: platform-channels.listgroupchannels
+        with:
+          token: rest.token
+          limit: rest.limit
+          channel_url: rest.channel_url
+          members_include_in: rest.members_include_in
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: creategroupchannel
+        description: Create a Group Channel
+        call: platform-channels.creategroupchannel
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/group-channels/{channel-url}
+      name: group-channels-channel-url
+      description: REST surface for group_channels-channel_url.
+      operations:
+      - method: GET
+        name: getgroupchannel
+        description: Get a Group Channel
+        call: platform-channels.getgroupchannel
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletegroupchannel
+        description: Delete a Group Channel
+        call: platform-channels.deletegroupchannel
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-channels-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Sendbird Platform API — Channels. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-group-channels
+      description: List Group Channels
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-channels.listgroupchannels
+      with:
+        token: tools.token
+        limit: tools.limit
+        channel_url: tools.channel_url
+        members_include_in: tools.members_include_in
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-group-channel
+      description: Create a Group Channel
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-channels.creategroupchannel
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-group-channel
+      description: Get a Group Channel
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-channels.getgroupchannel
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-group-channel
+      description: Delete a Group Channel
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: platform-channels.deletegroupchannel
+      outputParameters:
+      - type: object
+        mapping: $.
