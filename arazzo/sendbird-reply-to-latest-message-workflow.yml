@@ -1,0 +1,97 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Reply to the Latest Message in a Channel
+  summary: Read the most recent messages in a channel and post a reply.
+  description: >-
+    Fetches the most recent messages from a group channel and, when at least one
+    message exists, posts a reply from a supplied sender. The flow branches on
+    whether the channel has any messages so an empty channel can be handled
+    gracefully instead of replying into the void. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: reply-to-latest-message
+  summary: Inspect recent channel messages and reply when any exist.
+  description: >-
+    Lists recent messages in a channel and branches: when messages are present
+    it sends a reply, otherwise it ends without posting.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - channelUrl
+    - senderId
+    - reply
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      channelUrl:
+        type: string
+        description: URL of the channel to read and reply in.
+      senderId:
+        type: string
+        description: User ID that authors the reply.
+      reply:
+        type: string
+        description: Text content of the reply message.
+  steps:
+  - stepId: listRecent
+    description: List the most recent messages in the channel.
+    operationId: listMessages
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $inputs.channelUrl
+    - name: prev_limit
+      in: query
+      value: 5
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      latestMessageId: $response.body#/messages/0/message_id
+    onSuccess:
+    - name: hasMessages
+      type: goto
+      stepId: postReply
+      criteria:
+      - context: $response.body
+        condition: $.messages.length > 0
+        type: jsonpath
+    - name: noMessages
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.messages.length == 0
+        type: jsonpath
+  - stepId: postReply
+    description: Post the reply text into the channel from the sender.
+    operationId: sendMessage
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $inputs.channelUrl
+    requestBody:
+      contentType: application/json
+      payload:
+        message_type: MESG
+        user_id: $inputs.senderId
+        message: $inputs.reply
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      replyMessageId: $response.body#/message_id
+  outputs:
+    repliedToMessageId: $steps.listRecent.outputs.latestMessageId
+    replyMessageId: $steps.postReply.outputs.replyMessageId

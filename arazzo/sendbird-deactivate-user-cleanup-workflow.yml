@@ -1,0 +1,65 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Deactivate and Clean Up a User
+  summary: Confirm a user exists, then delete the user account from the application.
+  description: >-
+    An account-removal flow that confirms a user is present before permanently
+    deleting them from the Sendbird application. Reading first captures the
+    final state of the account and avoids issuing deletes against IDs that never
+    existed. Use this for GDPR-style erasure or offboarding. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: deactivate-user-cleanup
+  summary: Confirm and then delete a user account.
+  description: >-
+    Reads the user to confirm existence, then deletes the user from the
+    application.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - userId
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      userId:
+        type: string
+        description: User ID to delete.
+  steps:
+  - stepId: confirmUser
+    description: Confirm the user exists and capture their final nickname.
+    operationId: getUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: user_id
+      in: path
+      value: $inputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedUserId: $response.body#/user_id
+      finalNickname: $response.body#/nickname
+  - stepId: deleteUser
+    description: Permanently delete the confirmed user from the application.
+    operationId: deleteUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: user_id
+      in: path
+      value: $steps.confirmUser.outputs.confirmedUserId
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    deletedUserId: $steps.confirmUser.outputs.confirmedUserId
+    finalNickname: $steps.confirmUser.outputs.finalNickname

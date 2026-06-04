@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Update User Metadata
+  summary: Fetch a user, then merge nickname, profile, and metadata updates onto them.
+  description: >-
+    Manages user-level metadata by first reading the current user record and
+    then writing an update that sets the nickname, profile image, and custom
+    metadata key-value pairs. Reading first lets the caller confirm the user
+    exists and capture the prior state before applying the change. Sendbird
+    stores metadata directly on the user, so this flow adapts the broader
+    metadata theme onto the user update operation. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: update-user-metadata
+  summary: Read a user and apply nickname, profile, and metadata updates.
+  description: >-
+    Fetches the current user record and then updates the user with the supplied
+    nickname, profile URL, and metadata map.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - userId
+    - metadata
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      userId:
+        type: string
+        description: User ID to update.
+      nickname:
+        type: string
+        description: Updated nickname.
+      profileUrl:
+        type: string
+        description: Updated profile image URL.
+      metadata:
+        type: object
+        description: Custom metadata key-value pairs to write to the user.
+        additionalProperties:
+          type: string
+  steps:
+  - stepId: getUser
+    description: Read the current user record before applying updates.
+    operationId: getUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: user_id
+      in: path
+      value: $inputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentNickname: $response.body#/nickname
+  - stepId: applyUpdate
+    description: Update the user with the new nickname, profile, and metadata.
+    operationId: updateUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: user_id
+      in: path
+      value: $inputs.userId
+    requestBody:
+      contentType: application/json
+      payload:
+        nickname: $inputs.nickname
+        profile_url: $inputs.profileUrl
+        metadata: $inputs.metadata
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedUserId: $response.body#/user_id
+      updatedMetadata: $response.body#/metadata
+  outputs:
+    previousNickname: $steps.getUser.outputs.currentNickname
+    updatedUserId: $steps.applyUpdate.outputs.updatedUserId
+    updatedMetadata: $steps.applyUpdate.outputs.updatedMetadata

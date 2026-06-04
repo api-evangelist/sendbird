@@ -1,0 +1,113 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Issue an Access Token and Greet the User
+  summary: Create a user with an issued access token and send them a private channel greeting.
+  description: >-
+    Provisions a user with a session access token in one call, then creates a
+    distinct one-to-one channel between a system account and the new user and
+    posts a greeting. This is the typical pattern for authenticated client SDK
+    onboarding where the backend mints the access token the client will use to
+    connect. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: issue-access-token-and-greet
+  summary: Create a token-bearing user and greet them in a private channel.
+  description: >-
+    Creates a user with issue_access_token enabled, opens a distinct channel
+    with a system user, and posts a greeting.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - userId
+    - nickname
+    - profileUrl
+    - systemUserId
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      userId:
+        type: string
+        description: User ID to create.
+      nickname:
+        type: string
+        description: Display nickname for the new user.
+      profileUrl:
+        type: string
+        description: Profile image URL for the new user.
+      systemUserId:
+        type: string
+        description: System/bot user ID that greets the new user.
+      greeting:
+        type: string
+        description: Greeting message text.
+        default: Thanks for joining! Reply here if you need help.
+  steps:
+  - stepId: createUserWithToken
+    description: Create the user and issue a session access token in one call.
+    operationId: createUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        user_id: $inputs.userId
+        nickname: $inputs.nickname
+        profile_url: $inputs.profileUrl
+        issue_access_token: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      createdUserId: $response.body#/user_id
+      accessToken: $response.body#/access_token
+  - stepId: openPrivateChannel
+    description: Open a distinct channel between the system user and the new user.
+    operationId: createGroupChannel
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        user_ids:
+        - $inputs.systemUserId
+        - $steps.createUserWithToken.outputs.createdUserId
+        is_distinct: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelUrl: $response.body#/channel_url
+  - stepId: sendGreeting
+    description: Post a greeting from the system user into the private channel.
+    operationId: sendMessage
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $steps.openPrivateChannel.outputs.channelUrl
+    requestBody:
+      contentType: application/json
+      payload:
+        message_type: MESG
+        user_id: $inputs.systemUserId
+        message: $inputs.greeting
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      greetingMessageId: $response.body#/message_id
+  outputs:
+    userId: $steps.createUserWithToken.outputs.createdUserId
+    accessToken: $steps.createUserWithToken.outputs.accessToken
+    channelUrl: $steps.openPrivateChannel.outputs.channelUrl
+    greetingMessageId: $steps.sendGreeting.outputs.greetingMessageId

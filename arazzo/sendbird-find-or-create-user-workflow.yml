@@ -1,0 +1,94 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Find or Create a User
+  summary: Look up a user by ID and create them only if they do not already exist.
+  description: >-
+    An idempotent user-provisioning flow. It searches the application for a user
+    by ID and branches: when the user already exists it ends with the existing
+    record, and when no user is found it creates a new one with the supplied
+    nickname and profile image. This makes user provisioning safe to retry.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: find-or-create-user
+  summary: Resolve a user by ID, creating them when absent.
+  description: >-
+    Lists users filtered to a single ID and branches: when present it ends,
+    otherwise it creates the user.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - userId
+    - nickname
+    - profileUrl
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      userId:
+        type: string
+        description: User ID to find or create.
+      nickname:
+        type: string
+        description: Display nickname used when creating the user.
+      profileUrl:
+        type: string
+        description: Profile image URL used when creating the user.
+  steps:
+  - stepId: findUser
+    description: Search for an existing user matching the supplied ID.
+    operationId: listUsers
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: user_ids
+      in: query
+      value: $inputs.userId
+    - name: limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      existingUserId: $response.body#/users/0/user_id
+    onSuccess:
+    - name: userExists
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.users.length > 0
+        type: jsonpath
+    - name: userMissing
+      type: goto
+      stepId: createUser
+      criteria:
+      - context: $response.body
+        condition: $.users.length == 0
+        type: jsonpath
+  - stepId: createUser
+    description: Create the user when no existing record was found.
+    operationId: createUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        user_id: $inputs.userId
+        nickname: $inputs.nickname
+        profile_url: $inputs.profileUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      createdUserId: $response.body#/user_id
+  outputs:
+    existingUserId: $steps.findUser.outputs.existingUserId
+    createdUserId: $steps.createUser.outputs.createdUserId

@@ -1,0 +1,109 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Onboard a User and Start a Group Channel
+  summary: Create a user, open a group channel for them, and post a welcome message.
+  description: >-
+    The canonical first-run flow for a new Sendbird member. It registers a user
+    with a nickname and profile image, creates a group channel that includes
+    that user, and sends an admin welcome message into the channel so the member
+    has something waiting on first login. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: onboard-user-and-start-channel
+  summary: Register a new user and seed a welcome group channel.
+  description: >-
+    Creates a user, then a group channel containing that user, then posts an
+    admin welcome message addressed to the new member.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - userId
+    - nickname
+    - profileUrl
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      userId:
+        type: string
+        description: Unique user ID to register.
+      nickname:
+        type: string
+        description: Display nickname for the new user.
+      profileUrl:
+        type: string
+        description: URL of the user's profile image.
+      channelName:
+        type: string
+        description: Name for the welcome group channel.
+        default: Welcome
+      welcomeMessage:
+        type: string
+        description: Admin message text posted to the new channel.
+        default: Welcome to the community!
+  steps:
+  - stepId: createUser
+    description: Register the new user with a nickname and profile image.
+    operationId: createUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        user_id: $inputs.userId
+        nickname: $inputs.nickname
+        profile_url: $inputs.profileUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      createdUserId: $response.body#/user_id
+  - stepId: createChannel
+    description: Create a group channel that includes the freshly created user.
+    operationId: createGroupChannel
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.channelName
+        user_ids:
+        - $steps.createUser.outputs.createdUserId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelUrl: $response.body#/channel_url
+  - stepId: sendWelcome
+    description: Post an admin welcome message into the new channel.
+    operationId: sendMessage
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $steps.createChannel.outputs.channelUrl
+    requestBody:
+      contentType: application/json
+      payload:
+        message_type: ADMM
+        user_id: $steps.createUser.outputs.createdUserId
+        message: $inputs.welcomeMessage
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messageId: $response.body#/message_id
+  outputs:
+    userId: $steps.createUser.outputs.createdUserId
+    channelUrl: $steps.createChannel.outputs.channelUrl
+    welcomeMessageId: $steps.sendWelcome.outputs.messageId

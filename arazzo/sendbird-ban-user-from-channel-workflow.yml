@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Ban a User from a Channel
+  summary: Confirm a user and channel exist, then ban the user from the channel.
+  description: >-
+    A moderation flow that verifies the target user and channel are real before
+    issuing a ban. It looks up the user, confirms the channel, and then bans the
+    user from that channel for a supplied duration with a documented reason.
+    Validating first avoids issuing bans against typo'd IDs. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: ban-user-from-channel
+  summary: Validate the target then ban a user from a channel.
+  description: >-
+    Confirms the user and channel exist and then issues a ban with a duration
+    and reason.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - userId
+    - channelUrl
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      userId:
+        type: string
+        description: User ID to ban.
+      channelUrl:
+        type: string
+        description: URL of the channel to ban the user from.
+      seconds:
+        type: integer
+        description: Ban duration in seconds. -1 for a permanent ban.
+        default: -1
+      description:
+        type: string
+        description: Reason recorded for the ban.
+        default: Violation of community guidelines.
+  steps:
+  - stepId: confirmUser
+    description: Confirm the target user exists before moderating.
+    operationId: getUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: user_id
+      in: path
+      value: $inputs.userId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedUserId: $response.body#/user_id
+  - stepId: confirmChannel
+    description: Confirm the channel exists before issuing the ban.
+    operationId: getGroupChannel
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $inputs.channelUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedChannelUrl: $response.body#/channel_url
+  - stepId: banUser
+    description: Ban the confirmed user from the confirmed channel.
+    operationId: banUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: user_id
+      in: path
+      value: $steps.confirmUser.outputs.confirmedUserId
+    requestBody:
+      contentType: application/json
+      payload:
+        channel_url: $steps.confirmChannel.outputs.confirmedChannelUrl
+        seconds: $inputs.seconds
+        description: $inputs.description
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    bannedUserId: $steps.confirmUser.outputs.confirmedUserId
+    channelUrl: $steps.confirmChannel.outputs.confirmedChannelUrl

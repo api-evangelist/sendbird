@@ -1,0 +1,86 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Archive and Delete a Channel
+  summary: Read a channel's recent messages for archival, then delete the channel.
+  description: >-
+    A channel teardown flow that preserves a final snapshot of recent messages
+    before deleting the channel. It reads the channel metadata, pulls the most
+    recent messages so they can be archived externally, and then deletes the
+    channel. Capturing messages first prevents losing conversation history on
+    teardown. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: archive-and-delete-channel
+  summary: Snapshot recent messages then delete the channel.
+  description: >-
+    Reads channel details and recent messages for archival, then deletes the
+    channel.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - channelUrl
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      channelUrl:
+        type: string
+        description: URL of the channel to archive and delete.
+      archiveLimit:
+        type: integer
+        description: Number of recent messages to capture before deletion.
+        default: 100
+  steps:
+  - stepId: readChannel
+    description: Read channel details to capture its final state.
+    operationId: getGroupChannel
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $inputs.channelUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      name: $response.body#/name
+      memberCount: $response.body#/member_count
+  - stepId: snapshotMessages
+    description: Pull the most recent messages so they can be archived externally.
+    operationId: listMessages
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $inputs.channelUrl
+    - name: prev_limit
+      in: query
+      value: $inputs.archiveLimit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messages: $response.body#/messages
+  - stepId: deleteChannel
+    description: Delete the channel after the snapshot has been captured.
+    operationId: deleteGroupChannel
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $inputs.channelUrl
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    channelName: $steps.readChannel.outputs.name
+    archivedMessages: $steps.snapshotMessages.outputs.messages

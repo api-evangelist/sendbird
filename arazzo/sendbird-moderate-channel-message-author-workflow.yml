@@ -1,0 +1,94 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Moderate the Author of the Latest Channel Message
+  summary: Read a channel's latest message, identify its author, and mute that user.
+  description: >-
+    A reactive moderation flow that pulls the most recent message in a channel,
+    extracts the author's user ID, and mutes that user in the same channel. It
+    branches on whether the channel has any messages so an empty channel ends
+    cleanly. Useful for automated abuse response triggered off the latest post.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: moderate-channel-message-author
+  summary: Mute the author of the most recent message in a channel.
+  description: >-
+    Lists the latest message, branches on whether one exists, and mutes the
+    message author in the channel.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - channelUrl
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      channelUrl:
+        type: string
+        description: URL of the channel to inspect and moderate.
+      seconds:
+        type: integer
+        description: Mute duration in seconds. -1 for indefinite.
+        default: 600
+      description:
+        type: string
+        description: Reason recorded for the mute.
+        default: Automated moderation of latest message author.
+  steps:
+  - stepId: latestMessage
+    description: Fetch the single most recent message in the channel.
+    operationId: listMessages
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $inputs.channelUrl
+    - name: prev_limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      authorId: $response.body#/messages/0/user/user_id
+    onSuccess:
+    - name: hasMessage
+      type: goto
+      stepId: muteAuthor
+      criteria:
+      - context: $response.body
+        condition: $.messages.length > 0
+        type: jsonpath
+    - name: empty
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.messages.length == 0
+        type: jsonpath
+  - stepId: muteAuthor
+    description: Mute the author of the latest message in the channel.
+    operationId: muteUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: user_id
+      in: path
+      value: $steps.latestMessage.outputs.authorId
+    requestBody:
+      contentType: application/json
+      payload:
+        channel_url: $inputs.channelUrl
+        seconds: $inputs.seconds
+        description: $inputs.description
+    successCriteria:
+    - condition: $statusCode == 200
+  outputs:
+    moderatedUserId: $steps.latestMessage.outputs.authorId

@@ -1,0 +1,111 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Add Members to an Existing Channel
+  summary: Confirm a channel, recreate it as distinct with an expanded member set, and notify.
+  description: >-
+    Grows the membership of a distinct group channel. It reads the existing
+    channel to confirm it is present, then issues a distinct channel creation
+    with the expanded user set — because the channel is distinct, Sendbird maps
+    the same member superset onto the existing conversation rather than spawning
+    a duplicate — and finally posts an admin notice welcoming the new members.
+    This adapts the invite-members theme onto the distinct-channel mechanics the
+    spec supports. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: add-members-to-existing-channel
+  summary: Expand a distinct channel's members and announce them.
+  description: >-
+    Confirms the channel, recreates it as distinct with the expanded member set,
+    and posts an admin welcome for the new members.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - channelUrl
+    - memberIds
+    - moderatorId
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      channelUrl:
+        type: string
+        description: URL of the existing channel to expand.
+      memberIds:
+        type: array
+        description: Full set of user IDs the channel should contain.
+        items:
+          type: string
+      moderatorId:
+        type: string
+        description: User ID that authors the welcome notice.
+      welcomeMessage:
+        type: string
+        description: Admin notice posted for the new members.
+        default: New members have joined the channel.
+  steps:
+  - stepId: confirmChannel
+    description: Confirm the existing channel is present before expanding it.
+    operationId: getGroupChannel
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $inputs.channelUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      confirmedChannelUrl: $response.body#/channel_url
+      name: $response.body#/name
+  - stepId: expandMembers
+    description: >-
+      Recreate the channel as distinct with the expanded member set and the same
+      channel URL so the conversation is reused.
+    operationId: createGroupChannel
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        channel_url: $steps.confirmChannel.outputs.confirmedChannelUrl
+        name: $steps.confirmChannel.outputs.name
+        user_ids: $inputs.memberIds
+        is_distinct: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelUrl: $response.body#/channel_url
+      memberCount: $response.body#/member_count
+  - stepId: welcomeMembers
+    description: Post an admin notice welcoming the new members.
+    operationId: sendMessage
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $steps.expandMembers.outputs.channelUrl
+    requestBody:
+      contentType: application/json
+      payload:
+        message_type: ADMM
+        user_id: $inputs.moderatorId
+        message: $inputs.welcomeMessage
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      noticeId: $response.body#/message_id
+  outputs:
+    channelUrl: $steps.expandMembers.outputs.channelUrl
+    memberCount: $steps.expandMembers.outputs.memberCount
+    noticeId: $steps.welcomeMembers.outputs.noticeId

@@ -86,6 +86,54 @@ apis:
     - type: Documentation
       url: https://sendbird.com/docs/ai-chatbot/
 common:
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+    - url: arazzo/sendbird-add-members-to-existing-channel-workflow.yml
+      name: Sendbird Add Members to an Existing Channel
+      summary: Confirm a channel, recreate it as distinct with an expanded member set, and notify.
+    - url: arazzo/sendbird-archive-and-delete-channel-workflow.yml
+      name: Sendbird Archive and Delete a Channel
+      summary: Read a channel's recent messages for archival, then delete the channel.
+    - url: arazzo/sendbird-audit-channel-membership-workflow.yml
+      name: Sendbird Audit a Channel and Its Recent Activity
+      summary: List channels for a member, then read details and recent messages for one.
+    - url: arazzo/sendbird-ban-user-from-channel-workflow.yml
+      name: Sendbird Ban a User from a Channel
+      summary: Confirm a user and channel exist, then ban the user from the channel.
+    - url: arazzo/sendbird-create-channel-and-broadcast-workflow.yml
+      name: Sendbird Create a Channel and Broadcast a Message
+      summary: Create a group channel with a member set and immediately broadcast a message.
+    - url: arazzo/sendbird-deactivate-user-cleanup-workflow.yml
+      name: Sendbird Deactivate and Clean Up a User
+      summary: Confirm a user exists, then delete the user account from the application.
+    - url: arazzo/sendbird-direct-message-between-users-workflow.yml
+      name: Sendbird Open a Direct Message Between Two Users
+      summary: Create a distinct 1:1 channel for two users and send the first message.
+    - url: arazzo/sendbird-find-or-create-user-workflow.yml
+      name: Sendbird Find or Create a User
+      summary: Look up a user by ID and create them only if they do not already exist.
+    - url: arazzo/sendbird-issue-access-token-and-greet-workflow.yml
+      name: Sendbird Issue an Access Token and Greet the User
+      summary: Create a user with an issued access token and send them a private channel greeting.
+    - url: arazzo/sendbird-moderate-channel-message-author-workflow.yml
+      name: Sendbird Moderate the Author of the Latest Channel Message
+      summary: Read a channel's latest message, identify its author, and mute that user.
+    - url: arazzo/sendbird-mute-then-warn-user-workflow.yml
+      name: Sendbird Mute a User and Post a Moderation Notice
+      summary: Mute a user in a channel and post an admin notice explaining the action.
+    - url: arazzo/sendbird-onboard-user-and-start-channel-workflow.yml
+      name: Sendbird Onboard a User and Start a Group Channel
+      summary: Create a user, open a group channel for them, and post a welcome message.
+    - url: arazzo/sendbird-rename-user-and-notify-channel-workflow.yml
+      name: Sendbird Rename a User and Notify a Channel
+      summary: Update a user's nickname and announce the change in a channel.
+    - url: arazzo/sendbird-reply-to-latest-message-workflow.yml
+      name: Sendbird Reply to the Latest Message in a Channel
+      summary: Read the most recent messages in a channel and post a reply.
+    - url: arazzo/sendbird-update-user-metadata-workflow.yml
+      name: Sendbird Update User Metadata
+      summary: Fetch a user, then merge nickname, profile, and metadata updates onto them.
   - type: GitHubOrganization
     url: https://github.com/sendbird
   - type: LinkedIn

@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Audit a Channel and Its Recent Activity
+  summary: List channels for a member, then read details and recent messages for one.
+  description: >-
+    A read-only audit flow for support and analytics. It lists the group
+    channels that a given user belongs to, reads full details for the first
+    matching channel, and pulls its recent messages so an operator can review
+    activity. It branches on whether the user is in any channels so the empty
+    case ends cleanly. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: audit-channel-membership
+  summary: Find a member's first channel and audit its details and messages.
+  description: >-
+    Lists channels containing a user, branches on whether any exist, then reads
+    channel details and recent messages.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - userId
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      userId:
+        type: string
+        description: User ID whose channels are audited.
+      messageLimit:
+        type: integer
+        description: Number of recent messages to pull for the audited channel.
+        default: 20
+  steps:
+  - stepId: listChannels
+    description: List group channels that include the supplied user.
+    operationId: listGroupChannels
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: members_include_in
+      in: query
+      value: $inputs.userId
+    - name: limit
+      in: query
+      value: 1
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstChannelUrl: $response.body#/channels/0/channel_url
+    onSuccess:
+    - name: hasChannel
+      type: goto
+      stepId: channelDetails
+      criteria:
+      - context: $response.body
+        condition: $.channels.length > 0
+        type: jsonpath
+    - name: noChannels
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.channels.length == 0
+        type: jsonpath
+  - stepId: channelDetails
+    description: Read full details for the first matching channel.
+    operationId: getGroupChannel
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $steps.listChannels.outputs.firstChannelUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      name: $response.body#/name
+      memberCount: $response.body#/member_count
+  - stepId: recentMessages
+    description: Pull recent messages from the audited channel.
+    operationId: listMessages
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $steps.listChannels.outputs.firstChannelUrl
+    - name: prev_limit
+      in: query
+      value: $inputs.messageLimit
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messages: $response.body#/messages
+  outputs:
+    channelUrl: $steps.listChannels.outputs.firstChannelUrl
+    channelName: $steps.channelDetails.outputs.name
+    memberCount: $steps.channelDetails.outputs.memberCount
+    messages: $steps.recentMessages.outputs.messages

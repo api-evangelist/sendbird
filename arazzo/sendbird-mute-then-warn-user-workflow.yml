@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Mute a User and Post a Moderation Notice
+  summary: Mute a user in a channel and post an admin notice explaining the action.
+  description: >-
+    A lighter-touch moderation flow than banning. It mutes a user in a channel
+    for a set duration and then posts an admin message into the same channel so
+    members understand a moderation action was taken. Useful for transparent
+    moderation where the room should see that a warning was issued. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: mute-then-warn-user
+  summary: Mute a user and announce the moderation action in the channel.
+  description: >-
+    Mutes the user in the channel for a duration, then posts an admin notice
+    into that channel.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - userId
+    - channelUrl
+    - moderatorId
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      userId:
+        type: string
+        description: User ID to mute.
+      channelUrl:
+        type: string
+        description: URL of the channel to mute the user in.
+      seconds:
+        type: integer
+        description: Mute duration in seconds. -1 for indefinite.
+        default: 3600
+      description:
+        type: string
+        description: Reason recorded for the mute.
+        default: Temporary mute for cooling off.
+      moderatorId:
+        type: string
+        description: User ID that authors the admin notice.
+      noticeMessage:
+        type: string
+        description: Admin notice posted to the channel.
+        default: A member has been muted by a moderator.
+  steps:
+  - stepId: muteUser
+    description: Mute the user in the channel for the supplied duration.
+    operationId: muteUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: user_id
+      in: path
+      value: $inputs.userId
+    requestBody:
+      contentType: application/json
+      payload:
+        channel_url: $inputs.channelUrl
+        seconds: $inputs.seconds
+        description: $inputs.description
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: postNotice
+    description: Post an admin notice into the channel about the mute.
+    operationId: sendMessage
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $inputs.channelUrl
+    requestBody:
+      contentType: application/json
+      payload:
+        message_type: ADMM
+        user_id: $inputs.moderatorId
+        message: $inputs.noticeMessage
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      noticeMessageId: $response.body#/message_id
+  outputs:
+    mutedUserId: $inputs.userId
+    noticeMessageId: $steps.postNotice.outputs.noticeMessageId

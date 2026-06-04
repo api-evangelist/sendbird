@@ -1,0 +1,92 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Rename a User and Notify a Channel
+  summary: Update a user's nickname and announce the change in a channel.
+  description: >-
+    Keeps a channel informed when a member changes their display name. It
+    updates the user's nickname and profile image, then posts an admin message
+    into a channel announcing the new nickname so other members are not confused
+    by the change. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: rename-user-and-notify-channel
+  summary: Update a nickname and announce it in a channel.
+  description: >-
+    Updates the user's nickname and profile image, then posts an admin notice to
+    a channel announcing the new nickname.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - userId
+    - newNickname
+    - channelUrl
+    - moderatorId
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      userId:
+        type: string
+        description: User ID to rename.
+      newNickname:
+        type: string
+        description: New display nickname for the user.
+      profileUrl:
+        type: string
+        description: Optional updated profile image URL.
+      channelUrl:
+        type: string
+        description: URL of the channel to notify.
+      moderatorId:
+        type: string
+        description: User ID that authors the announcement.
+  steps:
+  - stepId: renameUser
+    description: Update the user's nickname and profile image.
+    operationId: updateUser
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: user_id
+      in: path
+      value: $inputs.userId
+    requestBody:
+      contentType: application/json
+      payload:
+        nickname: $inputs.newNickname
+        profile_url: $inputs.profileUrl
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedNickname: $response.body#/nickname
+  - stepId: announce
+    description: Post an admin announcement of the new nickname into the channel.
+    operationId: sendMessage
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $inputs.channelUrl
+    requestBody:
+      contentType: application/json
+      payload:
+        message_type: ADMM
+        user_id: $inputs.moderatorId
+        message: $steps.renameUser.outputs.updatedNickname
+        custom_type: nickname_change
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      announcementId: $response.body#/message_id
+  outputs:
+    updatedNickname: $steps.renameUser.outputs.updatedNickname
+    announcementId: $steps.announce.outputs.announcementId

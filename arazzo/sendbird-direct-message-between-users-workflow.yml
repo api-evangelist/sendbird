@@ -1,0 +1,87 @@
+arazzo: 1.0.1
+info:
+  title: Sendbird Open a Direct Message Between Two Users
+  summary: Create a distinct 1:1 channel for two users and send the first message.
+  description: >-
+    Implements a one-to-one direct message by creating a distinct group channel
+    that contains exactly two user IDs and then sending the first message into
+    it. Because the channel is created as distinct, repeated runs with the same
+    pair reuse the same conversation rather than creating duplicates. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: sendbirdApi
+  url: ../openapi/sendbird-platform-openapi.yml
+  type: openapi
+workflows:
+- workflowId: direct-message-between-users
+  summary: Start or reuse a 1:1 channel and post the first message.
+  description: >-
+    Creates a distinct group channel for the sender and recipient, then sends a
+    text message from the sender.
+  inputs:
+    type: object
+    required:
+    - apiToken
+    - senderId
+    - recipientId
+    - message
+    properties:
+      apiToken:
+        type: string
+        description: Sendbird Api-Token from the dashboard.
+      senderId:
+        type: string
+        description: User ID of the message sender.
+      recipientId:
+        type: string
+        description: User ID of the message recipient.
+      message:
+        type: string
+        description: Text content of the first message.
+  steps:
+  - stepId: createDistinctChannel
+    description: >-
+      Create a distinct group channel for the two users so the same pair always
+      maps to one conversation.
+    operationId: createGroupChannel
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    requestBody:
+      contentType: application/json
+      payload:
+        user_ids:
+        - $inputs.senderId
+        - $inputs.recipientId
+        is_distinct: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelUrl: $response.body#/channel_url
+      isDistinct: $response.body#/is_distinct
+  - stepId: sendFirstMessage
+    description: Send the first text message from the sender into the channel.
+    operationId: sendMessage
+    parameters:
+    - name: Api-Token
+      in: header
+      value: $inputs.apiToken
+    - name: channel_url
+      in: path
+      value: $steps.createDistinctChannel.outputs.channelUrl
+    requestBody:
+      contentType: application/json
+      payload:
+        message_type: MESG
+        user_id: $inputs.senderId
+        message: $inputs.message
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messageId: $response.body#/message_id
+  outputs:
+    channelUrl: $steps.createDistinctChannel.outputs.channelUrl
+    messageId: $steps.sendFirstMessage.outputs.messageId
