@@ -1,0 +1,1251 @@
+"""
+Sendbird Platform API - Conceptual GraphQL Schema
+Derived from: https://sendbird.com/docs/chat/platform-api/v3/overview
+GitHub: https://github.com/sendbird
+"""
+
+# ─── Scalars ────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar Upload
+
+# ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum ChannelType {
+  OPEN
+  GROUP
+}
+
+enum MessageType {
+  USER
+  FILE
+  ADMIN
+}
+
+enum PushTokenType {
+  GCM
+  APNS
+  APNS_VOIP
+  HUAWEI
+}
+
+enum AnnouncementStatus {
+  SCHEDULED
+  ONGOING
+  PAUSED
+  CANCELLED
+  COMPLETED
+}
+
+enum ModerationAction {
+  MUTE
+  BAN
+  DELETE_MESSAGE
+  NONE
+}
+
+enum ChannelMemberRole {
+  MEMBER
+  OPERATOR
+}
+
+enum BotType {
+  AI
+  WEBHOOK
+}
+
+enum NotificationChannel {
+  PUSH
+  EMAIL
+  SMS
+}
+
+enum SearchSortField {
+  CREATED_AT
+  SCORE
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+enum UserConnectionStatus {
+  ONLINE
+  OFFLINE
+  NON_AVAILABLE
+}
+
+enum DeliveryStatusValue {
+  SENT
+  DELIVERED
+  FAILED
+}
+
+enum ReadStatusValue {
+  READ
+  UNREAD
+}
+
+# ─── Core User Types ─────────────────────────────────────────────────────────
+
+"""
+Represents a Sendbird user account.
+"""
+type User {
+  userId: String!
+  nickname: String
+  profileUrl: String
+  accessToken: String
+  sessionTokens: [String!]
+  isActive: Boolean!
+  isOnline: Boolean!
+  lastSeenAt: DateTime
+  connectionStatus: UserConnectionStatus!
+  metadata: JSON
+  profile: UserProfile
+  friends: [UserFriend!]
+  blockedUsers: [UserBlockedUser!]
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""
+Extended profile data for a Sendbird user.
+"""
+type UserProfile {
+  userId: String!
+  nickname: String
+  profileUrl: String
+  bio: String
+  preferredLanguages: [String!]
+  metadata: JSON
+  updatedAt: DateTime
+}
+
+"""
+Represents a friendship relationship between two Sendbird users.
+"""
+type UserFriend {
+  user: User!
+  friend: User!
+  discoveryKey: String
+  createdAt: DateTime!
+}
+
+"""
+Represents a user who has been blocked by another user.
+"""
+type UserBlockedUser {
+  userId: String!
+  blockedUserId: String!
+  blockedUser: User!
+  createdAt: DateTime!
+}
+
+# ─── Channel Types ───────────────────────────────────────────────────────────
+
+"""
+Base interface for Sendbird channels (open and group).
+"""
+interface Channel {
+  channelUrl: String!
+  channelType: ChannelType!
+  name: String
+  coverUrl: String
+  data: String
+  customType: String
+  isFrozen: Boolean!
+  isEphemeral: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  messageCount: Int!
+  maxLengthMessage: Int
+  metadata: JSON
+}
+
+"""
+An open channel is a public, large-scale channel (e.g. live streaming chat).
+"""
+type OpenChannel implements Channel {
+  channelUrl: String!
+  channelType: ChannelType!
+  name: String
+  coverUrl: String
+  data: String
+  customType: String
+  isFrozen: Boolean!
+  isEphemeral: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  messageCount: Int!
+  maxLengthMessage: Int
+  metadata: JSON
+  participantCount: Int!
+  operators: [ChannelOperator!]
+  bannedUsers: [ChannelBannedUser!]
+}
+
+"""
+A group channel is a private channel for a defined set of members.
+"""
+type GroupChannel implements Channel {
+  channelUrl: String!
+  channelType: ChannelType!
+  name: String
+  coverUrl: String
+  data: String
+  customType: String
+  isFrozen: Boolean!
+  isEphemeral: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  messageCount: Int!
+  maxLengthMessage: Int
+  metadata: JSON
+  isDistinct: Boolean!
+  isSuper: Boolean!
+  isPublic: Boolean!
+  isBroadcast: Boolean!
+  memberCount: Int!
+  joinedMemberCount: Int!
+  members: [ChannelMember!]
+  operators: [ChannelOperator!]
+  bannedUsers: [ChannelBannedUser!]
+  mutedUsers: [ChannelMutedUser!]
+  invitations: [ChannelInvite!]
+  lastMessage: Message
+  unreadMessageCount: Int
+  unreadMentionCount: Int
+}
+
+"""
+Represents a member of a group channel.
+"""
+type ChannelMember {
+  user: User!
+  role: ChannelMemberRole!
+  isMuted: Boolean!
+  isBanned: Boolean!
+  joinedAt: DateTime
+  lastReadMessageId: Int
+  unreadMessageCount: Int
+}
+
+"""
+Represents an operator in a Sendbird channel (open or group).
+"""
+type ChannelOperator {
+  user: User!
+  channelUrl: String!
+  channelType: ChannelType!
+  grantedAt: DateTime!
+}
+
+"""
+Represents a user who has been banned from a Sendbird channel.
+"""
+type ChannelBannedUser {
+  user: User!
+  channelUrl: String!
+  channelType: ChannelType!
+  description: String
+  startAt: DateTime!
+  endAt: DateTime
+  expiresAt: DateTime
+}
+
+"""
+Represents a user who has been muted in a Sendbird channel.
+"""
+type ChannelMutedUser {
+  user: User!
+  channelUrl: String!
+  channelType: ChannelType!
+  description: String
+  startAt: DateTime!
+  endAt: DateTime
+  remainingDuration: Int
+}
+
+"""
+Represents an invitation to a group channel.
+"""
+type ChannelInvite {
+  channelUrl: String!
+  invitedUser: User!
+  inviter: User
+  status: String!
+  createdAt: DateTime!
+}
+
+# ─── Message Types ────────────────────────────────────────────────────────────
+
+"""
+Base interface for all Sendbird messages.
+"""
+interface Message {
+  messageId: Int!
+  type: MessageType!
+  channelUrl: String!
+  channelType: ChannelType!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  mentionedUsers: [User!]
+  metaArray: [MessageMeta!]
+  reactions: [MessageReaction!]
+  threadInfo: MessageThread
+  isSilent: Boolean!
+  data: String
+  customType: String
+}
+
+"""
+A text message sent by a user.
+"""
+type UserMessage implements Message {
+  messageId: Int!
+  type: MessageType!
+  channelUrl: String!
+  channelType: ChannelType!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  mentionedUsers: [User!]
+  metaArray: [MessageMeta!]
+  reactions: [MessageReaction!]
+  threadInfo: MessageThread
+  isSilent: Boolean!
+  data: String
+  customType: String
+  sender: User!
+  message: String!
+  translations: JSON
+  ogMetaData: JSON
+}
+
+"""
+A file (image, video, audio, etc.) message sent by a user.
+"""
+type FileMessage implements Message {
+  messageId: Int!
+  type: MessageType!
+  channelUrl: String!
+  channelType: ChannelType!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  mentionedUsers: [User!]
+  metaArray: [MessageMeta!]
+  reactions: [MessageReaction!]
+  threadInfo: MessageThread
+  isSilent: Boolean!
+  data: String
+  customType: String
+  sender: User!
+  url: String!
+  fileName: String
+  fileSize: Int
+  mimeType: String
+  thumbnails: [JSON]
+}
+
+"""
+An administrative message posted by the system or an operator.
+"""
+type AdminMessage implements Message {
+  messageId: Int!
+  type: MessageType!
+  channelUrl: String!
+  channelType: ChannelType!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  mentionedUsers: [User!]
+  metaArray: [MessageMeta!]
+  reactions: [MessageReaction!]
+  threadInfo: MessageThread
+  isSilent: Boolean!
+  data: String
+  customType: String
+  message: String!
+}
+
+"""
+Key-value metadata attached to a Sendbird message.
+"""
+type MessageMeta {
+  key: String!
+  value: [String!]!
+}
+
+"""
+A reaction (emoji) on a Sendbird message.
+"""
+type MessageReaction {
+  key: String!
+  userIds: [String!]!
+  updatedAt: DateTime!
+}
+
+"""
+Thread summary info attached to a parent message.
+"""
+type MessageThread {
+  replyCount: Int!
+  mostRepliedUsers: [User!]
+  lastRepliedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""
+A reply thread branching from a parent message.
+"""
+type Thread {
+  parentMessageId: Int!
+  parentMessage: Message
+  replies: [ThreadedReply!]
+  replyCount: Int!
+  updatedAt: DateTime
+}
+
+"""
+A single threaded reply under a parent message.
+"""
+type ThreadedReply {
+  messageId: Int!
+  parentMessageId: Int!
+  sender: User!
+  message: String
+  type: MessageType!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  metaArray: [MessageMeta!]
+  reactions: [MessageReaction!]
+}
+
+# ─── Notification Types ───────────────────────────────────────────────────────
+
+"""
+Represents a notification event sent to a user.
+"""
+type Notification {
+  notificationId: String!
+  userId: String!
+  title: String
+  body: String!
+  channel: NotificationChannel!
+  isRead: Boolean!
+  createdAt: DateTime!
+}
+
+"""
+Per-user notification preferences and settings.
+"""
+type NotificationSetting {
+  userId: String!
+  doNotDisturb: Boolean!
+  doNotDisturbStartHour: Int
+  doNotDisturbStartMin: Int
+  doNotDisturbEndHour: Int
+  doNotDisturbEndMin: Int
+  snoozeEnabled: Boolean!
+  snoozeStartTs: DateTime
+  snoozeEndTs: DateTime
+  timezone: String
+  pushSound: String
+  updatedAt: DateTime
+}
+
+"""
+Represents a push notification delivery event.
+"""
+type PushNotification {
+  pushNotificationId: String!
+  userId: String!
+  deviceToken: String!
+  tokenType: PushTokenType!
+  message: Message
+  title: String
+  body: String!
+  sentAt: DateTime!
+  status: String!
+}
+
+"""
+A push notification template for consistent formatting.
+"""
+type PushTemplate {
+  name: String!
+  isDefault: Boolean!
+  template: String!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""
+A device push token registered for a Sendbird user.
+"""
+type DeviceToken {
+  token: String!
+  userId: String!
+  tokenType: PushTokenType!
+  deviceOs: String
+  isActive: Boolean!
+  createdAt: DateTime!
+}
+
+# ─── Webhook Types ────────────────────────────────────────────────────────────
+
+"""
+Represents a Sendbird webhook configuration.
+"""
+type Webhook {
+  webhookId: String!
+  url: String!
+  isEnabled: Boolean!
+  includeMembers: Boolean!
+  enabledEvents: [String!]!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""
+An individual webhook endpoint registered in the application.
+"""
+type WebhookEndpoint {
+  endpointId: String!
+  url: String!
+  isEnabled: Boolean!
+  signingSecret: String
+  enabledEvents: [String!]!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# ─── Application Types ────────────────────────────────────────────────────────
+
+"""
+Represents a Sendbird application and its configuration.
+"""
+type Application {
+  appId: String!
+  appName: String!
+  region: String!
+  attrs: JSON
+  premiumFeatures: [String!]
+  maxMessageLength: Int
+  allowedDomains: [String!]
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""
+An API token issued for a Sendbird application.
+"""
+type AppToken {
+  tokenId: String!
+  token: String!
+  description: String
+  isEnabled: Boolean!
+  createdAt: DateTime!
+  expiresAt: DateTime
+}
+
+# ─── Bot Types ────────────────────────────────────────────────────────────────
+
+"""
+Represents a Sendbird bot (automated user).
+"""
+type Bot {
+  botUserId: String!
+  botType: BotType!
+  botToken: String
+  botCallbackUrl: String
+  isEnabled: Boolean!
+  nickname: String
+  profileUrl: String
+  category: BotCategory
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""
+A message sent by a Sendbird bot.
+"""
+type BotMessage {
+  messageId: Int!
+  botUserId: String!
+  channelUrl: String!
+  channelType: ChannelType!
+  message: String!
+  createdAt: DateTime!
+  customType: String
+  data: String
+}
+
+"""
+A category grouping bots by function.
+"""
+type BotCategory {
+  categoryId: String!
+  name: String!
+  description: String
+  bots: [Bot!]
+}
+
+# ─── Announcement Types ───────────────────────────────────────────────────────
+
+"""
+Represents a scheduled broadcast announcement to many channels or users.
+"""
+type Announcement {
+  uniqueId: String!
+  message: String!
+  messageType: MessageType!
+  status: AnnouncementStatus!
+  scheduledAt: DateTime
+  completedAt: DateTime
+  targetChannelType: ChannelType
+  targetCustomType: String
+  targetUserIds: [String!]
+  openRate: Float
+  clickRate: Float
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# ─── Friend Discovery Types ───────────────────────────────────────────────────
+
+"""
+Represents a friend discovery entry used for phone/email-based friend finding.
+"""
+type FriendDiscovery {
+  userId: String!
+  discoveryKey: String!
+  preferredLanguage: String
+  createdAt: DateTime!
+}
+
+# ─── Analytics Types ──────────────────────────────────────────────────────────
+
+"""
+A single analytics data point or metric.
+"""
+type AnalyticsMetric {
+  metricId: String!
+  name: String!
+  value: Float!
+  unit: String
+  period: String!
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+"""
+Aggregated statistics for a single channel.
+"""
+type ChannelStats {
+  channelUrl: String!
+  channelType: ChannelType!
+  memberCount: Int
+  messageCount: Int!
+  fileMessageCount: Int!
+  userMessageCount: Int!
+  adminMessageCount: Int!
+  averageResponseTime: Float
+  period: String!
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+"""
+Aggregated message delivery and engagement statistics.
+"""
+type MessageStats {
+  channelUrl: String
+  totalSent: Int!
+  totalDelivered: Int!
+  totalRead: Int!
+  deliveryRate: Float!
+  readRate: Float!
+  period: String!
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+"""
+Delivery status for a specific message to a specific user.
+"""
+type DeliveryStatus {
+  messageId: Int!
+  userId: String!
+  channelUrl: String!
+  status: DeliveryStatusValue!
+  deliveredAt: DateTime
+  updatedAt: DateTime!
+}
+
+"""
+Read status for a specific message by a specific user.
+"""
+type ReadStatus {
+  messageId: Int!
+  userId: String!
+  channelUrl: String!
+  status: ReadStatusValue!
+  readAt: DateTime
+  updatedAt: DateTime!
+}
+
+"""
+High-level usage summary for the application.
+"""
+type UsageSummary {
+  appId: String!
+  peakConnections: Int!
+  monthlyActiveUsers: Int!
+  dailyActiveUsers: Int!
+  totalMessages: Int!
+  totalChannels: Int!
+  totalUsers: Int!
+  period: String!
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+# ─── Moderation Types ─────────────────────────────────────────────────────────
+
+"""
+An automated moderation bot that watches channel messages for policy violations.
+"""
+type ModerationBot {
+  botId: String!
+  name: String!
+  isEnabled: Boolean!
+  action: ModerationAction!
+  keywords: [String!]
+  regexPatterns: [String!]
+  contentFilter: ContentFilter
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""
+Content filtering rules applied to messages in a Sendbird application.
+"""
+type ContentFilter {
+  filterId: String!
+  name: String!
+  isEnabled: Boolean!
+  keywords: [String!]!
+  regexPatterns: [String!]
+  action: ModerationAction!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# ─── AI Types ─────────────────────────────────────────────────────────────────
+
+"""
+An AI-powered chatbot deployed within Sendbird channels.
+"""
+type AIBot {
+  botId: String!
+  name: String!
+  modelProvider: String!
+  modelName: String!
+  systemPrompt: String
+  temperature: Float
+  isEnabled: Boolean!
+  channelUrls: [String!]
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""
+A smart reply suggestion generated by Sendbird's AI layer.
+"""
+type SmartReply {
+  suggestionId: String!
+  messageId: Int!
+  channelUrl: String!
+  suggestions: [String!]!
+  language: String
+  generatedAt: DateTime!
+}
+
+"""
+Full-text message search capability across Sendbird channels.
+"""
+type MessageSearch {
+  query: String!
+  totalCount: Int!
+  results: [SearchResult!]!
+  next: String
+}
+
+"""
+Parameters for a message search query.
+"""
+input SearchQuery {
+  query: String!
+  channelUrl: String
+  channelCustomType: String
+  messageTimestampFrom: DateTime
+  messageTimetampTo: DateTime
+  limit: Int
+  reverse: Boolean
+  sortField: SearchSortField
+  order: SortOrder
+  token: String
+}
+
+"""
+A single result item from a Sendbird message search.
+"""
+type SearchResult {
+  message: Message!
+  channel: Channel!
+  score: Float
+  highlights: [String!]
+}
+
+# ─── Input Types ──────────────────────────────────────────────────────────────
+
+input CreateUserInput {
+  userId: String!
+  nickname: String
+  profileUrl: String
+  issueAccessToken: Boolean
+  metadata: JSON
+}
+
+input UpdateUserInput {
+  nickname: String
+  profileUrl: String
+  metadata: JSON
+  isActive: Boolean
+}
+
+input CreateOpenChannelInput {
+  name: String
+  channelUrl: String
+  coverUrl: String
+  customType: String
+  data: String
+  operatorIds: [String!]
+  isEphemeral: Boolean
+}
+
+input CreateGroupChannelInput {
+  name: String
+  channelUrl: String
+  coverUrl: String
+  customType: String
+  data: String
+  userIds: [String!]!
+  operatorIds: [String!]
+  isDistinct: Boolean
+  isSuper: Boolean
+  isPublic: Boolean
+  isBroadcast: Boolean
+  isEphemeral: Boolean
+  inviterId: String
+}
+
+input UpdateChannelInput {
+  name: String
+  coverUrl: String
+  customType: String
+  data: String
+  isFrozen: Boolean
+  metadata: JSON
+}
+
+input SendUserMessageInput {
+  channelType: ChannelType!
+  channelUrl: String!
+  userId: String!
+  message: String!
+  customType: String
+  data: String
+  mentionType: String
+  mentionedUserIds: [String!]
+  isSilent: Boolean
+  metaArray: [MessageMetaInput!]
+}
+
+input SendFileMessageInput {
+  channelType: ChannelType!
+  channelUrl: String!
+  userId: String!
+  url: String!
+  fileName: String
+  fileSize: Int
+  mimeType: String
+  customType: String
+  data: String
+  isSilent: Boolean
+}
+
+input SendAdminMessageInput {
+  channelType: ChannelType!
+  channelUrl: String!
+  message: String!
+  customType: String
+  data: String
+  isSilent: Boolean
+  mentionedUserIds: [String!]
+}
+
+input MessageMetaInput {
+  key: String!
+  value: [String!]!
+}
+
+input AddReactionInput {
+  channelType: ChannelType!
+  channelUrl: String!
+  messageId: Int!
+  userId: String!
+  reaction: String!
+}
+
+input RemoveReactionInput {
+  channelType: ChannelType!
+  channelUrl: String!
+  messageId: Int!
+  userId: String!
+  reaction: String!
+}
+
+input BanUserInput {
+  channelType: ChannelType!
+  channelUrl: String!
+  userId: String!
+  agentId: String
+  seconds: Int
+  description: String
+}
+
+input MuteUserInput {
+  channelType: ChannelType!
+  channelUrl: String!
+  userId: String!
+  seconds: Int
+  description: String
+}
+
+input RegisterWebhookInput {
+  url: String!
+  enabledEvents: [String!]!
+  includeMembers: Boolean
+  isEnabled: Boolean
+}
+
+input RegisterDeviceTokenInput {
+  userId: String!
+  tokenType: PushTokenType!
+  token: String!
+}
+
+input CreateBotInput {
+  botUserId: String!
+  botType: BotType!
+  botToken: String
+  botCallbackUrl: String
+  nickname: String
+  profileUrl: String
+  isEnabled: Boolean
+}
+
+input CreateAnnouncementInput {
+  message: String!
+  messageType: MessageType!
+  scheduledAt: DateTime
+  targetChannelType: ChannelType
+  targetCustomType: String
+  targetUserIds: [String!]
+}
+
+# ─── Pagination Types ─────────────────────────────────────────────────────────
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type UserConnection {
+  nodes: [User!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+  next: String
+}
+
+type ChannelConnection {
+  nodes: [Channel!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+  next: String
+}
+
+type MessageConnection {
+  nodes: [Message!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+  next: String
+}
+
+type BotConnection {
+  nodes: [Bot!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+  next: String
+}
+
+type AnnouncementConnection {
+  nodes: [Announcement!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+  next: String
+}
+
+# ─── Root Types ───────────────────────────────────────────────────────────────
+
+type Query {
+  "Fetch a single user by user ID."
+  user(userId: String!): User
+
+  "List users in the application with pagination."
+  users(limit: Int, token: String): UserConnection!
+
+  "Fetch a single open channel by channel URL."
+  openChannel(channelUrl: String!): OpenChannel
+
+  "List open channels with pagination."
+  openChannels(limit: Int, token: String, customType: String): ChannelConnection!
+
+  "Fetch a single group channel by channel URL."
+  groupChannel(channelUrl: String!): GroupChannel
+
+  "List group channels, optionally filtered by user."
+  groupChannels(userId: String, limit: Int, token: String, customType: String): ChannelConnection!
+
+  "Fetch a specific message from a channel."
+  message(channelType: ChannelType!, channelUrl: String!, messageId: Int!): Message
+
+  "List messages in a channel."
+  messages(channelType: ChannelType!, channelUrl: String!, limit: Int, messageTs: DateTime): MessageConnection!
+
+  "Fetch a thread rooted at a parent message."
+  thread(channelType: ChannelType!, channelUrl: String!, parentMessageId: Int!): Thread
+
+  "Fetch a single bot by bot user ID."
+  bot(botUserId: String!): Bot
+
+  "List bots in the application."
+  bots(limit: Int, token: String): BotConnection!
+
+  "Fetch a single announcement by unique ID."
+  announcement(uniqueId: String!): Announcement
+
+  "List announcements in the application."
+  announcements(limit: Int, token: String, status: AnnouncementStatus): AnnouncementConnection!
+
+  "Fetch the current application configuration."
+  application: Application!
+
+  "Fetch analytics metrics for the application."
+  analyticsMetrics(period: String!, startDate: DateTime!, endDate: DateTime!): [AnalyticsMetric!]!
+
+  "Fetch message and engagement stats for a channel."
+  channelStats(channelUrl: String!, startDate: DateTime!, endDate: DateTime!): ChannelStats!
+
+  "Fetch message delivery and read stats."
+  messageStats(channelUrl: String, startDate: DateTime!, endDate: DateTime!): MessageStats!
+
+  "Fetch overall usage summary for the application."
+  usageSummary(startDate: DateTime!, endDate: DateTime!): UsageSummary!
+
+  "Full-text search across messages."
+  searchMessages(query: SearchQuery!): MessageSearch!
+
+  "Fetch notification settings for a user."
+  notificationSetting(userId: String!): NotificationSetting
+
+  "Fetch device tokens registered for a user."
+  deviceTokens(userId: String!, tokenType: PushTokenType): [DeviceToken!]!
+
+  "Fetch registered webhooks."
+  webhooks: [Webhook!]!
+
+  "Fetch the push notification template."
+  pushTemplate(name: String!): PushTemplate
+
+  "List all push templates."
+  pushTemplates: [PushTemplate!]!
+
+  "Fetch an AI bot by ID."
+  aiBot(botId: String!): AIBot
+
+  "List AI bots."
+  aiBots: [AIBot!]!
+
+  "Get smart reply suggestions for a message."
+  smartReplies(channelUrl: String!, messageId: Int!): SmartReply
+
+  "List content filters."
+  contentFilters: [ContentFilter!]!
+
+  "List moderation bots."
+  moderationBots: [ModerationBot!]!
+}
+
+type Mutation {
+  "Create a new user."
+  createUser(input: CreateUserInput!): User!
+
+  "Update an existing user."
+  updateUser(userId: String!, input: UpdateUserInput!): User!
+
+  "Delete a user from the application."
+  deleteUser(userId: String!): Boolean!
+
+  "Issue a new access token for a user."
+  issueAccessToken(userId: String!): User!
+
+  "Create a new open channel."
+  createOpenChannel(input: CreateOpenChannelInput!): OpenChannel!
+
+  "Create a new group channel."
+  createGroupChannel(input: CreateGroupChannelInput!): GroupChannel!
+
+  "Update channel properties."
+  updateChannel(channelType: ChannelType!, channelUrl: String!, input: UpdateChannelInput!): Channel!
+
+  "Delete a channel."
+  deleteChannel(channelType: ChannelType!, channelUrl: String!): Boolean!
+
+  "Freeze or unfreeze a channel."
+  freezeChannel(channelType: ChannelType!, channelUrl: String!, freeze: Boolean!): Channel!
+
+  "Invite users to a group channel."
+  inviteUsersToChannel(channelUrl: String!, userIds: [String!]!): GroupChannel!
+
+  "Join an open channel."
+  joinOpenChannel(channelUrl: String!, userId: String!): OpenChannel!
+
+  "Leave a group channel."
+  leaveGroupChannel(channelUrl: String!, userId: String!): Boolean!
+
+  "Send a user (text) message."
+  sendUserMessage(input: SendUserMessageInput!): UserMessage!
+
+  "Send a file message."
+  sendFileMessage(input: SendFileMessageInput!): FileMessage!
+
+  "Send an admin message."
+  sendAdminMessage(input: SendAdminMessageInput!): AdminMessage!
+
+  "Update an existing message."
+  updateMessage(channelType: ChannelType!, channelUrl: String!, messageId: Int!, message: String!): Message!
+
+  "Delete a message."
+  deleteMessage(channelType: ChannelType!, channelUrl: String!, messageId: Int!): Boolean!
+
+  "Add a reaction to a message."
+  addReaction(input: AddReactionInput!): MessageReaction!
+
+  "Remove a reaction from a message."
+  removeReaction(input: RemoveReactionInput!): MessageReaction!
+
+  "Ban a user from a channel."
+  banUserFromChannel(input: BanUserInput!): ChannelBannedUser!
+
+  "Unban a user from a channel."
+  unbanUserFromChannel(channelType: ChannelType!, channelUrl: String!, userId: String!): Boolean!
+
+  "Mute a user in a channel."
+  muteUserInChannel(input: MuteUserInput!): ChannelMutedUser!
+
+  "Unmute a user in a channel."
+  unmuteUserInChannel(channelType: ChannelType!, channelUrl: String!, userId: String!): Boolean!
+
+  "Grant operator privileges to a user in a channel."
+  addChannelOperator(channelType: ChannelType!, channelUrl: String!, userId: String!): ChannelOperator!
+
+  "Remove operator privileges from a user in a channel."
+  removeChannelOperator(channelType: ChannelType!, channelUrl: String!, userId: String!): Boolean!
+
+  "Register a webhook endpoint."
+  registerWebhook(input: RegisterWebhookInput!): Webhook!
+
+  "Update a webhook endpoint."
+  updateWebhook(webhookId: String!, input: RegisterWebhookInput!): Webhook!
+
+  "Delete a webhook endpoint."
+  deleteWebhook(webhookId: String!): Boolean!
+
+  "Register a push device token for a user."
+  registerDeviceToken(input: RegisterDeviceTokenInput!): DeviceToken!
+
+  "Unregister a push device token."
+  unregisterDeviceToken(userId: String!, tokenType: PushTokenType!, token: String!): Boolean!
+
+  "Update notification settings for a user."
+  updateNotificationSetting(userId: String!, doNotDisturb: Boolean, snoozeEnabled: Boolean, timezone: String): NotificationSetting!
+
+  "Create a bot."
+  createBot(input: CreateBotInput!): Bot!
+
+  "Update a bot."
+  updateBot(botUserId: String!, input: CreateBotInput!): Bot!
+
+  "Delete a bot."
+  deleteBot(botUserId: String!): Boolean!
+
+  "Send a bot message to a channel."
+  sendBotMessage(botUserId: String!, channelUrl: String!, message: String!): BotMessage!
+
+  "Create an announcement."
+  createAnnouncement(input: CreateAnnouncementInput!): Announcement!
+
+  "Cancel an announcement."
+  cancelAnnouncement(uniqueId: String!): Announcement!
+
+  "Block a user from another user's perspective."
+  blockUser(userId: String!, targetId: String!): UserBlockedUser!
+
+  "Unblock a previously blocked user."
+  unblockUser(userId: String!, targetId: String!): Boolean!
+
+  "Register friend discovery keys for a user."
+  registerFriendDiscovery(userId: String!, discoveryKey: String!): FriendDiscovery!
+
+  "Create an AI bot."
+  createAIBot(name: String!, modelProvider: String!, modelName: String!, systemPrompt: String): AIBot!
+
+  "Update a content filter."
+  updateContentFilter(filterId: String!, isEnabled: Boolean, keywords: [String!], action: ModerationAction): ContentFilter!
+}
+
+type Subscription {
+  "Subscribe to new messages in a channel."
+  onMessageReceived(channelUrl: String!): Message!
+
+  "Subscribe to channel metadata updates."
+  onChannelUpdated(channelUrl: String!): Channel!
+
+  "Subscribe to changes in a user's online status."
+  onUserOnlineStatusChanged(userId: String!): User!
+
+  "Subscribe to reaction updates on a message."
+  onReactionUpdated(channelUrl: String!, messageId: Int!): MessageReaction!
+
+  "Subscribe to member join/leave events in a group channel."
+  onMembershipChanged(channelUrl: String!): ChannelMember!
+
+  "Subscribe to new announcements."
+  onAnnouncementCreated: Announcement!
+}

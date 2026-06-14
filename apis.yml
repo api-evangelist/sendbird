@@ -1,192 +1,192 @@
 name: Sendbird
-description: Sendbird provides APIs and SDKs for in-app chat, voice, video, AI chatbots, and omnichannel business messaging.
-  Used by over 4,000 companies to build real-time communication experiences for customer support, communities, and marketplace
-  platforms.
+description: Sendbird provides APIs and SDKs for in-app chat, voice, video, AI chatbots,
+  and omnichannel business messaging. Used by over 4,000 companies to build real-time
+  communication experiences for customer support, communities, and marketplace platforms.
 image: https://sendbird.com/favicon.ico
 url: https://sendbird.com
 created: '2025-01-14'
 modified: '2026-05-19'
 specificationVersion: '0.18'
 apis:
-  - name: Sendbird Platform API
-    description: The Sendbird Platform API provides server-side access to manage users, channels, messages, and moderation for
-      chat applications. Supports group channels, open channels, direct messages, push notifications, and webhooks.
-    image: https://sendbird.com/favicon.ico
-    humanURL: https://sendbird.com/docs/chat/platform-api/
-    baseURL: https://api-{application_id}.sendbird.com/v3
-    tags:
-    - Chat
-    - Messaging
-    - Real-Time Communication
-    - Push Notifications
-    properties:
-    - type: Documentation
-      url: https://sendbird.com/docs/chat/platform-api/
-    - type: OpenAPI
-      url: openapi/sendbird-platform-openapi.yml
-    - type: Authentication
-      url: https://sendbird.com/docs/chat/platform-api/v3/authentication
-    - type: RateLimits
-      url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
-    - type: NaftikoCapability
-      url: capabilities/platform-channels.yaml
-    - type: NaftikoCapability
-      url: capabilities/platform-messages.yaml
-    - type: NaftikoCapability
-      url: capabilities/platform-moderation.yaml
-    - type: NaftikoCapability
-      url: capabilities/platform-users.yaml
-    contact:
-    - FN: Sendbird Support
-      url: https://sendbird.com/contact-us/
-  - name: Sendbird Calls API
-    description: The Sendbird Calls API provides voice and video calling capabilities, enabling real-time one-on-one and group
-      calls within applications.
-    image: https://sendbird.com/favicon.ico
-    humanURL: https://sendbird.com/docs/calls/
-    baseURL: https://api-{application_id}.sendbird.com/v3
-    tags:
-    - Voice
-    - Video
-    - Calls
-    - Real-Time Communication
-    properties:
-    - type: Documentation
-      url: https://sendbird.com/docs/calls/
-    contact:
-    - FN: Sendbird Support
-      url: https://sendbird.com/contact-us/
-  - name: Sendbird Business Messaging API
-    description: The Sendbird Business Messaging API enables omnichannel customer engagement through SMS, WhatsApp, and other
-      messaging channels, supporting customer support and marketing use cases.
-    image: https://sendbird.com/favicon.ico
-    humanURL: https://sendbird.com/docs/business-messaging/
-    baseURL: https://api-{application_id}.sendbird.com/v3
-    tags:
-    - Business Messaging
-    - Omnichannel
-    - Customer Support
-    - WhatsApp
-    - SMS
-    properties:
-    - type: Documentation
-      url: https://sendbird.com/docs/business-messaging/
-  - name: Sendbird AI Chatbot API
-    description: The Sendbird AI Chatbot API enables building and deploying AI-powered chatbots within chat applications, supporting
-      automated customer support and conversational AI experiences.
-    image: https://sendbird.com/favicon.ico
-    humanURL: https://sendbird.com/docs/ai-chatbot/
-    baseURL: https://api-{application_id}.sendbird.com/v3
-    tags:
-    - AI
-    - Chatbot
-    - Customer Support
-    - Automation
-    properties:
-    - type: Documentation
-      url: https://sendbird.com/docs/ai-chatbot/
-common:
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-    - url: arazzo/sendbird-add-members-to-existing-channel-workflow.yml
-      name: Sendbird Add Members to an Existing Channel
-      summary: Confirm a channel, recreate it as distinct with an expanded member set, and notify.
-    - url: arazzo/sendbird-archive-and-delete-channel-workflow.yml
-      name: Sendbird Archive and Delete a Channel
-      summary: Read a channel's recent messages for archival, then delete the channel.
-    - url: arazzo/sendbird-audit-channel-membership-workflow.yml
-      name: Sendbird Audit a Channel and Its Recent Activity
-      summary: List channels for a member, then read details and recent messages for one.
-    - url: arazzo/sendbird-ban-user-from-channel-workflow.yml
-      name: Sendbird Ban a User from a Channel
-      summary: Confirm a user and channel exist, then ban the user from the channel.
-    - url: arazzo/sendbird-create-channel-and-broadcast-workflow.yml
-      name: Sendbird Create a Channel and Broadcast a Message
-      summary: Create a group channel with a member set and immediately broadcast a message.
-    - url: arazzo/sendbird-deactivate-user-cleanup-workflow.yml
-      name: Sendbird Deactivate and Clean Up a User
-      summary: Confirm a user exists, then delete the user account from the application.
-    - url: arazzo/sendbird-direct-message-between-users-workflow.yml
-      name: Sendbird Open a Direct Message Between Two Users
-      summary: Create a distinct 1:1 channel for two users and send the first message.
-    - url: arazzo/sendbird-find-or-create-user-workflow.yml
-      name: Sendbird Find or Create a User
-      summary: Look up a user by ID and create them only if they do not already exist.
-    - url: arazzo/sendbird-issue-access-token-and-greet-workflow.yml
-      name: Sendbird Issue an Access Token and Greet the User
-      summary: Create a user with an issued access token and send them a private channel greeting.
-    - url: arazzo/sendbird-moderate-channel-message-author-workflow.yml
-      name: Sendbird Moderate the Author of the Latest Channel Message
-      summary: Read a channel's latest message, identify its author, and mute that user.
-    - url: arazzo/sendbird-mute-then-warn-user-workflow.yml
-      name: Sendbird Mute a User and Post a Moderation Notice
-      summary: Mute a user in a channel and post an admin notice explaining the action.
-    - url: arazzo/sendbird-onboard-user-and-start-channel-workflow.yml
-      name: Sendbird Onboard a User and Start a Group Channel
-      summary: Create a user, open a group channel for them, and post a welcome message.
-    - url: arazzo/sendbird-rename-user-and-notify-channel-workflow.yml
-      name: Sendbird Rename a User and Notify a Channel
-      summary: Update a user's nickname and announce the change in a channel.
-    - url: arazzo/sendbird-reply-to-latest-message-workflow.yml
-      name: Sendbird Reply to the Latest Message in a Channel
-      summary: Read the most recent messages in a channel and post a reply.
-    - url: arazzo/sendbird-update-user-metadata-workflow.yml
-      name: Sendbird Update User Metadata
-      summary: Fetch a user, then merge nickname, profile, and metadata updates onto them.
-  - type: GitHubOrganization
-    url: https://github.com/sendbird
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/sendbird
-  - type: Portal
-    url: https://sendbird.com/docs/
+- name: Sendbird Platform API
+  description: The Sendbird Platform API provides server-side access to manage users,
+    channels, messages, and moderation for chat applications. Supports group channels,
+    open channels, direct messages, push notifications, and webhooks.
+  image: https://sendbird.com/favicon.ico
+  humanURL: https://sendbird.com/docs/chat/platform-api/
+  baseURL: https://api-{application_id}.sendbird.com/v3
+  tags:
+  - Chat
+  - Messaging
+  - Real-Time Communication
+  - Push Notifications
+  properties:
+  - type: Documentation
+    url: https://sendbird.com/docs/chat/platform-api/
+  - type: OpenAPI
+    url: openapi/sendbird-platform-openapi.yml
   - type: Authentication
     url: https://sendbird.com/docs/chat/platform-api/v3/authentication
   - type: RateLimits
     url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
-  - type: Webhooks
-    url: https://sendbird.com/docs/chat/platform-api/v3/webhooks
-  - type: ChangeLog
-    url: https://sendbird.com/release-notes/
-  - type: StatusPage
-    url: https://status.sendbird.com/
-  - type: Support
+  - url: graphql/sendbird-graphql.md
+    type: GraphQL
+  contact:
+  - FN: Sendbird Support
     url: https://sendbird.com/contact-us/
-  - type: Pricing
-    url: https://sendbird.com/pricing/
-  - type: Blog
-    url: https://sendbird.com/blog/
-  - type: PrivacyPolicy
-    url: https://sendbird.com/privacy-policy/
-  - type: TermsOfService
-    url: https://sendbird.com/terms-of-service/
-  - type: Website
-    url: https://sendbird.com
-  - type: Dashboard
-    url: https://dashboard.sendbird.com/
-  - type: SpectralRules
-    url: rules/sendbird-rules.yml
-  - type: JSONLDContext
-    url: json-ld/sendbird-context.jsonld
-  - type: Vocabulary
-    url: vocabulary/sendbird-vocabulary.yml
-  - type: NaftikoCapabilities
-    url: capabilities/customer-support-messaging.yaml
-  - type: NaftikoCapabilities
-    url: capabilities/community-chat.yaml
-  - type: Integrations
-    url: https://sendbird.com/partners
-  - type: LLMsTxt
-    url: https://sendbird.com/llms.txt
+- name: Sendbird Calls API
+  description: The Sendbird Calls API provides voice and video calling capabilities,
+    enabling real-time one-on-one and group calls within applications.
+  image: https://sendbird.com/favicon.ico
+  humanURL: https://sendbird.com/docs/calls/
+  baseURL: https://api-{application_id}.sendbird.com/v3
+  tags:
+  - Voice
+  - Video
+  - Calls
+  - Real-Time Communication
+  properties:
+  - type: Documentation
+    url: https://sendbird.com/docs/calls/
+  contact:
+  - FN: Sendbird Support
+    url: https://sendbird.com/contact-us/
+- name: Sendbird Business Messaging API
+  description: The Sendbird Business Messaging API enables omnichannel customer engagement
+    through SMS, WhatsApp, and other messaging channels, supporting customer support
+    and marketing use cases.
+  image: https://sendbird.com/favicon.ico
+  humanURL: https://sendbird.com/docs/business-messaging/
+  baseURL: https://api-{application_id}.sendbird.com/v3
+  tags:
+  - Business Messaging
+  - Omnichannel
+  - Customer Support
+  - WhatsApp
+  - SMS
+  properties:
+  - type: Documentation
+    url: https://sendbird.com/docs/business-messaging/
+- name: Sendbird AI Chatbot API
+  description: The Sendbird AI Chatbot API enables building and deploying AI-powered
+    chatbots within chat applications, supporting automated customer support and conversational
+    AI experiences.
+  image: https://sendbird.com/favicon.ico
+  humanURL: https://sendbird.com/docs/ai-chatbot/
+  baseURL: https://api-{application_id}.sendbird.com/v3
+  tags:
+  - AI
+  - Chatbot
+  - Customer Support
+  - Automation
+  properties:
+  - type: Documentation
+    url: https://sendbird.com/docs/ai-chatbot/
+common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/sendbird/overview
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/sendbird-add-members-to-existing-channel-workflow.yml
+    name: Sendbird Add Members to an Existing Channel
+    summary: Confirm a channel, recreate it as distinct with an expanded member set,
+      and notify.
+  - url: arazzo/sendbird-archive-and-delete-channel-workflow.yml
+    name: Sendbird Archive and Delete a Channel
+    summary: Read a channel's recent messages for archival, then delete the channel.
+  - url: arazzo/sendbird-audit-channel-membership-workflow.yml
+    name: Sendbird Audit a Channel and Its Recent Activity
+    summary: List channels for a member, then read details and recent messages for
+      one.
+  - url: arazzo/sendbird-ban-user-from-channel-workflow.yml
+    name: Sendbird Ban a User from a Channel
+    summary: Confirm a user and channel exist, then ban the user from the channel.
+  - url: arazzo/sendbird-create-channel-and-broadcast-workflow.yml
+    name: Sendbird Create a Channel and Broadcast a Message
+    summary: Create a group channel with a member set and immediately broadcast a
+      message.
+  - url: arazzo/sendbird-deactivate-user-cleanup-workflow.yml
+    name: Sendbird Deactivate and Clean Up a User
+    summary: Confirm a user exists, then delete the user account from the application.
+  - url: arazzo/sendbird-direct-message-between-users-workflow.yml
+    name: Sendbird Open a Direct Message Between Two Users
+    summary: Create a distinct 1:1 channel for two users and send the first message.
+  - url: arazzo/sendbird-find-or-create-user-workflow.yml
+    name: Sendbird Find or Create a User
+    summary: Look up a user by ID and create them only if they do not already exist.
+  - url: arazzo/sendbird-issue-access-token-and-greet-workflow.yml
+    name: Sendbird Issue an Access Token and Greet the User
+    summary: Create a user with an issued access token and send them a private channel
+      greeting.
+  - url: arazzo/sendbird-moderate-channel-message-author-workflow.yml
+    name: Sendbird Moderate the Author of the Latest Channel Message
+    summary: Read a channel's latest message, identify its author, and mute that user.
+  - url: arazzo/sendbird-mute-then-warn-user-workflow.yml
+    name: Sendbird Mute a User and Post a Moderation Notice
+    summary: Mute a user in a channel and post an admin notice explaining the action.
+  - url: arazzo/sendbird-onboard-user-and-start-channel-workflow.yml
+    name: Sendbird Onboard a User and Start a Group Channel
+    summary: Create a user, open a group channel for them, and post a welcome message.
+  - url: arazzo/sendbird-rename-user-and-notify-channel-workflow.yml
+    name: Sendbird Rename a User and Notify a Channel
+    summary: Update a user's nickname and announce the change in a channel.
+  - url: arazzo/sendbird-reply-to-latest-message-workflow.yml
+    name: Sendbird Reply to the Latest Message in a Channel
+    summary: Read the most recent messages in a channel and post a reply.
+  - url: arazzo/sendbird-update-user-metadata-workflow.yml
+    name: Sendbird Update User Metadata
+    summary: Fetch a user, then merge nickname, profile, and metadata updates onto
+      them.
+- type: GitHubOrganization
+  url: https://github.com/sendbird
+- type: LinkedIn
+  url: https://www.linkedin.com/company/sendbird
+- type: Portal
+  url: https://sendbird.com/docs/
+- type: Authentication
+  url: https://sendbird.com/docs/chat/platform-api/v3/authentication
+- type: RateLimits
+  url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
+- type: Webhooks
+  url: https://sendbird.com/docs/chat/platform-api/v3/webhooks
+- type: ChangeLog
+  url: https://sendbird.com/release-notes/
+- type: StatusPage
+  url: https://status.sendbird.com/
+- type: Support
+  url: https://sendbird.com/contact-us/
+- type: Pricing
+  url: https://sendbird.com/pricing/
+- type: Blog
+  url: https://sendbird.com/blog/
+- type: PrivacyPolicy
+  url: https://sendbird.com/privacy-policy/
+- type: TermsOfService
+  url: https://sendbird.com/terms-of-service/
+- type: Website
+  url: https://sendbird.com
+- type: Dashboard
+  url: https://dashboard.sendbird.com/
+- type: SpectralRules
+  url: rules/sendbird-rules.yml
+- type: JSONLDContext
+  url: json-ld/sendbird-context.jsonld
+- type: Vocabulary
+  url: vocabulary/sendbird-vocabulary.yml
+- type: Integrations
+  url: https://sendbird.com/partners
+- type: LLMsTxt
+  url: https://sendbird.com/llms.txt
 integrations:
-  - name: Img partners
-  - name: Partners aws
-  - name: Partners brightcove
-  - name: Partners megazone
-  - name: Braze partner thumbnail
-  - name: Live Ramp partner thumbnail
-  - name: Frame 2043684008
+- name: Img partners
+- name: Partners aws
+- name: Partners brightcove
+- name: Partners megazone
+- name: Braze partner thumbnail
+- name: Live Ramp partner thumbnail
+- name: Frame 2043684008
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
-    url: https://apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  url: https://apievangelist.com
