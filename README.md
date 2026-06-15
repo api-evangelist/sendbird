@@ -1,94 +1,126 @@
-# Sendbird
+# Sendbird (sendbird)
 
 Sendbird provides APIs and SDKs for in-app chat, voice, video, AI chatbots, and omnichannel business messaging. Used by over 4,000 companies to build real-time communication experiences for customer support, communities, and marketplace platforms.
 
-**URL:** [https://sendbird.com](https://sendbird.com)
+**APIs.json:** [https://sendbird.com](https://sendbird.com)
 
 ## Timestamps
 
 - **Created:** 2025-01-14
-- **Modified:** 2026-05-02
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### Sendbird Platform API
 
-The Sendbird Platform API provides server-side access to manage users, channels, messages, and moderation for in-app chat applications.
+The Sendbird Platform API provides server-side access to manage users, channels, messages, and moderation for chat applications. Supports group channels, open channels, direct messages, push notifications, and webhooks.
 
-**Human URL:** [https://sendbird.com/docs/chat/platform-api/](https://sendbird.com/docs/chat/platform-api/)
+- **Human URL:** [https://sendbird.com/docs/chat/platform-api/](https://sendbird.com/docs/chat/platform-api/)
+- **Base URL:** `https://api-{application_id}.sendbird.com/v3`
 
 #### Tags
 
-- Chat, Messaging, Real-Time Communication, Push Notifications
+- Chat
+- Messaging
+- Real-Time Communication
+- Push Notifications
 
 #### Properties
 
 - [Documentation](https://sendbird.com/docs/chat/platform-api/)
-- [OpenAPI](openapi/sendbird-platform-openapi.yml)
-- [JSONSchema - User](json-schema/sendbird-user-schema.json)
-- [JSONSchema - Group Channel](json-schema/sendbird-group-channel-schema.json)
-- [JSONSchema - Message](json-schema/sendbird-message-schema.json)
+- [OpenAPI](openapi/sendbird-platform-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/sendbird-platform.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/sendbird-platform.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Authentication](https://sendbird.com/docs/chat/platform-api/v3/authentication)
+- [Rate Limits](https://sendbird.com/docs/chat/platform-api/v3/rate-limits)
 
----
+### Sendbird Calls API
 
-## Artifacts
+The Sendbird Calls API provides voice and video calling capabilities, enabling real-time one-on-one and group calls within applications.
 
-### OpenAPI Specifications
+- **Human URL:** [https://sendbird.com/docs/calls/](https://sendbird.com/docs/calls/)
+- **Base URL:** `https://api-{application_id}.sendbird.com/v3`
 
-| API | File |
-|---|---|
-| Sendbird Platform API | [openapi/sendbird-platform-openapi.yml](openapi/sendbird-platform-openapi.yml) |
+#### Tags
 
-### JSON Schemas
+- Voice
+- Video
+- Calls
+- Real-Time Communication
 
-| Schema | File |
-|---|---|
-| User | [json-schema/sendbird-user-schema.json](json-schema/sendbird-user-schema.json) |
-| Group Channel | [json-schema/sendbird-group-channel-schema.json](json-schema/sendbird-group-channel-schema.json) |
-| Message | [json-schema/sendbird-message-schema.json](json-schema/sendbird-message-schema.json) |
+#### Properties
 
-### JSON Structures
+- [Documentation](https://sendbird.com/docs/calls/)
+- [Postman Collection](collections/sendbird-platform.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/sendbird-platform.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-| Structure | File |
-|---|---|
-| User | [json-structure/sendbird-user-structure.json](json-structure/sendbird-user-structure.json) |
+### Sendbird Business Messaging API
 
-### Rules
+The Sendbird Business Messaging API enables omnichannel customer engagement through SMS, WhatsApp, and other messaging channels, supporting customer support and marketing use cases.
 
-| Ruleset | File |
-|---|---|
-| Sendbird API Rules | [rules/sendbird-rules.yml](rules/sendbird-rules.yml) |
+- **Human URL:** [https://sendbird.com/docs/business-messaging/](https://sendbird.com/docs/business-messaging/)
+- **Base URL:** `https://api-{application_id}.sendbird.com/v3`
 
-### Capabilities
+#### Tags
 
-#### Workflow Capabilities
+- Business Messaging
+- Omnichannel
+- Customer Support
+- WhatsApp
+- SMS
 
-| Workflow | Description | File |
-|---|---|---|
-| Customer Support Messaging | Support conversation management for customer service teams | [capabilities/customer-support-messaging.yaml](capabilities/customer-support-messaging.yaml) |
-| Community Chat | Community building and moderation workflow | [capabilities/community-chat.yaml](capabilities/community-chat.yaml) |
+#### Properties
 
-#### Shared Per-API Definitions
+- [Documentation](https://sendbird.com/docs/business-messaging/)
+- [Postman Collection](collections/sendbird-platform.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/sendbird-platform.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
-| API | File |
-|---|---|
-| Platform API | [capabilities/shared/platform-api.yaml](capabilities/shared/platform-api.yaml) |
+### Sendbird AI Chatbot API
 
-### JSON-LD Context
+The Sendbird AI Chatbot API enables building and deploying AI-powered chatbots within chat applications, supporting automated customer support and conversational AI experiences.
 
-- [json-ld/sendbird-context.jsonld](json-ld/sendbird-context.jsonld)
+- **Human URL:** [https://sendbird.com/docs/ai-chatbot/](https://sendbird.com/docs/ai-chatbot/)
+- **Base URL:** `https://api-{application_id}.sendbird.com/v3`
 
-### Examples
+#### Tags
 
-| Example | File |
-|---|---|
-| Create User | [examples/sendbird-create-user-example.json](examples/sendbird-create-user-example.json) |
-| Send Message | [examples/sendbird-send-message-example.json](examples/sendbird-send-message-example.json) |
+- AI
+- Chatbot
+- Customer Support
+- Automation
 
-### Vocabulary
+#### Properties
 
-- [vocabulary/sendbird-vocabulary.yml](vocabulary/sendbird-vocabulary.yml)
+- [Documentation](https://sendbird.com/docs/ai-chatbot/)
+- [Postman Collection](collections/sendbird-platform.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/sendbird-platform.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+## Common Properties
+
+- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
+- [GitHub Organization](https://github.com/sendbird)
+- [LinkedIn](https://www.linkedin.com/company/sendbird)
+- [Portal](https://sendbird.com/docs/)
+- [Authentication](https://sendbird.com/docs/chat/platform-api/v3/authentication)
+- [Rate Limits](https://sendbird.com/docs/chat/platform-api/v3/rate-limits)
+- [Webhooks](https://sendbird.com/docs/chat/platform-api/v3/webhooks)
+- [Changelog](https://sendbird.com/release-notes/)
+- [Status Page](https://status.sendbird.com/)
+- [Support](https://sendbird.com/contact-us/)
+- [Pricing](https://sendbird.com/pricing/)
+- [Blog](https://sendbird.com/blog/)
+- [Privacy Policy](https://sendbird.com/privacy-policy/)
+- [Terms of Service](https://sendbird.com/terms-of-service/)
+- [Website](https://sendbird.com)
+- [Dashboard](https://dashboard.sendbird.com/)
+- [Spectral Rules](rules/sendbird-rules.yml)
+- [J S O N L D Context](json-ld/sendbird-context.jsonld)
+- [Vocabulary](vocabulary/sendbird-vocabulary.yml)
+- [Integrations](https://sendbird.com/partners)
+- [L L Ms Txt](https://sendbird.com/llms.txt)
 
 ## Maintainers
 
-- **Kin Lane** — [kin@apievangelist.com](mailto:kin@apievangelist.com)
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com
+**URL:** https://apievangelist.com

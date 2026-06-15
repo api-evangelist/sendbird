@@ -1,0 +1,383 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sendbird Platform API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Token",
+      "value": "{{Api-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-{application_id}.sendbird.com/v3/users",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token for the next page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of users to return (1-100)."
+              },
+              {
+                "name": "active_mode",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user active mode."
+              },
+              {
+                "name": "show_bot",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include bot users in results."
+              },
+              {
+                "name": "user_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of user IDs to filter."
+              },
+              {
+                "name": "nickname",
+                "value": "",
+                "type": "query",
+                "description": "Filter users by nickname (partial match)."
+              },
+              {
+                "name": "nickname_startswith",
+                "value": "",
+                "type": "query",
+                "description": "Filter users whose nickname starts with this value."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of users registered in the Sendbird application. Supports pagination and filtering by nickname."
+        },
+        {
+          "info": {
+            "name": "Create a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-{application_id}.sendbird.com/v3/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new user in the Sendbird application. The user_id must be unique within the application."
+        },
+        {
+          "info": {
+            "name": "Get a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-{application_id}.sendbird.com/v3/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the user."
+              }
+            ]
+          },
+          "docs": "Retrieves information about a specific user."
+        },
+        {
+          "info": {
+            "name": "Update a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-{application_id}.sendbird.com/v3/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates information of a specific user."
+        },
+        {
+          "info": {
+            "name": "Delete a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-{application_id}.sendbird.com/v3/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the user."
+              }
+            ]
+          },
+          "docs": "Deletes a specific user from the Sendbird application."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Channels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Group Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return."
+              },
+              {
+                "name": "channel_url",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific channel URL."
+              },
+              {
+                "name": "members_include_in",
+                "value": "",
+                "type": "query",
+                "description": "Filter channels that include specific user IDs."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of group channels in the Sendbird application."
+        },
+        {
+          "info": {
+            "name": "Create a Group Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new group channel for messaging between users."
+        },
+        {
+          "info": {
+            "name": "Get a Group Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels/:channel_url",
+            "params": [
+              {
+                "name": "channel_url",
+                "value": "",
+                "type": "path",
+                "description": "URL of the channel."
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific group channel."
+        },
+        {
+          "info": {
+            "name": "Delete a Group Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels/:channel_url",
+            "params": [
+              {
+                "name": "channel_url",
+                "value": "",
+                "type": "path",
+                "description": "URL of the channel."
+              }
+            ]
+          },
+          "docs": "Deletes a specific group channel."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels/:channel_url/messages",
+            "params": [
+              {
+                "name": "channel_url",
+                "value": "",
+                "type": "path",
+                "description": "URL of the channel."
+              },
+              {
+                "name": "message_ts",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp to fetch messages around."
+              },
+              {
+                "name": "prev_limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of messages to retrieve before message_ts."
+              },
+              {
+                "name": "next_limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of messages to retrieve after message_ts."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the message at message_ts."
+              }
+            ]
+          },
+          "docs": "Retrieves messages from a specific group channel."
+        },
+        {
+          "info": {
+            "name": "Send a Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels/:channel_url/messages",
+            "params": [
+              {
+                "name": "channel_url",
+                "value": "",
+                "type": "path",
+                "description": "URL of the channel."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a message to a specific group channel."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Moderation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ban a User from a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-{application_id}.sendbird.com/v3/users/:user_id/ban",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bans a user from a specific channel for moderation purposes."
+        },
+        {
+          "info": {
+            "name": "Mute a User in a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-{application_id}.sendbird.com/v3/users/:user_id/mute",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mutes a user in a specific channel, preventing them from sending messages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

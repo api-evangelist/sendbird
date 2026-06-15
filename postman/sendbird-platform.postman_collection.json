@@ -1,0 +1,3225 @@
+{
+  "info": {
+    "_postman_id": "e7a1354f-e212-4979-848a-999b91f9aa40",
+    "name": "Sendbird Platform API",
+    "description": "The Sendbird Platform API provides server-side access to manage users, channels, messages, and moderation for in-app chat applications built on Sendbird. Supports group channels, open channels, direct messages, push notifications, and webhooks for real-time communication features.\n\nContact Support:\n Name: Sendbird Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:21.000Z",
+    "updatedAt": "2026-06-05T15:16:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e7a1354f-e212-4979-848a-999b91f9aa40"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{user_id}",
+          "item": [
+            {
+              "name": "ban",
+              "item": [
+                {
+                  "name": "Ban a User from a Channel",
+                  "id": "c30529cf-e938-4c05-938d-89183e6f7574",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"channel_url\": \"<string>\",\n  \"seconds\": -1,\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id/ban",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id",
+                        "ban"
+                      ],
+                      "variable": [
+                        {
+                          "id": "444f1a77-cf59-4c75-a1d0-e25f5cacb594",
+                          "key": "user_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the user."
+                        }
+                      ]
+                    },
+                    "description": "Bans a user from a specific channel for moderation purposes."
+                  },
+                  "response": [
+                    {
+                      "id": "765b169e-1497-4318-a8a0-f6695e90cf9a",
+                      "name": "User banned successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"channel_url\": \"<string>\",\n  \"seconds\": -1,\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:user_id/ban",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":user_id",
+                            "ban"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-765b169e-1497-4318-a8a0-f6695e90cf9a"
+                    },
+                    {
+                      "id": "d9899f84-a29a-4918-a5ac-742f4f800017",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"channel_url\": \"<string>\",\n  \"seconds\": -1,\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:user_id/ban",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":user_id",
+                            "ban"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-d9899f84-a29a-4918-a5ac-742f4f800017"
+                    },
+                    {
+                      "id": "1fdd4440-e26e-4f87-b94f-5eddf0f6570c",
+                      "name": "Unauthorized. API token is missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"channel_url\": \"<string>\",\n  \"seconds\": -1,\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:user_id/ban",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":user_id",
+                            "ban"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-1fdd4440-e26e-4f87-b94f-5eddf0f6570c"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-c30529cf-e938-4c05-938d-89183e6f7574"
+                }
+              ],
+              "id": "a9237516-64ef-4823-a392-b7b2fdae2dd1",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-a9237516-64ef-4823-a392-b7b2fdae2dd1"
+            },
+            {
+              "name": "mute",
+              "item": [
+                {
+                  "name": "Mute a User in a Channel",
+                  "id": "c0985a40-e32c-4a0f-8334-047d6335cf1d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"channel_url\": \"<string>\",\n  \"seconds\": -1,\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id/mute",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id",
+                        "mute"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c48ec83d-bcbe-481c-87cb-4c2cee721266",
+                          "key": "user_id",
+                          "value": "<string>",
+                          "description": "(Required) Unique identifier of the user."
+                        }
+                      ]
+                    },
+                    "description": "Mutes a user in a specific channel, preventing them from sending messages."
+                  },
+                  "response": [
+                    {
+                      "id": "c7d62599-77e9-426c-9bc0-0195113a580c",
+                      "name": "User muted successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"channel_url\": \"<string>\",\n  \"seconds\": -1,\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:user_id/mute",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":user_id",
+                            "mute"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-c7d62599-77e9-426c-9bc0-0195113a580c"
+                    },
+                    {
+                      "id": "c5522227-1cf8-4860-a787-351717060ea8",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"channel_url\": \"<string>\",\n  \"seconds\": -1,\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:user_id/mute",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":user_id",
+                            "mute"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-c5522227-1cf8-4860-a787-351717060ea8"
+                    },
+                    {
+                      "id": "8f7306cd-9806-46fd-aa55-d3964bfaf7f0",
+                      "name": "Unauthorized. API token is missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"channel_url\": \"<string>\",\n  \"seconds\": -1,\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:user_id/mute",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":user_id",
+                            "mute"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-8f7306cd-9806-46fd-aa55-d3964bfaf7f0"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-c0985a40-e32c-4a0f-8334-047d6335cf1d"
+                }
+              ],
+              "id": "6a80cae1-dd7f-4872-8329-57f38faecb84",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-6a80cae1-dd7f-4872-8329-57f38faecb84"
+            },
+            {
+              "name": "Get a User",
+              "id": "a7a1572e-1958-4a78-aed3-cf22e65f09ba",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:user_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":user_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a6e8b85c-a653-4858-9a01-4f518ebc3594",
+                      "key": "user_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the user."
+                    }
+                  ]
+                },
+                "description": "Retrieves information about a specific user."
+              },
+              "response": [
+                {
+                  "id": "54a39a75-e38b-47e2-a897-df4ebfbe5108",
+                  "name": "User details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"user_id\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"is_online\": \"<boolean>\",\n  \"is_active\": \"<boolean>\",\n  \"last_seen_at\": \"<integer>\",\n  \"access_token\": \"<string>\",\n  \"metadata\": {\n    \"sintc5a\": \"<string>\",\n    \"fugiat_9ef\": \"<string>\",\n    \"occaecat_d47\": \"<string>\"\n  },\n  \"created_at\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-54a39a75-e38b-47e2-a897-df4ebfbe5108"
+                },
+                {
+                  "id": "306cf78d-6dfc-44bd-91a0-2edd994591f7",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-306cf78d-6dfc-44bd-91a0-2edd994591f7"
+                },
+                {
+                  "id": "18ae8c52-7dcb-4a8c-acb2-5c1165bfe9d5",
+                  "name": "Unauthorized. API token is missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-18ae8c52-7dcb-4a8c-acb2-5c1165bfe9d5"
+                },
+                {
+                  "id": "5713d0fb-7552-4107-bebd-25ee935ca81e",
+                  "name": "Not found. The requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-5713d0fb-7552-4107-bebd-25ee935ca81e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-a7a1572e-1958-4a78-aed3-cf22e65f09ba"
+            },
+            {
+              "name": "Update a User",
+              "id": "ce7023ee-8387-47e3-808d-016ae91c7e1b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"metadata\": {\n    \"voluptate42\": \"<string>\",\n    \"Lorem9\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/:user_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":user_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "48935ae4-b788-437d-8d33-4d65b2011734",
+                      "key": "user_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the user."
+                    }
+                  ]
+                },
+                "description": "Updates information of a specific user."
+              },
+              "response": [
+                {
+                  "id": "56974ee4-c5d5-49a0-b315-c7f27e04a657",
+                  "name": "User updated successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"metadata\": {\n    \"voluptate42\": \"<string>\",\n    \"Lorem9\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"user_id\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"is_online\": \"<boolean>\",\n  \"is_active\": \"<boolean>\",\n  \"last_seen_at\": \"<integer>\",\n  \"access_token\": \"<string>\",\n  \"metadata\": {\n    \"sintc5a\": \"<string>\",\n    \"fugiat_9ef\": \"<string>\",\n    \"occaecat_d47\": \"<string>\"\n  },\n  \"created_at\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-56974ee4-c5d5-49a0-b315-c7f27e04a657"
+                },
+                {
+                  "id": "8ca5f2bc-88ce-42a9-9a56-bcc95a3109a2",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"metadata\": {\n    \"voluptate42\": \"<string>\",\n    \"Lorem9\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-8ca5f2bc-88ce-42a9-9a56-bcc95a3109a2"
+                },
+                {
+                  "id": "956ca584-02ad-43c4-bf05-9bbf607b46b6",
+                  "name": "Unauthorized. API token is missing or invalid.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"metadata\": {\n    \"voluptate42\": \"<string>\",\n    \"Lorem9\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-956ca584-02ad-43c4-bf05-9bbf607b46b6"
+                },
+                {
+                  "id": "58516ce7-df2a-4d51-a80f-18e6e52e9d26",
+                  "name": "Not found. The requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"metadata\": {\n    \"voluptate42\": \"<string>\",\n    \"Lorem9\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-58516ce7-df2a-4d51-a80f-18e6e52e9d26"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-ce7023ee-8387-47e3-808d-016ae91c7e1b"
+            },
+            {
+              "name": "Delete a User",
+              "id": "30369989-40f4-4884-87c9-1da34bbca2da",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:user_id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":user_id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "dfda8574-0413-476b-ae36-94e12bedd46d",
+                      "key": "user_id",
+                      "value": "<string>",
+                      "description": "(Required) Unique identifier of the user."
+                    }
+                  ]
+                },
+                "description": "Deletes a specific user from the Sendbird application."
+              },
+              "response": [
+                {
+                  "id": "3ae43514-b578-45d9-b03f-4f94082780e8",
+                  "name": "User deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-3ae43514-b578-45d9-b03f-4f94082780e8"
+                },
+                {
+                  "id": "2b3467bb-0d5e-48f9-853a-3e4454500208",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-2b3467bb-0d5e-48f9-853a-3e4454500208"
+                },
+                {
+                  "id": "cbbc8d00-1d83-446d-a66b-fa2fcd806c5f",
+                  "name": "Unauthorized. API token is missing or invalid.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-cbbc8d00-1d83-446d-a66b-fa2fcd806c5f"
+                },
+                {
+                  "id": "8b3f41c3-51e3-46ee-a245-9d8b5c73396b",
+                  "name": "Not found. The requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "user_id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-8b3f41c3-51e3-46ee-a245-9d8b5c73396b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-30369989-40f4-4884-87c9-1da34bbca2da"
+            }
+          ],
+          "id": "0fa95611-17d6-4533-9d87-b94817056cfc",
+          "createdAt": "2026-06-05T15:16:21.000Z",
+          "updatedAt": "2026-06-05T15:16:21.000Z",
+          "uid": "35240-0fa95611-17d6-4533-9d87-b94817056cfc"
+        },
+        {
+          "name": "List Users",
+          "id": "641f56fa-fac1-4109-b284-c84ad2904b2f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users?token=<string>&limit=10&active_mode=all&show_bot=false&user_ids=<string>&nickname=<string>&nickname_startswith=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [
+                {
+                  "description": "Pagination token for the next page.",
+                  "key": "token",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of users to return (1-100).",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Filter by user active mode.",
+                  "key": "active_mode",
+                  "value": "all"
+                },
+                {
+                  "description": "Whether to include bot users in results.",
+                  "key": "show_bot",
+                  "value": "false"
+                },
+                {
+                  "description": "Comma-separated list of user IDs to filter.",
+                  "key": "user_ids",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter users by nickname (partial match).",
+                  "key": "nickname",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter users whose nickname starts with this value.",
+                  "key": "nickname_startswith",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves a list of users registered in the Sendbird application. Supports pagination and filtering by nickname."
+          },
+          "response": [
+            {
+              "id": "17605ede-3133-4f8d-9593-4de1b8036e51",
+              "name": "A list of users.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?token=<string>&limit=10&active_mode=all&show_bot=false&user_ids=<string>&nickname=<string>&nickname_startswith=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "Pagination token for the next page.",
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of users to return (1-100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Filter by user active mode.",
+                      "key": "active_mode",
+                      "value": "all"
+                    },
+                    {
+                      "description": "Whether to include bot users in results.",
+                      "key": "show_bot",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Comma-separated list of user IDs to filter.",
+                      "key": "user_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter users by nickname (partial match).",
+                      "key": "nickname",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter users whose nickname starts with this value.",
+                      "key": "nickname_startswith",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"users\": [\n    {\n      \"user_id\": \"<string>\",\n      \"nickname\": \"<string>\",\n      \"profile_url\": \"<string>\",\n      \"is_online\": \"<boolean>\",\n      \"is_active\": \"<boolean>\",\n      \"last_seen_at\": \"<integer>\",\n      \"access_token\": \"<string>\",\n      \"metadata\": {\n        \"laborum42\": \"<string>\",\n        \"mollit_e7\": \"<string>\"\n      },\n      \"created_at\": \"<integer>\"\n    },\n    {\n      \"user_id\": \"<string>\",\n      \"nickname\": \"<string>\",\n      \"profile_url\": \"<string>\",\n      \"is_online\": \"<boolean>\",\n      \"is_active\": \"<boolean>\",\n      \"last_seen_at\": \"<integer>\",\n      \"access_token\": \"<string>\",\n      \"metadata\": {\n        \"cupidatat7\": \"<string>\"\n      },\n      \"created_at\": \"<integer>\"\n    }\n  ],\n  \"next\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-17605ede-3133-4f8d-9593-4de1b8036e51"
+            },
+            {
+              "id": "76c560d9-0262-4379-9eca-8f75e5bc4818",
+              "name": "Bad request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?token=<string>&limit=10&active_mode=all&show_bot=false&user_ids=<string>&nickname=<string>&nickname_startswith=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "Pagination token for the next page.",
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of users to return (1-100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Filter by user active mode.",
+                      "key": "active_mode",
+                      "value": "all"
+                    },
+                    {
+                      "description": "Whether to include bot users in results.",
+                      "key": "show_bot",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Comma-separated list of user IDs to filter.",
+                      "key": "user_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter users by nickname (partial match).",
+                      "key": "nickname",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter users whose nickname starts with this value.",
+                      "key": "nickname_startswith",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-76c560d9-0262-4379-9eca-8f75e5bc4818"
+            },
+            {
+              "id": "e2aa02c7-3c74-4acf-8bdd-aacecebd30bd",
+              "name": "Unauthorized. API token is missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users?token=<string>&limit=10&active_mode=all&show_bot=false&user_ids=<string>&nickname=<string>&nickname_startswith=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "Pagination token for the next page.",
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of users to return (1-100).",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Filter by user active mode.",
+                      "key": "active_mode",
+                      "value": "all"
+                    },
+                    {
+                      "description": "Whether to include bot users in results.",
+                      "key": "show_bot",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Comma-separated list of user IDs to filter.",
+                      "key": "user_ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter users by nickname (partial match).",
+                      "key": "nickname",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter users whose nickname starts with this value.",
+                      "key": "nickname_startswith",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-e2aa02c7-3c74-4acf-8bdd-aacecebd30bd"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:21.000Z",
+          "updatedAt": "2026-06-05T15:16:21.000Z",
+          "uid": "35240-641f56fa-fac1-4109-b284-c84ad2904b2f"
+        },
+        {
+          "name": "Create a User",
+          "id": "9e91d538-b3a6-40b6-a7bd-0321f4ff602f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_id\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"issue_access_token\": false,\n  \"metadata\": {\n    \"culpa_8\": \"<string>\",\n    \"exercitation_d\": \"<string>\",\n    \"dolor_db1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "Creates a new user in the Sendbird application. The user_id must be unique within the application."
+          },
+          "response": [
+            {
+              "id": "b33780fe-6c58-4a62-a8a6-8d07a15942cc",
+              "name": "User created successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"issue_access_token\": false,\n  \"metadata\": {\n    \"culpa_8\": \"<string>\",\n    \"exercitation_d\": \"<string>\",\n    \"dolor_db1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"user_id\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"is_online\": \"<boolean>\",\n  \"is_active\": \"<boolean>\",\n  \"last_seen_at\": \"<integer>\",\n  \"access_token\": \"<string>\",\n  \"metadata\": {\n    \"sintc5a\": \"<string>\",\n    \"fugiat_9ef\": \"<string>\",\n    \"occaecat_d47\": \"<string>\"\n  },\n  \"created_at\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-b33780fe-6c58-4a62-a8a6-8d07a15942cc"
+            },
+            {
+              "id": "51017788-6ae4-49f4-a1d4-b74a8cd8578b",
+              "name": "Bad request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"issue_access_token\": false,\n  \"metadata\": {\n    \"culpa_8\": \"<string>\",\n    \"exercitation_d\": \"<string>\",\n    \"dolor_db1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-51017788-6ae4-49f4-a1d4-b74a8cd8578b"
+            },
+            {
+              "id": "16885602-d65a-4379-9d9d-c88abdabcfbf",
+              "name": "Unauthorized. API token is missing or invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_id\": \"<string>\",\n  \"nickname\": \"<string>\",\n  \"profile_url\": \"<string>\",\n  \"issue_access_token\": false,\n  \"metadata\": {\n    \"culpa_8\": \"<string>\",\n    \"exercitation_d\": \"<string>\",\n    \"dolor_db1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-16885602-d65a-4379-9d9d-c88abdabcfbf"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:21.000Z",
+          "updatedAt": "2026-06-05T15:16:21.000Z",
+          "uid": "35240-9e91d538-b3a6-40b6-a7bd-0321f4ff602f"
+        }
+      ],
+      "id": "3e599feb-be3e-4461-ae9b-5d83c9b107ac",
+      "createdAt": "2026-06-05T15:16:21.000Z",
+      "updatedAt": "2026-06-05T15:16:21.000Z",
+      "uid": "35240-3e599feb-be3e-4461-ae9b-5d83c9b107ac"
+    },
+    {
+      "name": "group_channels",
+      "item": [
+        {
+          "name": "{channel_url}",
+          "item": [
+            {
+              "name": "messages",
+              "item": [
+                {
+                  "name": "List Messages",
+                  "id": "7e5e39a2-7bc0-42ac-9eab-7c3a921e26bf",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_channels/:channel_url/messages?message_ts=<integer>&prev_limit=15&next_limit=0&include=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_channels",
+                        ":channel_url",
+                        "messages"
+                      ],
+                      "query": [
+                        {
+                          "description": "Unix timestamp to fetch messages around.",
+                          "key": "message_ts",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Number of messages to retrieve before message_ts.",
+                          "key": "prev_limit",
+                          "value": "15"
+                        },
+                        {
+                          "description": "Number of messages to retrieve after message_ts.",
+                          "key": "next_limit",
+                          "value": "0"
+                        },
+                        {
+                          "description": "Whether to include the message at message_ts.",
+                          "key": "include",
+                          "value": "false"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "c76238d6-8ecd-47c0-8414-37ffceb4b9cb",
+                          "key": "channel_url",
+                          "value": "<string>",
+                          "description": "(Required) URL of the channel."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves messages from a specific group channel."
+                  },
+                  "response": [
+                    {
+                      "id": "8526b956-5aa8-4d96-8fbb-d3cd2131b292",
+                      "name": "A list of messages.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/group_channels/:channel_url/messages?message_ts=<integer>&prev_limit=15&next_limit=0&include=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "group_channels",
+                            ":channel_url",
+                            "messages"
+                          ],
+                          "query": [
+                            {
+                              "description": "Unix timestamp to fetch messages around.",
+                              "key": "message_ts",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Number of messages to retrieve before message_ts.",
+                              "key": "prev_limit",
+                              "value": "15"
+                            },
+                            {
+                              "description": "Number of messages to retrieve after message_ts.",
+                              "key": "next_limit",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Whether to include the message at message_ts.",
+                              "key": "include",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "channel_url"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"messages\": [\n    {\n      \"message_id\": \"<integer>\",\n      \"type\": \"MESG\",\n      \"message\": \"<string>\",\n      \"user\": {\n        \"user_id\": \"<string>\",\n        \"nickname\": \"<string>\",\n        \"profile_url\": \"<string>\",\n        \"is_online\": \"<boolean>\",\n        \"is_active\": \"<boolean>\",\n        \"last_seen_at\": \"<integer>\",\n        \"access_token\": \"<string>\",\n        \"metadata\": {\n          \"ut_b\": \"<string>\"\n        },\n        \"created_at\": \"<integer>\"\n      },\n      \"channel_url\": \"<string>\",\n      \"created_at\": \"<integer>\",\n      \"updated_at\": \"<integer>\",\n      \"custom_type\": \"<string>\",\n      \"data\": \"<string>\",\n      \"mention_type\": \"<string>\",\n      \"mentioned_users\": [\n        {\n          \"user_id\": \"<string>\",\n          \"nickname\": \"<string>\",\n          \"profile_url\": \"<string>\",\n          \"is_online\": \"<boolean>\",\n          \"is_active\": \"<boolean>\",\n          \"last_seen_at\": \"<integer>\",\n          \"access_token\": \"<string>\",\n          \"metadata\": {\n            \"reprehenderit87\": \"<string>\",\n            \"Ut15\": \"<string>\"\n          },\n          \"created_at\": \"<integer>\"\n        },\n        {\n          \"user_id\": \"<string>\",\n          \"nickname\": \"<string>\",\n          \"profile_url\": \"<string>\",\n          \"is_online\": \"<boolean>\",\n          \"is_active\": \"<boolean>\",\n          \"last_seen_at\": \"<integer>\",\n          \"access_token\": \"<string>\",\n          \"metadata\": {\n            \"veniam_\": \"<string>\",\n            \"dolore88b\": \"<string>\",\n            \"anim5ed\": \"<string>\"\n          },\n          \"created_at\": \"<integer>\"\n        }\n      ]\n    },\n    {\n      \"message_id\": \"<integer>\",\n      \"type\": \"ADMM\",\n      \"message\": \"<string>\",\n      \"user\": {\n        \"user_id\": \"<string>\",\n        \"nickname\": \"<string>\",\n        \"profile_url\": \"<string>\",\n        \"is_online\": \"<boolean>\",\n        \"is_active\": \"<boolean>\",\n        \"last_seen_at\": \"<integer>\",\n        \"access_token\": \"<string>\",\n        \"metadata\": {\n          \"aliqua_ce3\": \"<string>\",\n          \"mollit76f\": \"<string>\",\n          \"magna2\": \"<string>\"\n        },\n        \"created_at\": \"<integer>\"\n      },\n      \"channel_url\": \"<string>\",\n      \"created_at\": \"<integer>\",\n      \"updated_at\": \"<integer>\",\n      \"custom_type\": \"<string>\",\n      \"data\": \"<string>\",\n      \"mention_type\": \"<string>\",\n      \"mentioned_users\": [\n        {\n          \"user_id\": \"<string>\",\n          \"nickname\": \"<string>\",\n          \"profile_url\": \"<string>\",\n          \"is_online\": \"<boolean>\",\n          \"is_active\": \"<boolean>\",\n          \"last_seen_at\": \"<integer>\",\n          \"access_token\": \"<string>\",\n          \"metadata\": {\n            \"Loreme7\": \"<string>\"\n          },\n          \"created_at\": \"<integer>\"\n        },\n        {\n          \"user_id\": \"<string>\",\n          \"nickname\": \"<string>\",\n          \"profile_url\": \"<string>\",\n          \"is_online\": \"<boolean>\",\n          \"is_active\": \"<boolean>\",\n          \"last_seen_at\": \"<integer>\",\n          \"access_token\": \"<string>\",\n          \"metadata\": {\n            \"sint_19\": \"<string>\",\n            \"deserunt_85\": \"<string>\"\n          },\n          \"created_at\": \"<integer>\"\n        }\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-8526b956-5aa8-4d96-8fbb-d3cd2131b292"
+                    },
+                    {
+                      "id": "775f1f34-6538-4157-a174-725a5e663710",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/group_channels/:channel_url/messages?message_ts=<integer>&prev_limit=15&next_limit=0&include=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "group_channels",
+                            ":channel_url",
+                            "messages"
+                          ],
+                          "query": [
+                            {
+                              "description": "Unix timestamp to fetch messages around.",
+                              "key": "message_ts",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Number of messages to retrieve before message_ts.",
+                              "key": "prev_limit",
+                              "value": "15"
+                            },
+                            {
+                              "description": "Number of messages to retrieve after message_ts.",
+                              "key": "next_limit",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Whether to include the message at message_ts.",
+                              "key": "include",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "channel_url"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-775f1f34-6538-4157-a174-725a5e663710"
+                    },
+                    {
+                      "id": "e34ce5c3-1c03-4ddc-8d8a-79d2abb18e4c",
+                      "name": "Not found. The requested resource does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/group_channels/:channel_url/messages?message_ts=<integer>&prev_limit=15&next_limit=0&include=false",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "group_channels",
+                            ":channel_url",
+                            "messages"
+                          ],
+                          "query": [
+                            {
+                              "description": "Unix timestamp to fetch messages around.",
+                              "key": "message_ts",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Number of messages to retrieve before message_ts.",
+                              "key": "prev_limit",
+                              "value": "15"
+                            },
+                            {
+                              "description": "Number of messages to retrieve after message_ts.",
+                              "key": "next_limit",
+                              "value": "0"
+                            },
+                            {
+                              "description": "Whether to include the message at message_ts.",
+                              "key": "include",
+                              "value": "false"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "channel_url"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-e34ce5c3-1c03-4ddc-8d8a-79d2abb18e4c"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-7e5e39a2-7bc0-42ac-9eab-7c3a921e26bf"
+                },
+                {
+                  "name": "Send a Message",
+                  "id": "e426800c-e72a-40c6-9d25-fb05638c36f4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"message_type\": \"FILE\",\n  \"user_id\": \"<string>\",\n  \"message\": \"<string>\",\n  \"data\": \"<string>\",\n  \"custom_type\": \"<string>\",\n  \"mention_type\": \"users\",\n  \"mentioned_user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/group_channels/:channel_url/messages",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_channels",
+                        ":channel_url",
+                        "messages"
+                      ],
+                      "variable": [
+                        {
+                          "id": "36ac4d3c-94ca-4bea-8b6e-72a0d1a2f7d6",
+                          "key": "channel_url",
+                          "value": "<string>",
+                          "description": "(Required) URL of the channel."
+                        }
+                      ]
+                    },
+                    "description": "Sends a message to a specific group channel."
+                  },
+                  "response": [
+                    {
+                      "id": "978c3901-b8ee-476e-bb32-6c30ddb9c5b7",
+                      "name": "Message sent successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"message_type\": \"FILE\",\n  \"user_id\": \"<string>\",\n  \"message\": \"<string>\",\n  \"data\": \"<string>\",\n  \"custom_type\": \"<string>\",\n  \"mention_type\": \"users\",\n  \"mentioned_user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/group_channels/:channel_url/messages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "group_channels",
+                            ":channel_url",
+                            "messages"
+                          ],
+                          "variable": [
+                            {
+                              "key": "channel_url"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message_id\": \"<integer>\",\n  \"type\": \"MESG\",\n  \"message\": \"<string>\",\n  \"user\": {\n    \"user_id\": \"<string>\",\n    \"nickname\": \"<string>\",\n    \"profile_url\": \"<string>\",\n    \"is_online\": \"<boolean>\",\n    \"is_active\": \"<boolean>\",\n    \"last_seen_at\": \"<integer>\",\n    \"access_token\": \"<string>\",\n    \"metadata\": {\n      \"dolore1\": \"<string>\",\n      \"Loremd\": \"<string>\"\n    },\n    \"created_at\": \"<integer>\"\n  },\n  \"channel_url\": \"<string>\",\n  \"created_at\": \"<integer>\",\n  \"updated_at\": \"<integer>\",\n  \"custom_type\": \"<string>\",\n  \"data\": \"<string>\",\n  \"mention_type\": \"<string>\",\n  \"mentioned_users\": [\n    {\n      \"user_id\": \"<string>\",\n      \"nickname\": \"<string>\",\n      \"profile_url\": \"<string>\",\n      \"is_online\": \"<boolean>\",\n      \"is_active\": \"<boolean>\",\n      \"last_seen_at\": \"<integer>\",\n      \"access_token\": \"<string>\",\n      \"metadata\": {\n        \"ullamcoa\": \"<string>\",\n        \"veniam_c95\": \"<string>\",\n        \"minim_5\": \"<string>\"\n      },\n      \"created_at\": \"<integer>\"\n    },\n    {\n      \"user_id\": \"<string>\",\n      \"nickname\": \"<string>\",\n      \"profile_url\": \"<string>\",\n      \"is_online\": \"<boolean>\",\n      \"is_active\": \"<boolean>\",\n      \"last_seen_at\": \"<integer>\",\n      \"access_token\": \"<string>\",\n      \"metadata\": {\n        \"mollit79b\": \"<string>\",\n        \"eiusmod_da\": \"<string>\",\n        \"dolor81b\": \"<string>\"\n      },\n      \"created_at\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-978c3901-b8ee-476e-bb32-6c30ddb9c5b7"
+                    },
+                    {
+                      "id": "a8ae2be7-7b3c-4150-95c4-060d114a97d5",
+                      "name": "Bad request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"message_type\": \"FILE\",\n  \"user_id\": \"<string>\",\n  \"message\": \"<string>\",\n  \"data\": \"<string>\",\n  \"custom_type\": \"<string>\",\n  \"mention_type\": \"users\",\n  \"mentioned_user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/group_channels/:channel_url/messages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "group_channels",
+                            ":channel_url",
+                            "messages"
+                          ],
+                          "variable": [
+                            {
+                              "key": "channel_url"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-a8ae2be7-7b3c-4150-95c4-060d114a97d5"
+                    },
+                    {
+                      "id": "66e09ac5-6148-46b7-aadd-ce4407cae026",
+                      "name": "Unauthorized. API token is missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Api-Token",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"message_type\": \"FILE\",\n  \"user_id\": \"<string>\",\n  \"message\": \"<string>\",\n  \"data\": \"<string>\",\n  \"custom_type\": \"<string>\",\n  \"mention_type\": \"users\",\n  \"mentioned_user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/group_channels/:channel_url/messages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "group_channels",
+                            ":channel_url",
+                            "messages"
+                          ],
+                          "variable": [
+                            {
+                              "key": "channel_url"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:16:21.000Z",
+                      "updatedAt": "2026-06-05T15:16:21.000Z",
+                      "uid": "35240-66e09ac5-6148-46b7-aadd-ce4407cae026"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-e426800c-e72a-40c6-9d25-fb05638c36f4"
+                }
+              ],
+              "id": "d014cb34-bb58-4b72-98c8-2fa169515fed",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-d014cb34-bb58-4b72-98c8-2fa169515fed"
+            },
+            {
+              "name": "Get a Group Channel",
+              "id": "64aec95f-5525-4fd3-83ea-f50253efa61c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/group_channels/:channel_url",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_channels",
+                    ":channel_url"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7ab90f4d-19f0-4ea1-b68d-3d03a4c2dfa0",
+                      "key": "channel_url",
+                      "value": "<string>",
+                      "description": "(Required) URL of the channel."
+                    }
+                  ]
+                },
+                "description": "Retrieves details of a specific group channel."
+              },
+              "response": [
+                {
+                  "id": "630e212b-ead1-4f8d-a7e5-fc6bd8537b3b",
+                  "name": "Group channel details.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_channels/:channel_url",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_channels",
+                        ":channel_url"
+                      ],
+                      "variable": [
+                        {
+                          "key": "channel_url"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"channel_url\": \"<string>\",\n  \"name\": \"<string>\",\n  \"cover_url\": \"<string>\",\n  \"member_count\": \"<integer>\",\n  \"joined_member_count\": \"<integer>\",\n  \"unread_message_count\": \"<integer>\",\n  \"last_message\": {\n    \"message_id\": \"<integer>\",\n    \"type\": \"MESG\",\n    \"message\": \"<string>\",\n    \"user\": {\n      \"user_id\": \"<string>\",\n      \"nickname\": \"<string>\",\n      \"profile_url\": \"<string>\",\n      \"is_online\": \"<boolean>\",\n      \"is_active\": \"<boolean>\",\n      \"last_seen_at\": \"<integer>\",\n      \"access_token\": \"<string>\",\n      \"metadata\": {\n        \"Duis_75_\": \"<string>\",\n        \"cillum8d\": \"<string>\"\n      },\n      \"created_at\": \"<integer>\"\n    },\n    \"channel_url\": \"<string>\",\n    \"created_at\": \"<integer>\",\n    \"updated_at\": \"<integer>\",\n    \"custom_type\": \"<string>\",\n    \"data\": \"<string>\",\n    \"mention_type\": \"<string>\",\n    \"mentioned_users\": [\n      {\n        \"user_id\": \"<string>\",\n        \"nickname\": \"<string>\",\n        \"profile_url\": \"<string>\",\n        \"is_online\": \"<boolean>\",\n        \"is_active\": \"<boolean>\",\n        \"last_seen_at\": \"<integer>\",\n        \"access_token\": \"<string>\",\n        \"metadata\": {\n          \"laborisc8\": \"<string>\",\n          \"autec\": \"<string>\"\n        },\n        \"created_at\": \"<integer>\"\n      },\n      {\n        \"user_id\": \"<string>\",\n        \"nickname\": \"<string>\",\n        \"profile_url\": \"<string>\",\n        \"is_online\": \"<boolean>\",\n        \"is_active\": \"<boolean>\",\n        \"last_seen_at\": \"<integer>\",\n        \"access_token\": \"<string>\",\n        \"metadata\": {\n          \"cillum_ef\": \"<string>\"\n        },\n        \"created_at\": \"<integer>\"\n      }\n    ]\n  },\n  \"is_distinct\": \"<boolean>\",\n  \"created_at\": \"<integer>\",\n  \"data\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-630e212b-ead1-4f8d-a7e5-fc6bd8537b3b"
+                },
+                {
+                  "id": "0bf1dc52-0890-49cb-b9d0-687ab01b38d4",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_channels/:channel_url",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_channels",
+                        ":channel_url"
+                      ],
+                      "variable": [
+                        {
+                          "key": "channel_url"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-0bf1dc52-0890-49cb-b9d0-687ab01b38d4"
+                },
+                {
+                  "id": "8ac7d840-4c40-47a7-b5c7-ac53081473bd",
+                  "name": "Not found. The requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_channels/:channel_url",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_channels",
+                        ":channel_url"
+                      ],
+                      "variable": [
+                        {
+                          "key": "channel_url"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-8ac7d840-4c40-47a7-b5c7-ac53081473bd"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-64aec95f-5525-4fd3-83ea-f50253efa61c"
+            },
+            {
+              "name": "Delete a Group Channel",
+              "id": "7b10550c-53a7-408f-9719-8bc045a34572",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/group_channels/:channel_url",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_channels",
+                    ":channel_url"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2937a62a-44ec-4178-b9e3-1dedf8762bc3",
+                      "key": "channel_url",
+                      "value": "<string>",
+                      "description": "(Required) URL of the channel."
+                    }
+                  ]
+                },
+                "description": "Deletes a specific group channel."
+              },
+              "response": [
+                {
+                  "id": "4ba8eb1a-dec4-4bdc-a59d-d8d579fb7728",
+                  "name": "Group channel deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_channels/:channel_url",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_channels",
+                        ":channel_url"
+                      ],
+                      "variable": [
+                        {
+                          "key": "channel_url"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-4ba8eb1a-dec4-4bdc-a59d-d8d579fb7728"
+                },
+                {
+                  "id": "3e51c8a0-30f9-4e15-860f-44a996e01160",
+                  "name": "Bad request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_channels/:channel_url",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_channels",
+                        ":channel_url"
+                      ],
+                      "variable": [
+                        {
+                          "key": "channel_url"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-3e51c8a0-30f9-4e15-860f-44a996e01160"
+                },
+                {
+                  "id": "2ebe1f7d-65f5-4be0-95d1-9d0547eafa1c",
+                  "name": "Not found. The requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "Api-Token",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/group_channels/:channel_url",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "group_channels",
+                        ":channel_url"
+                      ],
+                      "variable": [
+                        {
+                          "key": "channel_url"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:16:21.000Z",
+                  "updatedAt": "2026-06-05T15:16:21.000Z",
+                  "uid": "35240-2ebe1f7d-65f5-4be0-95d1-9d0547eafa1c"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-7b10550c-53a7-408f-9719-8bc045a34572"
+            }
+          ],
+          "id": "03f07223-d0f2-4383-9470-70dbb51300ee",
+          "createdAt": "2026-06-05T15:16:21.000Z",
+          "updatedAt": "2026-06-05T15:16:21.000Z",
+          "uid": "35240-03f07223-d0f2-4383-9470-70dbb51300ee"
+        },
+        {
+          "name": "List Group Channels",
+          "id": "10fc1173-0c2d-4f1d-8c58-cfdec9454795",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/group_channels?token=<string>&limit=10&channel_url=<string>&members_include_in=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "group_channels"
+              ],
+              "query": [
+                {
+                  "description": "Pagination token.",
+                  "key": "token",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of channels to return.",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Filter by specific channel URL.",
+                  "key": "channel_url",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter channels that include specific user IDs.",
+                  "key": "members_include_in",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves a list of group channels in the Sendbird application."
+          },
+          "response": [
+            {
+              "id": "153c1081-d8b4-4d34-a45d-177cbcd2f485",
+              "name": "A list of group channels.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/group_channels?token=<string>&limit=10&channel_url=<string>&members_include_in=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_channels"
+                  ],
+                  "query": [
+                    {
+                      "description": "Pagination token.",
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of channels to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Filter by specific channel URL.",
+                      "key": "channel_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter channels that include specific user IDs.",
+                      "key": "members_include_in",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"channels\": [\n    {\n      \"channel_url\": \"<string>\",\n      \"name\": \"<string>\",\n      \"cover_url\": \"<string>\",\n      \"member_count\": \"<integer>\",\n      \"joined_member_count\": \"<integer>\",\n      \"unread_message_count\": \"<integer>\",\n      \"last_message\": {\n        \"message_id\": \"<integer>\",\n        \"type\": \"MESG\",\n        \"message\": \"<string>\",\n        \"user\": {\n          \"user_id\": \"<string>\",\n          \"nickname\": \"<string>\",\n          \"profile_url\": \"<string>\",\n          \"is_online\": \"<boolean>\",\n          \"is_active\": \"<boolean>\",\n          \"last_seen_at\": \"<integer>\",\n          \"access_token\": \"<string>\",\n          \"metadata\": {\n            \"veniama\": \"<string>\",\n            \"esse5_\": \"<string>\"\n          },\n          \"created_at\": \"<integer>\"\n        },\n        \"channel_url\": \"<string>\",\n        \"created_at\": \"<integer>\",\n        \"updated_at\": \"<integer>\",\n        \"custom_type\": \"<string>\",\n        \"data\": \"<string>\",\n        \"mention_type\": \"<string>\",\n        \"mentioned_users\": [\n          {\n            \"user_id\": \"<string>\",\n            \"nickname\": \"<string>\",\n            \"profile_url\": \"<string>\",\n            \"is_online\": \"<boolean>\",\n            \"is_active\": \"<boolean>\",\n            \"last_seen_at\": \"<integer>\",\n            \"access_token\": \"<string>\",\n            \"metadata\": {\n              \"esse4\": \"<string>\"\n            },\n            \"created_at\": \"<integer>\"\n          },\n          {\n            \"user_id\": \"<string>\",\n            \"nickname\": \"<string>\",\n            \"profile_url\": \"<string>\",\n            \"is_online\": \"<boolean>\",\n            \"is_active\": \"<boolean>\",\n            \"last_seen_at\": \"<integer>\",\n            \"access_token\": \"<string>\",\n            \"metadata\": {\n              \"sintb9_\": \"<string>\",\n              \"id519\": \"<string>\"\n            },\n            \"created_at\": \"<integer>\"\n          }\n        ]\n      },\n      \"is_distinct\": \"<boolean>\",\n      \"created_at\": \"<integer>\",\n      \"data\": \"<string>\"\n    },\n    {\n      \"channel_url\": \"<string>\",\n      \"name\": \"<string>\",\n      \"cover_url\": \"<string>\",\n      \"member_count\": \"<integer>\",\n      \"joined_member_count\": \"<integer>\",\n      \"unread_message_count\": \"<integer>\",\n      \"last_message\": {\n        \"message_id\": \"<integer>\",\n        \"type\": \"ADMM\",\n        \"message\": \"<string>\",\n        \"user\": {\n          \"user_id\": \"<string>\",\n          \"nickname\": \"<string>\",\n          \"profile_url\": \"<string>\",\n          \"is_online\": \"<boolean>\",\n          \"is_active\": \"<boolean>\",\n          \"last_seen_at\": \"<integer>\",\n          \"access_token\": \"<string>\",\n          \"metadata\": {\n            \"consequat5\": \"<string>\",\n            \"nostrud85\": \"<string>\"\n          },\n          \"created_at\": \"<integer>\"\n        },\n        \"channel_url\": \"<string>\",\n        \"created_at\": \"<integer>\",\n        \"updated_at\": \"<integer>\",\n        \"custom_type\": \"<string>\",\n        \"data\": \"<string>\",\n        \"mention_type\": \"<string>\",\n        \"mentioned_users\": [\n          {\n            \"user_id\": \"<string>\",\n            \"nickname\": \"<string>\",\n            \"profile_url\": \"<string>\",\n            \"is_online\": \"<boolean>\",\n            \"is_active\": \"<boolean>\",\n            \"last_seen_at\": \"<integer>\",\n            \"access_token\": \"<string>\",\n            \"metadata\": {\n              \"sunt5a\": \"<string>\",\n              \"quia\": \"<string>\"\n            },\n            \"created_at\": \"<integer>\"\n          },\n          {\n            \"user_id\": \"<string>\",\n            \"nickname\": \"<string>\",\n            \"profile_url\": \"<string>\",\n            \"is_online\": \"<boolean>\",\n            \"is_active\": \"<boolean>\",\n            \"last_seen_at\": \"<integer>\",\n            \"access_token\": \"<string>\",\n            \"metadata\": {\n              \"qui_fa9\": \"<string>\"\n            },\n            \"created_at\": \"<integer>\"\n          }\n        ]\n      },\n      \"is_distinct\": \"<boolean>\",\n      \"created_at\": \"<integer>\",\n      \"data\": \"<string>\"\n    }\n  ],\n  \"next\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-153c1081-d8b4-4d34-a45d-177cbcd2f485"
+            },
+            {
+              "id": "4379e7f8-3aa7-4169-94cc-e5485d27c990",
+              "name": "Bad request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/group_channels?token=<string>&limit=10&channel_url=<string>&members_include_in=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_channels"
+                  ],
+                  "query": [
+                    {
+                      "description": "Pagination token.",
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of channels to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Filter by specific channel URL.",
+                      "key": "channel_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter channels that include specific user IDs.",
+                      "key": "members_include_in",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-4379e7f8-3aa7-4169-94cc-e5485d27c990"
+            },
+            {
+              "id": "28d6d218-1e37-43b0-88ac-6c1ebc016d76",
+              "name": "Unauthorized. API token is missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/group_channels?token=<string>&limit=10&channel_url=<string>&members_include_in=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_channels"
+                  ],
+                  "query": [
+                    {
+                      "description": "Pagination token.",
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of channels to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Filter by specific channel URL.",
+                      "key": "channel_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter channels that include specific user IDs.",
+                      "key": "members_include_in",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-28d6d218-1e37-43b0-88ac-6c1ebc016d76"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:21.000Z",
+          "updatedAt": "2026-06-05T15:16:21.000Z",
+          "uid": "35240-10fc1173-0c2d-4f1d-8c58-cfdec9454795"
+        },
+        {
+          "name": "Create a Group Channel",
+          "id": "769326fe-8a44-40f0-bd77-1ca2211097f5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"channel_url\": \"<string>\",\n  \"cover_url\": \"<string>\",\n  \"is_distinct\": false,\n  \"data\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/group_channels",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "group_channels"
+              ]
+            },
+            "description": "Creates a new group channel for messaging between users."
+          },
+          "response": [
+            {
+              "id": "1d4f656d-38a3-4482-a0c5-13e38688c345",
+              "name": "Group channel created successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"channel_url\": \"<string>\",\n  \"cover_url\": \"<string>\",\n  \"is_distinct\": false,\n  \"data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/group_channels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_channels"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"channel_url\": \"<string>\",\n  \"name\": \"<string>\",\n  \"cover_url\": \"<string>\",\n  \"member_count\": \"<integer>\",\n  \"joined_member_count\": \"<integer>\",\n  \"unread_message_count\": \"<integer>\",\n  \"last_message\": {\n    \"message_id\": \"<integer>\",\n    \"type\": \"MESG\",\n    \"message\": \"<string>\",\n    \"user\": {\n      \"user_id\": \"<string>\",\n      \"nickname\": \"<string>\",\n      \"profile_url\": \"<string>\",\n      \"is_online\": \"<boolean>\",\n      \"is_active\": \"<boolean>\",\n      \"last_seen_at\": \"<integer>\",\n      \"access_token\": \"<string>\",\n      \"metadata\": {\n        \"Duis_75_\": \"<string>\",\n        \"cillum8d\": \"<string>\"\n      },\n      \"created_at\": \"<integer>\"\n    },\n    \"channel_url\": \"<string>\",\n    \"created_at\": \"<integer>\",\n    \"updated_at\": \"<integer>\",\n    \"custom_type\": \"<string>\",\n    \"data\": \"<string>\",\n    \"mention_type\": \"<string>\",\n    \"mentioned_users\": [\n      {\n        \"user_id\": \"<string>\",\n        \"nickname\": \"<string>\",\n        \"profile_url\": \"<string>\",\n        \"is_online\": \"<boolean>\",\n        \"is_active\": \"<boolean>\",\n        \"last_seen_at\": \"<integer>\",\n        \"access_token\": \"<string>\",\n        \"metadata\": {\n          \"laborisc8\": \"<string>\",\n          \"autec\": \"<string>\"\n        },\n        \"created_at\": \"<integer>\"\n      },\n      {\n        \"user_id\": \"<string>\",\n        \"nickname\": \"<string>\",\n        \"profile_url\": \"<string>\",\n        \"is_online\": \"<boolean>\",\n        \"is_active\": \"<boolean>\",\n        \"last_seen_at\": \"<integer>\",\n        \"access_token\": \"<string>\",\n        \"metadata\": {\n          \"cillum_ef\": \"<string>\"\n        },\n        \"created_at\": \"<integer>\"\n      }\n    ]\n  },\n  \"is_distinct\": \"<boolean>\",\n  \"created_at\": \"<integer>\",\n  \"data\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-1d4f656d-38a3-4482-a0c5-13e38688c345"
+            },
+            {
+              "id": "999f9ad2-4c03-4256-8855-982533d4e2f6",
+              "name": "Bad request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"channel_url\": \"<string>\",\n  \"cover_url\": \"<string>\",\n  \"is_distinct\": false,\n  \"data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/group_channels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_channels"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-999f9ad2-4c03-4256-8855-982533d4e2f6"
+            },
+            {
+              "id": "ca815478-3ae7-4dcd-a45c-e070a4d20a61",
+              "name": "Unauthorized. API token is missing or invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"channel_url\": \"<string>\",\n  \"cover_url\": \"<string>\",\n  \"is_distinct\": false,\n  \"data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/group_channels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "group_channels"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<boolean>\",\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:16:21.000Z",
+              "updatedAt": "2026-06-05T15:16:21.000Z",
+              "uid": "35240-ca815478-3ae7-4dcd-a45c-e070a4d20a61"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:21.000Z",
+          "updatedAt": "2026-06-05T15:16:21.000Z",
+          "uid": "35240-769326fe-8a44-40f0-bd77-1ca2211097f5"
+        }
+      ],
+      "id": "de6eb2dc-1c1c-42b2-87be-0eaee3214259",
+      "createdAt": "2026-06-05T15:16:21.000Z",
+      "updatedAt": "2026-06-05T15:16:21.000Z",
+      "uid": "35240-de6eb2dc-1c1c-42b2-87be-0eaee3214259"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Api-Token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "application_id",
+      "value": "YOUR_APP_ID"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://api-{{application_id}}.sendbird.com/v3"
+    }
+  ]
+}
