@@ -83,6 +83,14 @@ apis:
   - type: Documentation
     url: https://sendbird.com/docs/ai-chatbot/
 common:
+- type: TrustCenter
+  url: security/sendbird-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/sendbird-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/sendbird-domain-security.yml
+- type: Authentication
+  url: authentication/sendbird-authentication.yml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/sendbird/overview
 - type: Arazzo

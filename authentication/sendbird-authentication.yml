@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sendbird-platform-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: apiTokenAuth
+  type: apiKey
+  in: header
+  parameter: Api-Token
+  description: Sendbird API token obtained from the Sendbird Dashboard.
+  sources:
+  - openapi/sendbird-platform-openapi.yml
