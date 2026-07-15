@@ -83,6 +83,8 @@ apis:
   - type: Documentation
     url: https://sendbird.com/docs/ai-chatbot/
 common:
+- type: AgenticAccess
+  url: agentic-access/sendbird-agentic-access.yml
 - type: TrustCenter
   url: security/sendbird-trust-center.yml
 - type: VulnerabilityDisclosure
