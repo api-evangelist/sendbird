@@ -1,0 +1,46 @@
+generated: '2026-06-20'
+method: searched
+source: https://sendbird.com/products/chat-messaging/sdk
+description: >-
+  Sendbird UIKit — prebuilt, customizable client-side chat UI component libraries
+  distinct from the server-side SDKs. UIKit ships ready-made views for channel
+  lists, conversations, message composers, and moderation, layered on top of the
+  Chat SDK. Grouped by platform family.
+component_families:
+  - family: UIKit for React (Web)
+    kind: react-component-library
+    loader: "@sendbird/uikit-react"
+    registry: npm
+    url: https://sendbird.com/docs/chat/uikit/v3/react/overview
+    source: https://github.com/sendbird/sendbird-uikit-react
+    surfaces:
+      - App / SendbirdProvider
+      - ChannelList
+      - Channel (conversation view + message composer)
+      - ChannelSettings
+      - OpenChannel
+  - family: UIKit for React Native
+    kind: react-native-component-library
+    loader: "@sendbird/uikit-react-native"
+    registry: npm
+    url: https://sendbird.com/docs/chat/uikit/v3/react-native/overview
+    source: https://github.com/sendbird/sendbird-uikit-react-native
+  - family: UIKit for iOS
+    kind: ios-component-library
+    loader: SendbirdUIKit
+    registry: swiftpm / cocoapods
+    url: https://sendbird.com/docs/chat/uikit/v3/ios-uikit/overview
+    source: https://github.com/sendbird/sendbird-uikit-ios
+    note: Add-on to Chat SDK for iOS 4.0.13+.
+  - family: UIKit for Android
+    kind: android-component-library
+    loader: "com.sendbird.uikit:uikit"
+    registry: maven
+    url: https://sendbird.com/docs/chat/uikit/v3/android/overview
+    source: https://github.com/sendbird/sendbird-uikit-android
+  - family: UIKit for Flutter
+    kind: flutter-widget-library
+    loader: sendbird_uikit
+    registry: pub.dev
+    url: https://pub.dev/packages/sendbird_uikit
+    publisher: sendbird.com

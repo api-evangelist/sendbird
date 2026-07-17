@@ -1,0 +1,37 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/sendbird-platform-openapi.yml
+description: >-
+  Cross-cutting standards conformance for the Sendbird Platform API, derived from
+  the OpenAPI and the docs. Sendbird uses API-key (Api-Token header) auth with a
+  proprietary numeric error registry rather than OAuth/OIDC or RFC 9457.
+standards:
+  - id: openapi-3.1
+    conforms: true
+    evidence: Repo ships an OpenAPI 3.1.0 description (openapi/sendbird-platform-openapi.yml).
+  - id: oauth2
+    conforms: false
+    evidence: Auth is apiKey (Api-Token header); no oauth2 securityScheme.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a proprietary {error, code, message} JSON envelope, not application/problem+json.
+  - id: json-api
+    conforms: false
+  - id: cursor-pagination
+    conforms: true
+    evidence: List operations use opaque token/next cursor pagination (token + limit params, next response field).
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key header documented; distinct group channels (is_distinct) provide a resource-level dedupe instead.
+  - id: webhooks
+    conforms: true
+    evidence: Sendbird publishes a webhooks/event delivery surface (https://sendbird.com/docs/chat/platform-api/v3/webhooks).
+  - id: rate-limiting
+    conforms: true
+    evidence: Documented rate limits and 429 RateLimitExceeded error code.
+  - id: scim
+    conforms: false
+  - id: fhir-r4
+    conforms: false

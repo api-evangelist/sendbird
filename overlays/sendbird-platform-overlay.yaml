@@ -1,0 +1,40 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Sendbird Platform API
+  version: 1.0.0
+extends: openapi/sendbird-platform-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: sendbird
+      x-apievangelist-artifacts:
+        authentication: authentication/sendbird-authentication.yml
+        error-codes: errors/sendbird-error-codes.yml
+        problem-types: errors/sendbird-problem-types.yml
+        conformance: conformance/sendbird-conformance.yml
+        conventions: conventions/sendbird-conventions.yml
+        lifecycle: lifecycle/sendbird-lifecycle.yml
+        data-model: data-model/sendbird-data-model.yml
+        packages: packages/sendbird-packages.yml
+        components: components/sendbird-components.yml
+  - target: $.info
+    update:
+      x-agentic-access-profile: agentic-access/sendbird-agentic-access.yml
+  - target: $.paths['/users/{user_id}/ban'].post
+    update:
+      x-apievangelist-consequence: moderation-write
+      description: >-
+        Bans a user from a specific channel for moderation purposes. Moderation
+        action with member-facing consequence; agents should require review.
+  - target: $.paths['/users/{user_id}/mute'].post
+    update:
+      x-apievangelist-consequence: moderation-write
+  - target: $.paths['/users/{user_id}'].delete
+    update:
+      x-apievangelist-consequence: destructive
+      description: >-
+        Deletes a specific user from the Sendbird application. Destructive and
+        irreversible; agents should require confirmation before invoking.
+  - target: $.paths['/group_channels/{channel_url}'].delete
+    update:
+      x-apievangelist-consequence: destructive

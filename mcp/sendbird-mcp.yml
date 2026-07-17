@@ -1,0 +1,53 @@
+generated: '2026-06-20'
+method: derived
+status: candidate
+source: openapi/sendbird-platform-openapi.yml
+note: >-
+  Sendbird publishes no official hosted/remote MCP server (searched docs, npm
+  @modelcontextprotocol, and the MCP registry; only a Sendbird blog explainer on
+  MCP exists). This is a DERIVED candidate tool list, one tool per Platform API
+  operationId, offered as a starting point for an MCP wrapper. status: candidate.
+server:
+  name: sendbird-platform
+  transport: http
+  auth: apiKey (Api-Token header)
+tools:
+  - name: list_users
+    description: List users registered in the Sendbird application.
+    source_operation: openapi/sendbird-platform-openapi.yml#listUsers
+  - name: create_user
+    description: Create a new user with a unique user_id, nickname, and profile URL.
+    source_operation: openapi/sendbird-platform-openapi.yml#createUser
+  - name: get_user
+    description: Retrieve a specific user by user_id.
+    source_operation: openapi/sendbird-platform-openapi.yml#getUser
+  - name: update_user
+    description: Update a user's nickname, profile image, or metadata.
+    source_operation: openapi/sendbird-platform-openapi.yml#updateUser
+  - name: delete_user
+    description: Delete a user from the application.
+    source_operation: openapi/sendbird-platform-openapi.yml#deleteUser
+  - name: list_group_channels
+    description: List group channels in the application.
+    source_operation: openapi/sendbird-platform-openapi.yml#listGroupChannels
+  - name: create_group_channel
+    description: Create a group channel between users.
+    source_operation: openapi/sendbird-platform-openapi.yml#createGroupChannel
+  - name: get_group_channel
+    description: Retrieve details of a specific group channel by channel_url.
+    source_operation: openapi/sendbird-platform-openapi.yml#getGroupChannel
+  - name: delete_group_channel
+    description: Delete a specific group channel.
+    source_operation: openapi/sendbird-platform-openapi.yml#deleteGroupChannel
+  - name: list_messages
+    description: List messages in a group channel.
+    source_operation: openapi/sendbird-platform-openapi.yml#listMessages
+  - name: send_message
+    description: Send a text, file, or admin message to a group channel.
+    source_operation: openapi/sendbird-platform-openapi.yml#sendMessage
+  - name: ban_user
+    description: Ban a user from a channel for moderation.
+    source_operation: openapi/sendbird-platform-openapi.yml#banUser
+  - name: mute_user
+    description: Mute a user in a channel to prevent them from sending messages.
+    source_operation: openapi/sendbird-platform-openapi.yml#muteUser

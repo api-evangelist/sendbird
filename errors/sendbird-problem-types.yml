@@ -1,0 +1,58 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/sendbird-platform-openapi.yml
+format: sendbird-error-envelope
+note: >-
+  Derived from the OpenAPI 4xx responses. Sendbird does NOT use RFC 9457
+  application/problem+json; errors use a proprietary JSON envelope
+  {error, code, message} (see errors/sendbird-error-codes.yml for the numeric
+  code registry). These are the HTTP-status-level responses declared across
+  operations.
+problems:
+  - status: 400
+    title: Bad request
+    schema: "#/components/schemas/Error"
+    media_type: application/json
+    description: Bad request. Malformed parameters or invalid values; see numeric code.
+    source_operations:
+      - openapi/sendbird-platform-openapi.yml#listUsers
+      - openapi/sendbird-platform-openapi.yml#createUser
+      - openapi/sendbird-platform-openapi.yml#getUser
+      - openapi/sendbird-platform-openapi.yml#updateUser
+      - openapi/sendbird-platform-openapi.yml#deleteUser
+      - openapi/sendbird-platform-openapi.yml#listGroupChannels
+      - openapi/sendbird-platform-openapi.yml#createGroupChannel
+      - openapi/sendbird-platform-openapi.yml#getGroupChannel
+      - openapi/sendbird-platform-openapi.yml#deleteGroupChannel
+      - openapi/sendbird-platform-openapi.yml#listMessages
+      - openapi/sendbird-platform-openapi.yml#sendMessage
+      - openapi/sendbird-platform-openapi.yml#banUser
+      - openapi/sendbird-platform-openapi.yml#muteUser
+  - status: 401
+    title: Unauthorized
+    schema: "#/components/schemas/Error"
+    media_type: application/json
+    description: Unauthorized. API token is missing or invalid.
+    source_operations:
+      - openapi/sendbird-platform-openapi.yml#listUsers
+      - openapi/sendbird-platform-openapi.yml#createUser
+      - openapi/sendbird-platform-openapi.yml#getUser
+      - openapi/sendbird-platform-openapi.yml#updateUser
+      - openapi/sendbird-platform-openapi.yml#deleteUser
+      - openapi/sendbird-platform-openapi.yml#listGroupChannels
+      - openapi/sendbird-platform-openapi.yml#createGroupChannel
+      - openapi/sendbird-platform-openapi.yml#sendMessage
+      - openapi/sendbird-platform-openapi.yml#banUser
+      - openapi/sendbird-platform-openapi.yml#muteUser
+  - status: 404
+    title: Not found
+    schema: "#/components/schemas/Error"
+    media_type: application/json
+    description: Not found. The requested resource does not exist.
+    source_operations:
+      - openapi/sendbird-platform-openapi.yml#getUser
+      - openapi/sendbird-platform-openapi.yml#updateUser
+      - openapi/sendbird-platform-openapi.yml#deleteUser
+      - openapi/sendbird-platform-openapi.yml#getGroupChannel
+      - openapi/sendbird-platform-openapi.yml#deleteGroupChannel
+      - openapi/sendbird-platform-openapi.yml#listMessages

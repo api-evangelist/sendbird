@@ -1,0 +1,21 @@
+generated: '2026-06-20'
+method: searched
+host: https://sendbird.com
+note: >-
+  The Platform API base host is templated per application
+  (https://api-{application_id}.sendbird.com) and is not probeable without a live
+  application id, so the corporate/docs host sendbird.com was probed. No
+  /.well-known/ discovery documents are published; all probes returned 404.
+  Absence recorded as valid data. dashboard.sendbird.com returned 502 for the
+  probe and is a SPA console, not a discovery surface.
+documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404

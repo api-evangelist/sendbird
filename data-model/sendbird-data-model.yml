@@ -1,0 +1,52 @@
+generated: '2026-06-20'
+method: derived
+source: openapi/sendbird-platform-openapi.yml
+description: >-
+  Entity-relationship graph derived from the Sendbird Platform API OpenAPI schema
+  $ref links and id-reference fields. Sendbird identifies users by user_id and
+  channels by channel_url (an opaque URL-safe string); messages by numeric
+  message_id.
+entities:
+  - name: User
+    id_field: user_id
+    id_type: string
+    key_fields: [user_id, nickname, profile_url, is_online, is_active, metadata]
+    relationships:
+      - type: has_many
+        target: Message
+        via: user
+        note: A user authors messages (Message.user references a User).
+  - name: GroupChannel
+    id_field: channel_url
+    id_type: string
+    key_fields: [channel_url, name, member_count, is_distinct, data]
+    relationships:
+      - type: has_many
+        target: Message
+        via: channel_url
+        note: A group channel contains messages (Message.channel_url references the channel).
+      - type: has_one
+        target: Message
+        via: last_message
+        note: GroupChannel.last_message embeds the most recent Message.
+      - type: has_many
+        target: User
+        via: user_ids
+        note: Membership is set via user_ids on create; member_count/joined_member_count summarize it.
+  - name: Message
+    id_field: message_id
+    id_type: integer
+    key_fields: [message_id, type, message, custom_type, created_at]
+    relationships:
+      - type: belongs_to
+        target: User
+        via: user
+        note: The authoring user.
+      - type: belongs_to
+        target: GroupChannel
+        via: channel_url
+        note: The channel the message belongs to.
+      - type: has_many
+        target: User
+        via: mentioned_users
+        note: Users mentioned in the message.

@@ -1,0 +1,54 @@
+generated: '2026-06-20'
+method: searched
+source: https://sendbird.com/docs/chat/platform-api/v3/prepare-to-use-api
+description: >-
+  Cross-cutting request/response conventions for the Sendbird Platform API,
+  captured from the docs and derived from the OpenAPI.
+authentication:
+  style: api-key
+  header: Api-Token
+  token_types:
+    - master API token (auto-generated per application; cannot be revoked or modified)
+    - secondary API tokens (generated/managed via API; revocable)
+    - per-user session/access tokens (for client authentication)
+  guidance: Server-side only. Sendbird docs warn "DON'T send any Chat API requests from your client app."
+  artifact: authentication/sendbird-authentication.yml
+base_url:
+  format: https://api-{application_id}.sendbird.com/v3
+  note: application_id is case-sensitive; found in Dashboard > Settings > Application > General.
+  delight_ai_variant: https://api-{application_id}.svc.delight.ai/v3
+content_type:
+  request: application/json; charset=utf8
+  file_upload: multipart/form-data; boundary={unique_string}
+  response: application/json
+pagination:
+  style: cursor
+  request_params:
+    - token   # opaque pagination cursor
+    - limit   # page size (typically 1-100)
+  response_fields:
+    - next    # opaque token for the next page
+  note: >-
+    Message listing uses timestamp-anchored windows instead (message_ts with
+    prev_limit / next_limit).
+idempotency:
+  header: none
+  note: >-
+    No Idempotency-Key header. Distinct group channels (is_distinct: true)
+    provide resource-level deduplication for channel creation.
+metadata:
+  supported: true
+  note: Users and channels accept custom metadata (key-value) and a custom `data` string.
+error_envelope:
+  format: proprietary
+  shape: "{ error: boolean, code: integer, message: string }"
+  artifact: errors/sendbird-error-codes.yml
+rate_limiting:
+  documented: true
+  docs: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
+  signal: HTTP 429 with error code 429 RateLimitExceeded
+  artifact: rate-limits/sendbird-rate-limits.yml
+versioning:
+  scheme: uri-path
+  current: v3
+  artifact: lifecycle/sendbird-lifecycle.yml

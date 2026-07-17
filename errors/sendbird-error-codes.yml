@@ -1,0 +1,162 @@
+generated: '2026-06-20'
+method: searched
+source: https://sendbird.com/docs/chat/platform-api/v3/error-codes
+description: >-
+  Sendbird Platform API numeric error-code registry (the non-payments sibling of
+  a decline-code table). Errors are returned in a JSON envelope with fields
+  error (bool), code (numeric Sendbird code), and message. HTTP status is 400 for
+  most application-level errors; the numeric `code` disambiguates the specific
+  condition. Captured verbatim from the docs error reference.
+envelope:
+  fields:
+    - name: error
+      type: boolean
+      description: Indicates an error occurred.
+    - name: code
+      type: integer
+      description: Sendbird-specific numeric error code.
+    - name: message
+      type: string
+      description: Human-readable error message.
+error_codes:
+  # 4001xx — parameter / type errors
+  - code: 400100
+    name: UnexpectedParameterType
+    meaning: Parameter should be a string type.
+  - code: 400101
+    name: UnexpectedParameterType
+    meaning: Parameter should be a number type.
+  - code: 400102
+    name: UnexpectedParameterType
+    meaning: Parameter should be a list type.
+  - code: 400103
+    name: UnexpectedParameterType
+    meaning: Parameter should be a JSON type.
+  - code: 400104
+    name: UnexpectedParameterType
+    meaning: Parameter should be a boolean type.
+  - code: 400105
+    name: MissingRequiredParameters
+    meaning: Request is missing one or more required parameters.
+  - code: 400106
+    name: NegativeNumberNotAllowed
+    meaning: Negative numbers are not permitted.
+  - code: 400108
+    name: UnauthorizedRequest
+    meaning: Request lacks authorization.
+  - code: 400110
+    name: ParameterValueLengthExceeded
+    meaning: Parameter value is too long.
+  - code: 400111
+    name: InvalidValue
+    meaning: Invalid parameter value specified.
+  - code: 400112
+    name: IncompatibleValues
+    meaning: Duplicate values where unique values are required.
+  - code: 400113
+    name: ParameterValueOutOfRange
+    meaning: Parameter is outside the accepted range.
+  - code: 400114
+    name: InvalidURLOfResource
+    meaning: Resource URL not found.
+  - code: 400151
+    name: NotAllowedCharacter
+    meaning: Contains special characters, empty string, or whitespace.
+  # 4002xx — resource errors
+  - code: 400201
+    name: ResourceNotFound
+    meaning: Resource identified by resourceId not found.
+  - code: 400202
+    name: ResourceAlreadyExists
+    meaning: Resource already exists.
+  - code: 400203
+    name: TooManyItemsInParameter
+    meaning: Parameter exceeds the item limit.
+  # 4003xx — user / application / auth errors
+  - code: 400300
+    name: DeactivatedUserNotAccessible
+    meaning: Cannot retrieve deactivated user data.
+  - code: 400301
+    name: UserNotFound
+    meaning: User doesn't exist or has been deleted.
+  - code: 400302
+    name: InvalidAccessToken
+    meaning: Invalid access token.
+  - code: 400303
+    name: InvalidSessionKeyValue
+    meaning: Invalid session key.
+  - code: 400304
+    name: ApplicationNotFound
+    meaning: Application not found.
+  - code: 400305
+    name: UserIdLengthExceeded
+    meaning: userId is too long.
+  - code: 400306
+    name: PaidQuotaExceeded
+    meaning: The plan's paid quota has been exceeded.
+  - code: 400307
+    name: DomainNotAllowed
+    meaning: Request from a restricted domain.
+  # 4004xx — API token / request errors
+  - code: 400401
+    name: InvalidApiToken
+    meaning: Invalid API token.
+  - code: 400402
+    name: MissingSomeParameters
+    meaning: Missing necessary parameters.
+  - code: 400403
+    name: InvalidJsonRequestBody
+    meaning: Invalid JSON in the request body.
+  - code: 400404
+    name: InvalidRequestURL
+    meaning: Invalid HTTP request URL.
+  # 4005xx — websocket connection limits
+  - code: 400500
+    name: TooManyUserWebsocketConnections
+    meaning: User websocket connections exceed the limit.
+  - code: 400501
+    name: TooManyApplicationWebsocketConnections
+    meaning: Application websocket connections exceed the limit.
+  # 4007xx — blocked users
+  - code: 400700
+    name: BlockedUser.SendNotAllowed
+    meaning: Sender is blocked or the message violates filters.
+  - code: 400701
+    name: BlockedUser.InvitedNotAllowed
+    meaning: A blocked user cannot be invited.
+  - code: 400702
+    name: BlockedUser.InviteNotAllowed
+    meaning: Cannot invite the blocking user.
+  # 4007xx — banned users
+  - code: 400750
+    name: BannedUser.EnterChannelNotAllowed
+    meaning: User is banned from the channel.
+  - code: 400751
+    name: BannedUser.EnterCustomChannelNotAllowed
+    meaning: User is banned from the custom-type channel.
+  # 4009xx / 403 — request / availability
+  - code: 400920
+    name: Unacceptable
+    meaning: Invalid parameter combination, or application is in read-only mode.
+  - code: 400930
+    name: InvalidEndpoint
+    meaning: Request sent to a non-existent endpoint.
+  - code: 403100
+    name: ApplicationNotAvailable
+    meaning: Application is unavailable.
+  # 429 / 5xx — rate limiting and server errors
+  - code: 429
+    name: RateLimitExceeded
+    meaning: Rate limit threshold exceeded.
+  - code: 500601
+    name: InternalError.PushTokenNotRegistered
+    meaning: Error registering push token; retry the request.
+  - code: 500602
+    name: InternalError.PushTokenNotUnregistered
+    meaning: Error unregistering push token; retry the request.
+  - code: 500901
+    name: InternalError
+    meaning: Unexpected server exception; retry the request.
+  - code: 503
+    name: ServiceUnavailable
+    meaning: Temporary server failure; retry the request.

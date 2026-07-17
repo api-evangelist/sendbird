@@ -1,0 +1,126 @@
+generated: '2026-06-20'
+method: searched
+source: https://sendbird.com/products/chat-messaging/sdk
+description: >-
+  First-party Sendbird client SDKs and UIKits across web, mobile, desktop, and
+  game engines. Verified against public package registries (npm, pub.dev, NuGet)
+  and the github.com/sendbird organization. Sendbird publishes no first-party
+  Python (PyPI) SDK; the Platform API is consumed server-side over HTTP.
+packages:
+  # --- JavaScript / Web ---
+  - language: javascript
+    registry: npm
+    name: "@sendbird/chat"
+    version: 4.22.7
+    url: https://www.npmjs.com/package/@sendbird/chat
+    install: npm install @sendbird/chat
+    official: true
+    kind: chat-sdk
+  - language: javascript
+    registry: npm
+    name: sendbird
+    version: 3.1.33
+    url: https://www.npmjs.com/package/sendbird
+    install: npm install sendbird
+    official: true
+    kind: chat-sdk-v3
+    note: Legacy Chat SDK v3 for JavaScript; superseded by @sendbird/chat v4.
+  - language: javascript
+    registry: npm
+    name: "@sendbird/uikit-react"
+    version: 3.18.2
+    url: https://www.npmjs.com/package/@sendbird/uikit-react
+    install: npm install @sendbird/uikit-react
+    official: true
+    kind: uikit
+  - language: javascript
+    registry: npm
+    name: "@sendbird/uikit-react-native"
+    version: 3.12.7
+    url: https://www.npmjs.com/package/@sendbird/uikit-react-native
+    install: npm install @sendbird/uikit-react-native
+    official: true
+    kind: uikit
+  - language: javascript
+    registry: npm
+    name: sendbird-calls
+    version: 1.10.21
+    url: https://www.npmjs.com/package/sendbird-calls
+    install: npm install sendbird-calls
+    official: true
+    kind: calls-sdk
+  - language: javascript
+    registry: npm
+    name: "@sendbird/calls-react-native"
+    version: 1.2.0
+    url: https://www.npmjs.com/package/@sendbird/calls-react-native
+    install: npm install @sendbird/calls-react-native
+    official: true
+    kind: calls-sdk
+  # --- Flutter / Dart ---
+  - language: dart
+    registry: pub.dev
+    name: sendbird_chat_sdk
+    url: https://pub.dev/packages/sendbird_chat_sdk
+    install: flutter pub add sendbird_chat_sdk
+    official: true
+    publisher: sendbird.com
+    kind: chat-sdk
+  - language: dart
+    registry: pub.dev
+    name: sendbird_uikit
+    url: https://pub.dev/packages/sendbird_uikit
+    install: flutter pub add sendbird_uikit
+    official: true
+    publisher: sendbird.com
+    kind: uikit
+  # --- .NET ---
+  - language: csharp
+    registry: nuget
+    name: Sendbird.Chat
+    version: 4.2.0
+    url: https://www.nuget.org/packages/Sendbird.Chat
+    install: dotnet add package Sendbird.Chat
+    official: true
+    kind: chat-sdk
+    source: https://github.com/sendbird/sendbird-chat-sdk-dotnet
+  # --- iOS (distributed via Swift Package Manager / CocoaPods, not a central registry) ---
+  - language: swift
+    registry: swiftpm
+    name: SendbirdChatSDK
+    url: https://github.com/sendbird/sendbird-chat-ios-spm
+    install: "Swift Package Manager: https://github.com/sendbird/sendbird-chat-ios-spm.git"
+    official: true
+    kind: chat-sdk
+  - language: swift
+    registry: swiftpm
+    name: SendbirdUIKit
+    url: https://github.com/sendbird/sendbird-uikit-ios-spm
+    install: "Swift Package Manager: https://github.com/sendbird/sendbird-uikit-ios-spm.git"
+    official: true
+    kind: uikit
+    source: https://github.com/sendbird/sendbird-uikit-ios
+  # --- Android (distributed via Sendbird Maven repo / Gradle) ---
+  - language: kotlin
+    registry: maven
+    name: "com.sendbird.sdk:sendbird-chat"
+    url: https://github.com/sendbird/SendBird-Android
+    install: "implementation 'com.sendbird.sdk:sendbird-chat:VERSION'"
+    official: true
+    kind: chat-sdk
+  - language: kotlin
+    registry: maven
+    name: "com.sendbird.uikit:uikit"
+    url: https://github.com/sendbird/sendbird-uikit-android
+    install: "implementation 'com.sendbird.uikit:uikit:VERSION'"
+    official: true
+    kind: uikit
+  # --- Unity / .NET game ---
+  - language: csharp
+    registry: github
+    name: sendbird-chat-sample-unity
+    url: https://github.com/sendbird/sendbird-chat-sample-unity
+    install: "Import the Sendbird Chat SDK for Unity package"
+    official: true
+    kind: chat-sdk
+    note: Unity Chat SDK distributed as a downloadable package, not via a central registry.

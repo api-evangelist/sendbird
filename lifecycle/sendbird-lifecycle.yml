@@ -1,0 +1,27 @@
+generated: '2026-06-20'
+method: searched
+source: https://sendbird.com/docs/chat/platform-api/v3/overview
+description: >-
+  Versioning, deprecation, and operational lifecycle for the Sendbird Platform
+  API. The API version is carried in the URI path (v3). Sendbird maintains a
+  dedicated deprecated-features reference and a public status page.
+versioning:
+  scheme: uri-path
+  current: v3
+  base_url: https://api-{application_id}.sendbird.com/v3
+  docs: https://sendbird.com/docs/chat/platform-api/v3/overview
+deprecation:
+  policy_url: https://sendbird.com/docs/chat/platform-api/v3/deprecated
+  policy_summary: >-
+    Deprecated APIs and features remain supported only for customers who began
+    using them before deprecation. Example: issuing session tokens via
+    PUT /users/{user_id} is deprecated in favor of POST /users/{user_id}/token.
+  sunset_header: unknown
+status_page: https://status.sendbird.com/
+support: https://sendbird.com/contact-us/
+deprecated_operations: []
+note: >-
+  No operations in openapi/sendbird-platform-openapi.yml carry deprecated: true.
+  The release-notes URL previously wired in apis.yml (sendbird.com/release-notes/)
+  now returns 404; the docs overview and the deprecated-features page are the
+  live lifecycle sources.

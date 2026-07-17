@@ -5,7 +5,7 @@ description: Sendbird provides APIs and SDKs for in-app chat, voice, video, AI c
 image: https://sendbird.com/favicon.ico
 url: https://sendbird.com
 created: '2025-01-14'
-modified: '2026-05-19'
+modified: '2026-06-20'
 specificationVersion: '0.18'
 apis:
 - name: Sendbird Platform API
@@ -83,6 +83,30 @@ apis:
   - type: Documentation
     url: https://sendbird.com/docs/ai-chatbot/
 common:
+- type: Packages
+  url: packages/sendbird-packages.yml
+- type: WellKnown
+  url: well-known/sendbird-well-known.yml
+- type: MCPServer
+  url: mcp/sendbird-mcp.yml
+- type: LLMsTxt
+  url: llms/sendbird-llms.txt
+- type: Overlay
+  url: overlays/sendbird-platform-overlay.yaml
+- type: Conformance
+  url: conformance/sendbird-conformance.yml
+- type: ErrorCatalog
+  url: errors/sendbird-error-codes.yml
+- type: ErrorCatalog
+  url: errors/sendbird-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/sendbird-lifecycle.yml
+- type: Conventions
+  url: conventions/sendbird-conventions.yml
+- type: Components
+  url: components/sendbird-components.yml
+- type: DataModel
+  url: data-model/sendbird-data-model.yml
 - type: AgenticAccess
   url: agentic-access/sendbird-agentic-access.yml
 - type: TrustCenter
