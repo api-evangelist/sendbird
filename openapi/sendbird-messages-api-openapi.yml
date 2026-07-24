@@ -1,0 +1,254 @@
+openapi: 3.1.0
+info:
+  title: Sendbird Platform Channels Messages API
+  description: The Sendbird Platform API provides server-side access to manage users, channels, messages, and moderation for in-app chat applications built on Sendbird. Supports group channels, open channels, direct messages, push notifications, and webhooks for real-time communication features.
+  version: 3.0.0
+  termsOfService: https://sendbird.com/terms-of-service/
+  contact:
+    name: Sendbird Support
+    url: https://sendbird.com/contact-us/
+  license:
+    name: Proprietary
+    url: https://sendbird.com/terms-of-service/
+servers:
+- url: https://api-{application_id}.sendbird.com/v3
+  description: Sendbird Platform API (replace {application_id} with your app ID)
+  variables:
+    application_id:
+      default: YOUR_APP_ID
+      description: Your Sendbird application ID
+security:
+- apiTokenAuth: []
+tags:
+- name: Messages
+  description: Operations for sending and managing messages.
+paths:
+  /group_channels/{channel_url}/messages:
+    get:
+      operationId: listMessages
+      summary: List Messages
+      description: Retrieves messages from a specific group channel.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/channel_url'
+      - name: message_ts
+        in: query
+        description: Unix timestamp to fetch messages around.
+        schema:
+          type: integer
+      - name: prev_limit
+        in: query
+        description: Number of messages to retrieve before message_ts.
+        schema:
+          type: integer
+          default: 15
+          maximum: 200
+      - name: next_limit
+        in: query
+        description: Number of messages to retrieve after message_ts.
+        schema:
+          type: integer
+          default: 0
+          maximum: 200
+      - name: include
+        in: query
+        description: Whether to include the message at message_ts.
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: A list of messages.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messages:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Message'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: sendMessage
+      summary: Send a Message
+      description: Sends a message to a specific group channel.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/channel_url'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - message_type
+              - user_id
+              properties:
+                message_type:
+                  type: string
+                  description: Type of message.
+                  enum:
+                  - MESG
+                  - FILE
+                  - ADMM
+                user_id:
+                  type: string
+                  description: ID of the user sending the message.
+                message:
+                  type: string
+                  description: Text content of the message.
+                data:
+                  type: string
+                  description: Custom data string.
+                custom_type:
+                  type: string
+                  description: Custom type for message categorization.
+                mention_type:
+                  type: string
+                  enum:
+                  - users
+                  - channel
+                  description: Type of mention.
+                mentioned_user_ids:
+                  type: array
+                  items:
+                    type: string
+                  description: IDs of mentioned users.
+      responses:
+        '200':
+          description: Message sent successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: Unique identifier of the user.
+        nickname:
+          type: string
+          description: Display nickname.
+        profile_url:
+          type: string
+          description: Profile image URL.
+        is_online:
+          type: boolean
+          description: Whether the user is currently online.
+        is_active:
+          type: boolean
+          description: Whether the user account is active.
+        last_seen_at:
+          type: integer
+          description: Unix timestamp of last activity.
+        access_token:
+          type: string
+          description: Access token for the user (returned when issue_access_token is true).
+        metadata:
+          type: object
+          description: Custom metadata.
+          additionalProperties:
+            type: string
+        created_at:
+          type: integer
+          description: Unix timestamp when the user was created.
+    Error:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Indicates an error occurred.
+        code:
+          type: integer
+          description: Sendbird error code.
+        message:
+          type: string
+          description: Human-readable error message.
+    Message:
+      type: object
+      properties:
+        message_id:
+          type: integer
+          description: Unique ID of the message.
+        type:
+          type: string
+          description: Message type.
+          enum:
+          - MESG
+          - FILE
+          - ADMM
+        message:
+          type: string
+          description: Text content of the message.
+        user:
+          $ref: '#/components/schemas/User'
+        channel_url:
+          type: string
+          description: URL of the channel containing this message.
+        created_at:
+          type: integer
+          description: Unix timestamp when the message was created.
+        updated_at:
+          type: integer
+          description: Unix timestamp when the message was last updated.
+        custom_type:
+          type: string
+          description: Custom type for message categorization.
+        data:
+          type: string
+          description: Custom data string.
+        mention_type:
+          type: string
+          description: Mention type.
+        mentioned_users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+          description: Mentioned users.
+  parameters:
+    channel_url:
+      name: channel_url
+      in: path
+      required: true
+      description: URL of the channel.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized. API token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiTokenAuth:
+      type: apiKey
+      in: header
+      name: Api-Token
+      description: Sendbird API token obtained from the Sendbird Dashboard.

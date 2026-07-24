@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Sendbird Platform Channels Moderation API
+  description: The Sendbird Platform API provides server-side access to manage users, channels, messages, and moderation for in-app chat applications built on Sendbird. Supports group channels, open channels, direct messages, push notifications, and webhooks for real-time communication features.
+  version: 3.0.0
+  termsOfService: https://sendbird.com/terms-of-service/
+  contact:
+    name: Sendbird Support
+    url: https://sendbird.com/contact-us/
+  license:
+    name: Proprietary
+    url: https://sendbird.com/terms-of-service/
+servers:
+- url: https://api-{application_id}.sendbird.com/v3
+  description: Sendbird Platform API (replace {application_id} with your app ID)
+  variables:
+    application_id:
+      default: YOUR_APP_ID
+      description: Your Sendbird application ID
+security:
+- apiTokenAuth: []
+tags:
+- name: Moderation
+  description: Operations for content moderation and user management.
+paths:
+  /users/{user_id}/ban:
+    post:
+      operationId: banUser
+      summary: Ban a User from a Channel
+      description: Bans a user from a specific channel for moderation purposes.
+      tags:
+      - Moderation
+      parameters:
+      - $ref: '#/components/parameters/user_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - channel_url
+              properties:
+                channel_url:
+                  type: string
+                  description: URL of the channel to ban the user from.
+                seconds:
+                  type: integer
+                  description: Duration of the ban in seconds. -1 for permanent ban.
+                  default: -1
+                description:
+                  type: string
+                  description: Reason for the ban.
+      responses:
+        '200':
+          description: User banned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /users/{user_id}/mute:
+    post:
+      operationId: muteUser
+      summary: Mute a User in a Channel
+      description: Mutes a user in a specific channel, preventing them from sending messages.
+      tags:
+      - Moderation
+      parameters:
+      - $ref: '#/components/parameters/user_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - channel_url
+              properties:
+                channel_url:
+                  type: string
+                  description: URL of the channel to mute the user in.
+                seconds:
+                  type: integer
+                  description: Duration of the mute in seconds.
+                  default: -1
+                description:
+                  type: string
+                  description: Reason for the mute.
+      responses:
+        '200':
+          description: User muted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    user_id:
+      name: user_id
+      in: path
+      required: true
+      description: Unique identifier of the user.
+      schema:
+        type: string
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Indicates an error occurred.
+        code:
+          type: integer
+          description: Sendbird error code.
+        message:
+          type: string
+          description: Human-readable error message.
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized. API token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    apiTokenAuth:
+      type: apiKey
+      in: header
+      name: Api-Token
+      description: Sendbird API token obtained from the Sendbird Dashboard.
