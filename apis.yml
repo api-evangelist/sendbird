@@ -2,41 +2,29 @@ name: Sendbird
 description: Sendbird provides APIs and SDKs for in-app chat, voice, video, AI chatbots,
   and omnichannel business messaging. Used by over 4,000 companies to build real-time
   communication experiences for customer support, communities, and marketplace platforms.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://sendbird.com/favicon.ico
 url: https://sendbird.com
 created: '2025-01-14'
 modified: '2026-06-20'
 specificationVersion: '0.18'
 apis:
-- name: Sendbird Platform API
-  description: The Sendbird Platform API provides server-side access to manage users,
-    channels, messages, and moderation for chat applications. Supports group channels,
-    open channels, direct messages, push notifications, and webhooks.
-  image: https://sendbird.com/favicon.ico
-  humanURL: https://sendbird.com/docs/chat/platform-api/
-  baseURL: https://api-{application_id}.sendbird.com/v3
-  tags:
-  - Chat
-  - Messaging
-  - Real-Time Communication
-  - Push Notifications
-  properties:
-  - type: Documentation
-    url: https://sendbird.com/docs/chat/platform-api/
-  - type: OpenAPI
-    url: openapi/sendbird-platform-openapi.yml
-  - type: Authentication
-    url: https://sendbird.com/docs/chat/platform-api/v3/authentication
-  - type: RateLimits
-    url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
-  - url: graphql/sendbird-graphql.md
-    type: GraphQL
-  contact:
-  - FN: Sendbird Support
-    url: https://sendbird.com/contact-us/
 - name: Sendbird Calls API
-  description: The Sendbird Calls API provides voice and video calling capabilities,
-    enabling real-time one-on-one and group calls within applications.
+  description: >-
+    The Sendbird Calls API provides voice and video calling capabilities, enabling real-time one-on-one
+    and group calls within applications.
   image: https://sendbird.com/favicon.ico
   humanURL: https://sendbird.com/docs/calls/
   baseURL: https://api-{application_id}.sendbird.com/v3
@@ -52,9 +40,9 @@ apis:
   - FN: Sendbird Support
     url: https://sendbird.com/contact-us/
 - name: Sendbird Business Messaging API
-  description: The Sendbird Business Messaging API enables omnichannel customer engagement
-    through SMS, WhatsApp, and other messaging channels, supporting customer support
-    and marketing use cases.
+  description: >-
+    The Sendbird Business Messaging API enables omnichannel customer engagement through SMS, WhatsApp,
+    and other messaging channels, supporting customer support and marketing use cases.
   image: https://sendbird.com/favicon.ico
   humanURL: https://sendbird.com/docs/business-messaging/
   baseURL: https://api-{application_id}.sendbird.com/v3
@@ -68,9 +56,9 @@ apis:
   - type: Documentation
     url: https://sendbird.com/docs/business-messaging/
 - name: Sendbird AI Chatbot API
-  description: The Sendbird AI Chatbot API enables building and deploying AI-powered
-    chatbots within chat applications, supporting automated customer support and conversational
-    AI experiences.
+  description: >-
+    The Sendbird AI Chatbot API enables building and deploying AI-powered chatbots within chat applications,
+    supporting automated customer support and conversational AI experiences.
   image: https://sendbird.com/favicon.ico
   humanURL: https://sendbird.com/docs/ai-chatbot/
   baseURL: https://api-{application_id}.sendbird.com/v3
@@ -82,6 +70,78 @@ apis:
   properties:
   - type: Documentation
     url: https://sendbird.com/docs/ai-chatbot/
+- aid: sendbird:sendbird-channels-api
+  name: Sendbird Channels API
+  description: Operations for managing group and open channels.
+  humanURL: https://sendbird.com/docs/chat/platform-api/
+  baseURL: https://api-{application_id}.sendbird.com/v3
+  tags:
+  - Channels
+  properties:
+  - type: OpenAPI
+    url: openapi/sendbird-channels-api-openapi.yml
+  - type: Documentation
+    url: https://sendbird.com/docs/chat/platform-api/
+  - type: Authentication
+    url: https://sendbird.com/docs/chat/platform-api/v3/authentication
+  - type: RateLimits
+    url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
+  - type: GraphQL
+    url: graphql/sendbird-graphql.md
+- aid: sendbird:sendbird-messages-api
+  name: Sendbird Messages API
+  description: Operations for sending and managing messages.
+  humanURL: https://sendbird.com/docs/chat/platform-api/
+  baseURL: https://api-{application_id}.sendbird.com/v3
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/sendbird-messages-api-openapi.yml
+  - type: Documentation
+    url: https://sendbird.com/docs/chat/platform-api/
+  - type: Authentication
+    url: https://sendbird.com/docs/chat/platform-api/v3/authentication
+  - type: RateLimits
+    url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
+  - type: GraphQL
+    url: graphql/sendbird-graphql.md
+- aid: sendbird:sendbird-moderation-api
+  name: Sendbird Moderation API
+  description: Operations for content moderation and user management.
+  humanURL: https://sendbird.com/docs/chat/platform-api/
+  baseURL: https://api-{application_id}.sendbird.com/v3
+  tags:
+  - Moderation
+  properties:
+  - type: OpenAPI
+    url: openapi/sendbird-moderation-api-openapi.yml
+  - type: Documentation
+    url: https://sendbird.com/docs/chat/platform-api/
+  - type: Authentication
+    url: https://sendbird.com/docs/chat/platform-api/v3/authentication
+  - type: RateLimits
+    url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
+  - type: GraphQL
+    url: graphql/sendbird-graphql.md
+- aid: sendbird:sendbird-users-api
+  name: Sendbird Users API
+  description: Operations for managing Sendbird users.
+  humanURL: https://sendbird.com/docs/chat/platform-api/
+  baseURL: https://api-{application_id}.sendbird.com/v3
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/sendbird-users-api-openapi.yml
+  - type: Documentation
+    url: https://sendbird.com/docs/chat/platform-api/
+  - type: Authentication
+    url: https://sendbird.com/docs/chat/platform-api/v3/authentication
+  - type: RateLimits
+    url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
+  - type: GraphQL
+    url: graphql/sendbird-graphql.md
 common:
 - type: Packages
   url: packages/sendbird-packages.yml
