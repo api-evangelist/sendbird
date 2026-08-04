@@ -1,0 +1,20 @@
+{
+  "provider": "sendbird",
+  "sources": [
+    "sendbird-channels-api-openapi.yml",
+    "sendbird-messages-api-openapi.yml",
+    "sendbird-moderation-api-openapi.yml",
+    "sendbird-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "sendbird-channels-api-openapi.yml",
+    "sendbird-messages-api-openapi.yml",
+    "sendbird-moderation-api-openapi.yml",
+    "sendbird-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
