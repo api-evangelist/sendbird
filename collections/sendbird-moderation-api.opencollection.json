@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sendbird Platform Channels Moderation API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Token",
+      "value": "{{Api-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Moderation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ban a User from a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-{application_id}.sendbird.com/v3/users/:user_id/ban",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bans a user from a specific channel for moderation purposes."
+        },
+        {
+          "info": {
+            "name": "Mute a User in a Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-{application_id}.sendbird.com/v3/users/:user_id/mute",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mutes a user in a specific channel, preventing them from sending messages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

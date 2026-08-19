@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sendbird Platform Channels Messages API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Token",
+      "value": "{{Api-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels/:channel_url/messages",
+            "params": [
+              {
+                "name": "channel_url",
+                "value": "",
+                "type": "path",
+                "description": "URL of the channel."
+              },
+              {
+                "name": "message_ts",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp to fetch messages around."
+              },
+              {
+                "name": "prev_limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of messages to retrieve before message_ts."
+              },
+              {
+                "name": "next_limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of messages to retrieve after message_ts."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include the message at message_ts."
+              }
+            ]
+          },
+          "docs": "Retrieves messages from a specific group channel."
+        },
+        {
+          "info": {
+            "name": "Send a Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels/:channel_url/messages",
+            "params": [
+              {
+                "name": "channel_url",
+                "value": "",
+                "type": "path",
+                "description": "URL of the channel."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends a message to a specific group channel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

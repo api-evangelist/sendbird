@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sendbird Platform Channels Users API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Token",
+      "value": "{{Api-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-{application_id}.sendbird.com/v3/users",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token for the next page."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of users to return (1-100)."
+              },
+              {
+                "name": "active_mode",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user active mode."
+              },
+              {
+                "name": "show_bot",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include bot users in results."
+              },
+              {
+                "name": "user_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of user IDs to filter."
+              },
+              {
+                "name": "nickname",
+                "value": "",
+                "type": "query",
+                "description": "Filter users by nickname (partial match)."
+              },
+              {
+                "name": "nickname_startswith",
+                "value": "",
+                "type": "query",
+                "description": "Filter users whose nickname starts with this value."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of users registered in the Sendbird application. Supports pagination and filtering by nickname."
+        },
+        {
+          "info": {
+            "name": "Create a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-{application_id}.sendbird.com/v3/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new user in the Sendbird application. The user_id must be unique within the application."
+        },
+        {
+          "info": {
+            "name": "Get a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-{application_id}.sendbird.com/v3/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the user."
+              }
+            ]
+          },
+          "docs": "Retrieves information about a specific user."
+        },
+        {
+          "info": {
+            "name": "Update a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api-{application_id}.sendbird.com/v3/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates information of a specific user."
+        },
+        {
+          "info": {
+            "name": "Delete a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-{application_id}.sendbird.com/v3/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the user."
+              }
+            ]
+          },
+          "docs": "Deletes a specific user from the Sendbird application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

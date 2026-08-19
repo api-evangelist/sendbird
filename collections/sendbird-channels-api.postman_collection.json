@@ -1,0 +1,1003 @@
+{
+  "item": [
+    {
+      "id": "e0b05775-0861-40d5-a2f8-723248c122b9",
+      "name": "Channels",
+      "description": {
+        "content": "Operations for managing group and open channels.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "243898d7-acf4-495c-827b-ea3f6dfab55a",
+          "name": "List Group Channels",
+          "request": {
+            "name": "List Group Channels",
+            "description": {
+              "content": "Retrieves a list of group channels in the Sendbird application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "group_channels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "Pagination token."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of channels to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "channel_url",
+                  "value": "<string>",
+                  "description": "Filter by specific channel URL."
+                },
+                {
+                  "disabled": false,
+                  "key": "members_include_in",
+                  "value": "<string>",
+                  "description": "Filter channels that include specific user IDs."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your Sendbird application ID",
+                  "type": "any",
+                  "value": "{{application_id}}",
+                  "key": "application_id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "07b34e7c-604e-4d23-a468-090c707f041a",
+              "name": "A list of group channels.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "channel_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "members_include_in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"channels\": [\n    {\n      \"channel_url\": \"string\",\n      \"name\": \"string\",\n      \"cover_url\": \"string\",\n      \"member_count\": 2735,\n      \"joined_member_count\": 3499,\n      \"unread_message_count\": 3972,\n      \"last_message\": {\n        \"message_id\": 4706,\n        \"type\": \"FILE\",\n        \"message\": \"string\",\n        \"user\": {\n          \"user_id\": \"string\",\n          \"nickname\": \"string\",\n          \"profile_url\": \"string\",\n          \"is_online\": true,\n          \"is_active\": false,\n          \"last_seen_at\": 2234,\n          \"access_token\": \"string\",\n          \"metadata\": {\n            \"key_0\": \"string\"\n          },\n          \"created_at\": 6468\n        },\n        \"channel_url\": \"string\",\n        \"created_at\": 6952,\n        \"updated_at\": 2849,\n        \"custom_type\": \"string\",\n        \"data\": \"string\",\n        \"mention_type\": \"string\",\n        \"mentioned_users\": [\n          {\n            \"user_id\": \"string\",\n            \"nickname\": \"string\",\n            \"profile_url\": \"string\",\n            \"is_online\": false,\n            \"is_active\": true,\n            \"last_seen_at\": 9435,\n            \"access_token\": \"string\",\n            \"metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": 6823\n          },\n          {\n            \"user_id\": \"string\",\n            \"nickname\": \"string\",\n            \"profile_url\": \"string\",\n            \"is_online\": true,\n            \"is_active\": false,\n            \"last_seen_at\": 5405,\n            \"access_token\": \"string\",\n            \"metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": 4011\n          }\n        ]\n      },\n      \"is_distinct\": true,\n      \"created_at\": 9765,\n      \"data\": \"string\"\n    },\n    {\n      \"channel_url\": \"string\",\n      \"name\": \"string\",\n      \"cover_url\": \"string\",\n      \"member_count\": 1132,\n      \"joined_member_count\": 6106,\n      \"unread_message_count\": 5449,\n      \"last_message\": {\n        \"message_id\": 3805,\n        \"type\": \"ADMM\",\n        \"message\": \"string\",\n        \"user\": {\n          \"user_id\": \"string\",\n          \"nickname\": \"string\",\n          \"profile_url\": \"string\",\n          \"is_online\": true,\n          \"is_active\": false,\n          \"last_seen_at\": 264,\n          \"access_token\": \"string\",\n          \"metadata\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"created_at\": 6185\n        },\n        \"channel_url\": \"string\",\n        \"created_at\": 8648,\n        \"updated_at\": 5528,\n        \"custom_type\": \"string\",\n        \"data\": \"string\",\n        \"mention_type\": \"string\",\n        \"mentioned_users\": [\n          {\n            \"user_id\": \"string\",\n            \"nickname\": \"string\",\n            \"profile_url\": \"string\",\n            \"is_online\": false,\n            \"is_active\": true,\n            \"last_seen_at\": 1913,\n            \"access_token\": \"string\",\n            \"metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": 1043\n          },\n          {\n            \"user_id\": \"string\",\n            \"nickname\": \"string\",\n            \"profile_url\": \"string\",\n            \"is_online\": false,\n            \"is_active\": false,\n            \"last_seen_at\": 4472,\n            \"access_token\": \"string\",\n            \"metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": 2529\n          }\n        ]\n      },\n      \"is_distinct\": false,\n      \"created_at\": 4241,\n      \"data\": \"string\"\n    }\n  ],\n  \"next\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24bd1361-cd33-4aff-8117-2b8b509a0aa4",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "channel_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "members_include_in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 1246,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c0b7225-8ef3-4fc5-949e-4159ee3daa28",
+              "name": "Unauthorized. API token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "channel_url",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "members_include_in",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 1246,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7168c03-ae84-44ce-a49d-b09495c502c5",
+          "name": "Create a Group Channel",
+          "request": {
+            "name": "Create a Group Channel",
+            "description": {
+              "content": "Creates a new group channel for messaging between users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "group_channels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your Sendbird application ID",
+                  "type": "any",
+                  "value": "{{application_id}}",
+                  "key": "application_id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"channel_url\": \"<string>\",\n  \"cover_url\": \"<string>\",\n  \"is_distinct\": false,\n  \"data\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12da07c0-51c4-4729-a6fa-124e84ae9f6f",
+              "name": "Group channel created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"channel_url\": \"<string>\",\n  \"cover_url\": \"<string>\",\n  \"is_distinct\": false,\n  \"data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"channel_url\": \"string\",\n  \"name\": \"string\",\n  \"cover_url\": \"string\",\n  \"member_count\": 5233,\n  \"joined_member_count\": 1614,\n  \"unread_message_count\": 812,\n  \"last_message\": {\n    \"message_id\": 4519,\n    \"type\": \"FILE\",\n    \"message\": \"string\",\n    \"user\": {\n      \"user_id\": \"string\",\n      \"nickname\": \"string\",\n      \"profile_url\": \"string\",\n      \"is_online\": true,\n      \"is_active\": true,\n      \"last_seen_at\": 6161,\n      \"access_token\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"created_at\": 9839\n    },\n    \"channel_url\": \"string\",\n    \"created_at\": 9075,\n    \"updated_at\": 1115,\n    \"custom_type\": \"string\",\n    \"data\": \"string\",\n    \"mention_type\": \"string\",\n    \"mentioned_users\": [\n      {\n        \"user_id\": \"string\",\n        \"nickname\": \"string\",\n        \"profile_url\": \"string\",\n        \"is_online\": false,\n        \"is_active\": false,\n        \"last_seen_at\": 3561,\n        \"access_token\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"created_at\": 531\n      },\n      {\n        \"user_id\": \"string\",\n        \"nickname\": \"string\",\n        \"profile_url\": \"string\",\n        \"is_online\": true,\n        \"is_active\": true,\n        \"last_seen_at\": 3434,\n        \"access_token\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        },\n        \"created_at\": 1867\n      }\n    ]\n  },\n  \"is_distinct\": true,\n  \"created_at\": 2904,\n  \"data\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20b16724-3da2-434b-affe-89d9eacfc458",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"channel_url\": \"<string>\",\n  \"cover_url\": \"<string>\",\n  \"is_distinct\": false,\n  \"data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 1246,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "868cca9b-9586-4ca3-afa2-1d3f16e9efc9",
+              "name": "Unauthorized. API token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"channel_url\": \"<string>\",\n  \"cover_url\": \"<string>\",\n  \"is_distinct\": false,\n  \"data\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 1246,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9663373-14c2-4cf7-8dc2-78afeaf126c3",
+          "name": "Get a Group Channel",
+          "request": {
+            "name": "Get a Group Channel",
+            "description": {
+              "content": "Retrieves details of a specific group channel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "group_channels",
+                ":channel_url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_url",
+                  "description": "(Required) URL of the channel."
+                },
+                {
+                  "description": "Your Sendbird application ID",
+                  "type": "any",
+                  "value": "{{application_id}}",
+                  "key": "application_id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6dbeeb5e-f254-46a0-a55b-3be6250dece0",
+              "name": "Group channel details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels",
+                    ":channel_url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_url",
+                      "description": "(Required) URL of the channel."
+                    },
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"channel_url\": \"string\",\n  \"name\": \"string\",\n  \"cover_url\": \"string\",\n  \"member_count\": 5233,\n  \"joined_member_count\": 1614,\n  \"unread_message_count\": 812,\n  \"last_message\": {\n    \"message_id\": 4519,\n    \"type\": \"FILE\",\n    \"message\": \"string\",\n    \"user\": {\n      \"user_id\": \"string\",\n      \"nickname\": \"string\",\n      \"profile_url\": \"string\",\n      \"is_online\": true,\n      \"is_active\": true,\n      \"last_seen_at\": 6161,\n      \"access_token\": \"string\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"created_at\": 9839\n    },\n    \"channel_url\": \"string\",\n    \"created_at\": 9075,\n    \"updated_at\": 1115,\n    \"custom_type\": \"string\",\n    \"data\": \"string\",\n    \"mention_type\": \"string\",\n    \"mentioned_users\": [\n      {\n        \"user_id\": \"string\",\n        \"nickname\": \"string\",\n        \"profile_url\": \"string\",\n        \"is_online\": false,\n        \"is_active\": false,\n        \"last_seen_at\": 3561,\n        \"access_token\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"created_at\": 531\n      },\n      {\n        \"user_id\": \"string\",\n        \"nickname\": \"string\",\n        \"profile_url\": \"string\",\n        \"is_online\": true,\n        \"is_active\": true,\n        \"last_seen_at\": 3434,\n        \"access_token\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        },\n        \"created_at\": 1867\n      }\n    ]\n  },\n  \"is_distinct\": true,\n  \"created_at\": 2904,\n  \"data\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82bddb6a-f250-4fd4-b6b9-b60697c7d875",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels",
+                    ":channel_url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_url",
+                      "description": "(Required) URL of the channel."
+                    },
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 1246,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "00e36521-e3a9-4b83-a99e-678934b0f9f2",
+              "name": "Not found. The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels",
+                    ":channel_url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_url",
+                      "description": "(Required) URL of the channel."
+                    },
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 1246,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b92fb2bb-a67d-4ac3-8227-11df2689a37d",
+          "name": "Delete a Group Channel",
+          "request": {
+            "name": "Delete a Group Channel",
+            "description": {
+              "content": "Deletes a specific group channel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "group_channels",
+                ":channel_url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "channel_url",
+                  "description": "(Required) URL of the channel."
+                },
+                {
+                  "description": "Your Sendbird application ID",
+                  "type": "any",
+                  "value": "{{application_id}}",
+                  "key": "application_id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "476f3512-52a8-4cf5-b84a-7a7159774c60",
+              "name": "Group channel deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels",
+                    ":channel_url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_url",
+                      "description": "(Required) URL of the channel."
+                    },
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91046046-b786-4bd7-ba95-95bc9afa802f",
+              "name": "Bad request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels",
+                    ":channel_url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_url",
+                      "description": "(Required) URL of the channel."
+                    },
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 1246,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "935667e4-0db3-4d29-b98f-97e886835956",
+              "name": "Not found. The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "group_channels",
+                    ":channel_url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "channel_url",
+                      "description": "(Required) URL of the channel."
+                    },
+                    {
+                      "description": "Your Sendbird application ID",
+                      "type": "any",
+                      "value": "{{application_id}}",
+                      "key": "application_id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Api-Token",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": false,\n  \"code\": 1246,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your Sendbird application ID",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_APP_ID",
+      "key": "application_id"
+    },
+    {
+      "type": "string",
+      "value": "https://api-{{application_id}}.sendbird.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Api-Token"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a9874d57-82c3-469f-9cc6-c1a4f9718447",
+    "name": "Sendbird Platform Channels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Sendbird Platform API provides server-side access to manage users, channels, messages, and moderation for in-app chat applications built on Sendbird. Supports group channels, open channels, direct messages, push notifications, and webhooks for real-time communication features.\n\nContact Support:\n Name: Sendbird Support",
+      "type": "text/plain"
+    }
+  }
+}

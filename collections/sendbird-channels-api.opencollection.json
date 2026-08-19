@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Sendbird Platform Channels API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Api-Token",
+      "value": "{{Api-Token}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Channels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Group Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "Pagination token."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return."
+              },
+              {
+                "name": "channel_url",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific channel URL."
+              },
+              {
+                "name": "members_include_in",
+                "value": "",
+                "type": "query",
+                "description": "Filter channels that include specific user IDs."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of group channels in the Sendbird application."
+        },
+        {
+          "info": {
+            "name": "Create a Group Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new group channel for messaging between users."
+        },
+        {
+          "info": {
+            "name": "Get a Group Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels/:channel_url",
+            "params": [
+              {
+                "name": "channel_url",
+                "value": "",
+                "type": "path",
+                "description": "URL of the channel."
+              }
+            ]
+          },
+          "docs": "Retrieves details of a specific group channel."
+        },
+        {
+          "info": {
+            "name": "Delete a Group Channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api-{application_id}.sendbird.com/v3/group_channels/:channel_url",
+            "params": [
+              {
+                "name": "channel_url",
+                "value": "",
+                "type": "path",
+                "description": "URL of the channel."
+              }
+            ]
+          },
+          "docs": "Deletes a specific group channel."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
