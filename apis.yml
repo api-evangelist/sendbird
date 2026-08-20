@@ -49,6 +49,12 @@ apis:
   tags:
   - Business Messaging
   - Omnichannel
+  - Customer-Support
+  - WhatsApp
+  - SMS
+  tags_raw:
+  - Business Messaging
+  - Omnichannel
   - Customer Support
   - WhatsApp
   - SMS
@@ -63,6 +69,11 @@ apis:
   humanURL: https://sendbird.com/docs/ai-chatbot/
   baseURL: https://api-{application_id}.sendbird.com/v3
   tags:
+  - Artificial Intelligence
+  - Chatbots
+  - Customer-Support
+  - Automation
+  tags_raw:
   - AI
   - Chatbot
   - Customer Support
@@ -94,6 +105,8 @@ apis:
   humanURL: https://sendbird.com/docs/chat/platform-api/
   baseURL: https://api-{application_id}.sendbird.com/v3
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -130,6 +143,8 @@ apis:
   humanURL: https://sendbird.com/docs/chat/platform-api/
   baseURL: https://api-{application_id}.sendbird.com/v3
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
