@@ -10,8 +10,11 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: sendbirdApi
-  url: ../openapi/sendbird-platform-openapi.yml
+- name: messagesApi
+  url: ../openapi/sendbird-messages-api-openapi.yml
+  type: openapi
+- name: usersApi
+  url: ../openapi/sendbird-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: rename-user-and-notify-channel

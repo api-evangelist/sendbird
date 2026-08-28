@@ -11,8 +11,14 @@ info:
     the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: sendbirdApi
-  url: ../openapi/sendbird-platform-openapi.yml
+- name: channelsApi
+  url: ../openapi/sendbird-channels-api-openapi.yml
+  type: openapi
+- name: moderationApi
+  url: ../openapi/sendbird-moderation-api-openapi.yml
+  type: openapi
+- name: usersApi
+  url: ../openapi/sendbird-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: ban-user-from-channel

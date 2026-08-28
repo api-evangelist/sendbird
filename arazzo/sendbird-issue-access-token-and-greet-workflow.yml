@@ -11,8 +11,14 @@ info:
     and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: sendbirdApi
-  url: ../openapi/sendbird-platform-openapi.yml
+- name: channelsApi
+  url: ../openapi/sendbird-channels-api-openapi.yml
+  type: openapi
+- name: messagesApi
+  url: ../openapi/sendbird-messages-api-openapi.yml
+  type: openapi
+- name: usersApi
+  url: ../openapi/sendbird-users-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: issue-access-token-and-greet
