@@ -2,6 +2,18 @@ name: Sendbird
 description: Sendbird provides APIs and SDKs for in-app chat, voice, video, AI chatbots,
   and omnichannel business messaging. Used by over 4,000 companies to build real-time
   communication experiences for customer support, communities, and marketplace platforms.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
