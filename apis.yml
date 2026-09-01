@@ -82,7 +82,7 @@ apis:
   baseURL: https://api-{application_id}.sendbird.com/v3
   tags:
   - Artificial Intelligence
-  - Chatbot
+  - Chatbots
   - Customer-Support
   - Automation
   tags_raw:
