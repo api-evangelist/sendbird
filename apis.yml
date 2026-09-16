@@ -1,7 +1,7 @@
 name: Sendbird
-description: Sendbird provides APIs and SDKs for in-app chat, voice, video, AI chatbots,
-  and omnichannel business messaging. Used by over 4,000 companies to build real-time
-  communication experiences for customer support, communities, and marketplace platforms.
+description: Sendbird provides APIs and SDKs for in-app chat, voice, video, AI chatbots, and omnichannel
+  business messaging. Used by over 4,000 companies to build real-time communication experiences for customer
+  support, communities, and marketplace platforms.
 deliveryModel:
   model: saas
   open_source: false
@@ -30,13 +30,12 @@ accessModel:
 image: https://sendbird.com/favicon.ico
 url: https://sendbird.com
 created: '2025-01-14'
-modified: '2026-06-20'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - name: Sendbird Calls API
-  description: >-
-    The Sendbird Calls API provides voice and video calling capabilities, enabling real-time one-on-one
-    and group calls within applications.
+  description: The Sendbird Calls API provides voice and video calling capabilities, enabling real-time
+    one-on-one and group calls within applications.
   image: https://sendbird.com/favicon.ico
   humanURL: https://sendbird.com/docs/calls/
   baseURL: https://api-{application_id}.sendbird.com/v3
@@ -52,9 +51,8 @@ apis:
   - FN: Sendbird Support
     url: https://sendbird.com/contact-us/
 - name: Sendbird Business Messaging API
-  description: >-
-    The Sendbird Business Messaging API enables omnichannel customer engagement through SMS, WhatsApp,
-    and other messaging channels, supporting customer support and marketing use cases.
+  description: The Sendbird Business Messaging API enables omnichannel customer engagement through SMS,
+    WhatsApp, and other messaging channels, supporting customer support and marketing use cases.
   image: https://sendbird.com/favicon.ico
   humanURL: https://sendbird.com/docs/business-messaging/
   baseURL: https://api-{application_id}.sendbird.com/v3
@@ -74,9 +72,8 @@ apis:
   - type: Documentation
     url: https://sendbird.com/docs/business-messaging/
 - name: Sendbird AI Chatbot API
-  description: >-
-    The Sendbird AI Chatbot API enables building and deploying AI-powered chatbots within chat applications,
-    supporting automated customer support and conversational AI experiences.
+  description: The Sendbird AI Chatbot API enables building and deploying AI-powered chatbots within chat
+    applications, supporting automated customer support and conversational AI experiences.
   image: https://sendbird.com/favicon.ico
   humanURL: https://sendbird.com/docs/ai-chatbot/
   baseURL: https://api-{application_id}.sendbird.com/v3
@@ -176,7 +173,10 @@ common:
   url: well-known/sendbird-well-known.yml
 - type: X-MCPServerCandidate
   url: mcp/sendbird-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/sendbird-llms.txt
 - type: Overlay
@@ -304,3 +304,10 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
   url: https://apievangelist.com
+tags:
+- Customer-Support
+- Voice
+- Video
+- Omnichannel
+- WhatsApp
+- SMS
