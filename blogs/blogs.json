@@ -3,10 +3,13 @@
   "feeds": [
     {
       "source": "https://sendbird.com/pricing/",
-      "error": "HTTPError"
+      "feed_url": "https://sendbird.com/pricing/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-09-13T13:00:00Z",
+  "fetched": "2026-09-19T20:17:39Z",
   "agent_pulled": "2026-06-27"
 }
