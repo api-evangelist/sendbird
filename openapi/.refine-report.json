@@ -1,10 +1,7 @@
 {
   "provider": "sendbird",
   "sources": [
-    "sendbird-channels-api-openapi.yml",
-    "sendbird-messages-api-openapi.yml",
-    "sendbird-moderation-api-openapi.yml",
-    "sendbird-users-api-openapi.yml"
+    "_original/sendbird-platform-openapi.yml"
   ],
   "outputs": [
     "sendbird-channels-api-openapi.yml",
@@ -15,6 +12,15 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sendbird-platform-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "sendbird-channels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sendbird-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sendbird-moderation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sendbird-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
