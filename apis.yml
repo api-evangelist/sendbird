@@ -59,7 +59,7 @@ apis:
   tags:
   - Business Messaging
   - Omnichannel
-  - Customer-Support
+  - Customer Support
   - WhatsApp
   - SMS
   tags_raw:
@@ -68,6 +68,7 @@ apis:
   - Customer Support
   - WhatsApp
   - SMS
+  - Customer-Support
   properties:
   - type: Documentation
     url: https://sendbird.com/docs/business-messaging/
@@ -80,13 +81,14 @@ apis:
   tags:
   - Artificial Intelligence
   - Chatbots
-  - Customer-Support
+  - Customer Support
   - Automation
   tags_raw:
   - AI
   - Chatbot
   - Customer Support
   - Automation
+  - Customer-Support
   properties:
   - type: Documentation
     url: https://sendbird.com/docs/ai-chatbot/
@@ -106,8 +108,6 @@ apis:
     url: https://sendbird.com/docs/chat/platform-api/v3/authentication
   - type: RateLimits
     url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
-  - type: GraphQL
-    url: graphql/sendbird-graphql.md
 - aid: sendbird:sendbird-messages-api
   name: Sendbird Messages API
   description: Operations for sending and managing messages.
@@ -126,8 +126,6 @@ apis:
     url: https://sendbird.com/docs/chat/platform-api/v3/authentication
   - type: RateLimits
     url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
-  - type: GraphQL
-    url: graphql/sendbird-graphql.md
 - aid: sendbird:sendbird-moderation-api
   name: Sendbird Moderation API
   description: Operations for content moderation and user management.
@@ -144,8 +142,6 @@ apis:
     url: https://sendbird.com/docs/chat/platform-api/v3/authentication
   - type: RateLimits
     url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
-  - type: GraphQL
-    url: graphql/sendbird-graphql.md
 - aid: sendbird:sendbird-users-api
   name: Sendbird Users API
   description: Operations for managing Sendbird users.
@@ -164,8 +160,6 @@ apis:
     url: https://sendbird.com/docs/chat/platform-api/v3/authentication
   - type: RateLimits
     url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
-  - type: GraphQL
-    url: graphql/sendbird-graphql.md
 common:
 - type: Packages
   url: packages/sendbird-packages.yml
@@ -305,6 +299,13 @@ maintainers:
   email: kin@apievangelist.com
   url: https://apievangelist.com
 tags:
+- Customer Support
+- Voice
+- Video
+- Omnichannel
+- WhatsApp
+- SMS
+tags_raw:
 - Customer-Support
 - Voice
 - Video
