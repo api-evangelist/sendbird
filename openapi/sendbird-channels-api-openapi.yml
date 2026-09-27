@@ -156,26 +156,19 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized. API token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Not found. The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Indicates an error occurred.
+        code:
+          type: integer
+          description: Sendbird error code.
+        message:
+          type: string
+          description: Human-readable error message.
     Message:
       type: object
       properties:
@@ -249,18 +242,6 @@ components:
         created_at:
           type: integer
           description: Unix timestamp when the user was created.
-    Error:
-      type: object
-      properties:
-        error:
-          type: boolean
-          description: Indicates an error occurred.
-        code:
-          type: integer
-          description: Sendbird error code.
-        message:
-          type: string
-          description: Human-readable error message.
     GroupChannel:
       type: object
       properties:
@@ -293,6 +274,25 @@ components:
         data:
           type: string
           description: Custom data string.
+  responses:
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized. API token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     channel_url:
       name: channel_url

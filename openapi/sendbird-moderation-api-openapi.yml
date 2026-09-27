@@ -115,6 +115,19 @@ components:
         message:
           type: string
           description: Human-readable error message.
+  responses:
+    Unauthorized:
+      description: Unauthorized. API token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     user_id:
       name: user_id
@@ -123,19 +136,6 @@ components:
       description: Unique identifier of the user.
       schema:
         type: string
-  responses:
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized. API token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiTokenAuth:
       type: apiKey
