@@ -223,19 +223,34 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized. API token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    user_id:
+      name: user_id
+      in: path
+      required: true
+      description: Unique identifier of the user.
+      schema:
+        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: boolean
-          description: Indicates an error occurred.
-        code:
-          type: integer
-          description: Sendbird error code.
-        message:
-          type: string
-          description: Human-readable error message.
     User:
       type: object
       properties:
@@ -268,33 +283,18 @@ components:
         created_at:
           type: integer
           description: Unix timestamp when the user was created.
-  responses:
-    NotFound:
-      description: Not found. The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized. API token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    user_id:
-      name: user_id
-      in: path
-      required: true
-      description: Unique identifier of the user.
-      schema:
-        type: string
+    Error:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Indicates an error occurred.
+        code:
+          type: integer
+          description: Sendbird error code.
+        message:
+          type: string
+          description: Human-readable error message.
   securitySchemes:
     apiTokenAuth:
       type: apiKey

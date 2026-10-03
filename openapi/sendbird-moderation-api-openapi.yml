@@ -115,6 +115,14 @@ components:
         message:
           type: string
           description: Human-readable error message.
+  parameters:
+    user_id:
+      name: user_id
+      in: path
+      required: true
+      description: Unique identifier of the user.
+      schema:
+        type: string
   responses:
     Unauthorized:
       description: Unauthorized. API token is missing or invalid.
@@ -128,14 +136,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    user_id:
-      name: user_id
-      in: path
-      required: true
-      description: Unique identifier of the user.
-      schema:
-        type: string
   securitySchemes:
     apiTokenAuth:
       type: apiKey
