@@ -133,26 +133,47 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    NotFound:
-      description: Not found. The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized. API token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    channel_url:
+      name: channel_url
+      in: path
+      required: true
+      description: URL of the channel.
+      schema:
+        type: string
   schemas:
+    User:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: Unique identifier of the user.
+        nickname:
+          type: string
+          description: Display nickname.
+        profile_url:
+          type: string
+          description: Profile image URL.
+        is_online:
+          type: boolean
+          description: Whether the user is currently online.
+        is_active:
+          type: boolean
+          description: Whether the user account is active.
+        last_seen_at:
+          type: integer
+          description: Unix timestamp of last activity.
+        access_token:
+          type: string
+          description: Access token for the user (returned when issue_access_token is true).
+        metadata:
+          type: object
+          description: Custom metadata.
+          additionalProperties:
+            type: string
+        created_at:
+          type: integer
+          description: Unix timestamp when the user was created.
     Message:
       type: object
       properties:
@@ -194,38 +215,6 @@ components:
           items:
             $ref: '#/components/schemas/User'
           description: Mentioned users.
-    User:
-      type: object
-      properties:
-        user_id:
-          type: string
-          description: Unique identifier of the user.
-        nickname:
-          type: string
-          description: Display nickname.
-        profile_url:
-          type: string
-          description: Profile image URL.
-        is_online:
-          type: boolean
-          description: Whether the user is currently online.
-        is_active:
-          type: boolean
-          description: Whether the user account is active.
-        last_seen_at:
-          type: integer
-          description: Unix timestamp of last activity.
-        access_token:
-          type: string
-          description: Access token for the user (returned when issue_access_token is true).
-        metadata:
-          type: object
-          description: Custom metadata.
-          additionalProperties:
-            type: string
-        created_at:
-          type: integer
-          description: Unix timestamp when the user was created.
     Error:
       type: object
       properties:
@@ -238,14 +227,25 @@ components:
         message:
           type: string
           description: Human-readable error message.
-  parameters:
-    channel_url:
-      name: channel_url
-      in: path
-      required: true
-      description: URL of the channel.
-      schema:
-        type: string
+  responses:
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized. API token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiTokenAuth:
       type: apiKey

@@ -223,33 +223,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Not found. The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized. API token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    user_id:
-      name: user_id
-      in: path
-      required: true
-      description: Unique identifier of the user.
-      schema:
-        type: string
   schemas:
     User:
       type: object
@@ -295,6 +268,33 @@ components:
         message:
           type: string
           description: Human-readable error message.
+  parameters:
+    user_id:
+      name: user_id
+      in: path
+      required: true
+      description: Unique identifier of the user.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized. API token is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     apiTokenAuth:
       type: apiKey
