@@ -161,6 +161,10 @@ apis:
   - type: RateLimits
     url: https://sendbird.com/docs/chat/platform-api/v3/rate-limits
 common:
+- type: Plans
+  url: plans/sendbird-plans-pricing.yml
+- type: FinOps
+  url: finops/sendbird-finops.yml
 - type: Packages
   url: packages/sendbird-packages.yml
 - type: WellKnown
