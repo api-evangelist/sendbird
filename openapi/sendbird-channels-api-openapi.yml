@@ -156,47 +156,51 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    channel_url:
-      name: channel_url
-      in: path
-      required: true
-      description: URL of the channel.
-      schema:
-        type: string
   schemas:
-    User:
+    Error:
       type: object
       properties:
-        user_id:
-          type: string
-          description: Unique identifier of the user.
-        nickname:
-          type: string
-          description: Display nickname.
-        profile_url:
-          type: string
-          description: Profile image URL.
-        is_online:
+        error:
           type: boolean
-          description: Whether the user is currently online.
-        is_active:
-          type: boolean
-          description: Whether the user account is active.
-        last_seen_at:
+          description: Indicates an error occurred.
+        code:
           type: integer
-          description: Unix timestamp of last activity.
-        access_token:
+          description: Sendbird error code.
+        message:
           type: string
-          description: Access token for the user (returned when issue_access_token is true).
-        metadata:
-          type: object
-          description: Custom metadata.
-          additionalProperties:
-            type: string
+          description: Human-readable error message.
+    GroupChannel:
+      type: object
+      properties:
+        channel_url:
+          type: string
+          description: Unique URL of the channel.
+        name:
+          type: string
+          description: Name of the channel.
+        cover_url:
+          type: string
+          description: Cover image URL.
+        member_count:
+          type: integer
+          description: Number of members in the channel.
+        joined_member_count:
+          type: integer
+          description: Number of joined members.
+        unread_message_count:
+          type: integer
+          description: Number of unread messages.
+        last_message:
+          $ref: '#/components/schemas/Message'
+        is_distinct:
+          type: boolean
+          description: Whether this is a distinct channel.
         created_at:
           type: integer
-          description: Unix timestamp when the user was created.
+          description: Unix timestamp when the channel was created.
+        data:
+          type: string
+          description: Custom data string.
     Message:
       type: object
       properties:
@@ -238,51 +242,45 @@ components:
           items:
             $ref: '#/components/schemas/User'
           description: Mentioned users.
-    GroupChannel:
+    User:
       type: object
       properties:
-        channel_url:
+        user_id:
           type: string
-          description: Unique URL of the channel.
-        name:
+          description: Unique identifier of the user.
+        nickname:
           type: string
-          description: Name of the channel.
-        cover_url:
+          description: Display nickname.
+        profile_url:
           type: string
-          description: Cover image URL.
-        member_count:
-          type: integer
-          description: Number of members in the channel.
-        joined_member_count:
-          type: integer
-          description: Number of joined members.
-        unread_message_count:
-          type: integer
-          description: Number of unread messages.
-        last_message:
-          $ref: '#/components/schemas/Message'
-        is_distinct:
+          description: Profile image URL.
+        is_online:
           type: boolean
-          description: Whether this is a distinct channel.
+          description: Whether the user is currently online.
+        is_active:
+          type: boolean
+          description: Whether the user account is active.
+        last_seen_at:
+          type: integer
+          description: Unix timestamp of last activity.
+        access_token:
+          type: string
+          description: Access token for the user (returned when issue_access_token is true).
+        metadata:
+          type: object
+          description: Custom metadata.
+          additionalProperties:
+            type: string
         created_at:
           type: integer
-          description: Unix timestamp when the channel was created.
-        data:
-          type: string
-          description: Custom data string.
-    Error:
-      type: object
-      properties:
-        error:
-          type: boolean
-          description: Indicates an error occurred.
-        code:
-          type: integer
-          description: Sendbird error code.
-        message:
-          type: string
-          description: Human-readable error message.
+          description: Unix timestamp when the user was created.
   responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     NotFound:
       description: Not found. The requested resource does not exist.
       content:
@@ -295,12 +293,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    channel_url:
+      name: channel_url
+      in: path
+      required: true
+      description: URL of the channel.
+      schema:
+        type: string
   securitySchemes:
     apiTokenAuth:
       type: apiKey

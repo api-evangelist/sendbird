@@ -133,47 +133,19 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    channel_url:
-      name: channel_url
-      in: path
-      required: true
-      description: URL of the channel.
-      schema:
-        type: string
   schemas:
-    User:
+    Error:
       type: object
       properties:
-        user_id:
-          type: string
-          description: Unique identifier of the user.
-        nickname:
-          type: string
-          description: Display nickname.
-        profile_url:
-          type: string
-          description: Profile image URL.
-        is_online:
+        error:
           type: boolean
-          description: Whether the user is currently online.
-        is_active:
-          type: boolean
-          description: Whether the user account is active.
-        last_seen_at:
+          description: Indicates an error occurred.
+        code:
           type: integer
-          description: Unix timestamp of last activity.
-        access_token:
+          description: Sendbird error code.
+        message:
           type: string
-          description: Access token for the user (returned when issue_access_token is true).
-        metadata:
-          type: object
-          description: Custom metadata.
-          additionalProperties:
-            type: string
-        created_at:
-          type: integer
-          description: Unix timestamp when the user was created.
+          description: Human-readable error message.
     Message:
       type: object
       properties:
@@ -215,19 +187,45 @@ components:
           items:
             $ref: '#/components/schemas/User'
           description: Mentioned users.
-    Error:
+    User:
       type: object
       properties:
-        error:
-          type: boolean
-          description: Indicates an error occurred.
-        code:
-          type: integer
-          description: Sendbird error code.
-        message:
+        user_id:
           type: string
-          description: Human-readable error message.
+          description: Unique identifier of the user.
+        nickname:
+          type: string
+          description: Display nickname.
+        profile_url:
+          type: string
+          description: Profile image URL.
+        is_online:
+          type: boolean
+          description: Whether the user is currently online.
+        is_active:
+          type: boolean
+          description: Whether the user account is active.
+        last_seen_at:
+          type: integer
+          description: Unix timestamp of last activity.
+        access_token:
+          type: string
+          description: Access token for the user (returned when issue_access_token is true).
+        metadata:
+          type: object
+          description: Custom metadata.
+          additionalProperties:
+            type: string
+        created_at:
+          type: integer
+          description: Unix timestamp when the user was created.
   responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     NotFound:
       description: Not found. The requested resource does not exist.
       content:
@@ -240,12 +238,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    channel_url:
+      name: channel_url
+      in: path
+      required: true
+      description: URL of the channel.
+      schema:
+        type: string
   securitySchemes:
     apiTokenAuth:
       type: apiKey

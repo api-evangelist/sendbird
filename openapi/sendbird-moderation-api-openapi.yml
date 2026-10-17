@@ -102,6 +102,19 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: boolean
+          description: Indicates an error occurred.
+        code:
+          type: integer
+          description: Sendbird error code.
+        message:
+          type: string
+          description: Human-readable error message.
   responses:
     BadRequest:
       description: Bad request.
@@ -123,19 +136,6 @@ components:
       description: Unique identifier of the user.
       schema:
         type: string
-  schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: boolean
-          description: Indicates an error occurred.
-        code:
-          type: integer
-          description: Sendbird error code.
-        message:
-          type: string
-          description: Human-readable error message.
   securitySchemes:
     apiTokenAuth:
       type: apiKey
