@@ -59,7 +59,7 @@ apis:
   tags:
   - Business Messaging
   - Omnichannel
-  - Customer Support
+  - Customer Service
   - WhatsApp
   - SMS
   tags_raw:
@@ -81,7 +81,7 @@ apis:
   tags:
   - Artificial Intelligence
   - Chatbots
-  - Customer Support
+  - Customer Service
   - Automation
   tags_raw:
   - AI
@@ -303,7 +303,7 @@ maintainers:
   email: kin@apievangelist.com
   url: https://apievangelist.com
 tags:
-- Customer Support
+- Customer Service
 - Voice
 - Video
 - Omnichannel
@@ -316,3 +316,4 @@ tags_raw:
 - Omnichannel
 - WhatsApp
 - SMS
+- Customer Support
