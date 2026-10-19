@@ -66,3 +66,16 @@
     builder: Pipedream repo (component)
   status: not-a-workflow
   arazzo: null
+- slug: sendbird-brightcove-own
+  label: Brightcove (own)
+  partner: brightcove
+  partner_name: Brightcove (own)
+  category: Events, Conferencing & Learning
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.brightcove.com/partners/sendbird-live-chat
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
