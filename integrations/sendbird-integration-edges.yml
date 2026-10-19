@@ -1,9 +1,16 @@
 generated: '2026-10-13'
 method: searched
 checked:
+- https://api.nuget.org/v3
 - https://aws.amazon.com/marketplace/
+- https://crates.io/api/v1
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://marketplace.brightcove.com/llms.txt
+- https://proxy.golang.org
+- https://pypi.org/pypi
+- https://registry.npmjs.org
+- https://repo1.maven.org/maven2
+- https://rubygems.org/api/v1
 - https://zapier.com/api/v4/apps/
 marketplace_apps: []
 edges:
@@ -91,6 +98,111 @@ edges:
   detected: '2026-10-18'
   detected_by: mirror-platform-listings.py
   category: Events, Conferencing & Learning
+- partner_name: npm registry
+  partner: npm
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (JavaScript/TypeScript)
+  evidence: https://www.npmjs.com/package/@sendbird/calls-react-native
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: '@sendbird/calls-react-native'
+      version: 1.2.0
+      released: '2026-02-19'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@sendbird/calls-react-native
+      repo_leg: github-org:sendbird
+      publisher_leg: email:sendbird.com
+      matched_by: domain
+    - name: '@sendbird/chat'
+      version: 4.22.14
+      released: '2026-10-15'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@sendbird/chat
+      repo_leg: domain:sendbird.com
+      publisher_leg: email:sendbird.com
+      matched_by: domain
+    - name: '@sendbird/uikit-react'
+      version: 3.20.0
+      released: '2026-10-06'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@sendbird/uikit-react
+      repo_leg: domain:sendbird.com
+      publisher_leg: email:sendbird.com
+      matched_by: domain
+    - name: '@sendbird/uikit-react-native'
+      version: 3.12.10
+      released: '2026-10-01'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/@sendbird/uikit-react-native
+      repo_leg: github-org:sendbird
+      publisher_leg: email:sendbird.com
+      matched_by: domain
+    - name: sendbird
+      version: 3.1.33
+      released: '2023-08-24'
+      released_field: modified
+      lapsed: true
+      page: https://www.npmjs.com/package/sendbird
+      repo_leg: domain:sendbird.com
+      publisher_leg: email:sendbird.com
+      matched_by: domain
+    - name: sendbird-calls
+      version: 1.10.21
+      released: '2026-01-07'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/sendbird-calls
+      repo_leg: domain:sendbird.com
+      publisher_leg: email:sendbird.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
+- partner_name: NuGet Gallery
+  partner: nuget
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (.NET)
+  evidence: https://www.nuget.org/packages/Sendbird.Chat
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: NuGet Gallery (public registry JSON)
+    spec_file: null
+    language: .NET
+    packages:
+    - name: Sendbird.Chat
+      version: 4.2.0
+      released: '2026-02-27'
+      released_field: published
+      lapsed: false
+      page: https://www.nuget.org/packages/Sendbird.Chat
+      repo_leg: domain:sendbird.com
+      publisher_leg: org:sendbird
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  detected_by: sweep-official-sdks.py
+  first_seen: '2026-10-18'
 source:
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://zapier.com/api/v4/apps/
