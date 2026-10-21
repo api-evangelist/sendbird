@@ -15,19 +15,6 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
-- slug: sendbird-brightcove-own
-  label: Brightcove (own)
-  partner: brightcove
-  partner_name: Brightcove (own)
-  category: Events, Conferencing & Learning
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://marketplace.brightcove.com/partners/sendbird-live-chat
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: sendbird-npm-registry
   label: npm registry
   partner: npm
@@ -184,5 +171,101 @@
     actions: true
     sources: false
     builder: Pipedream repo (component)
+  status: not-a-workflow
+  arazzo: null
+- slug: sendbird-cocoapods-trunk
+  label: CocoaPods trunk
+  partner_name: CocoaPods trunk
+  category: iOS SDK (CocoaPods)
+  type: register
+  channel: package-registry
+  evidence: https://cocoapods.org/pods/SendBird-CocoaPod-Test
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: CocoaPods trunk (cdn.cocoapods.org Specs; github.com/CocoaPods/Specs)
+    spec_file: null
+    role: cocoapods-publisher
+    registered_name: Young Hwang
+    matched_domain: sendbird.com
+    matched_by: domain
+    pods:
+    - pod: SendBird-CocoaPod-Test
+      version: 1.0.2
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendBirdCalls
+      version: 1.10.22
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendBirdDesk
+      version: 1.2.2
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendBirdOSXSDK
+      version: 2.0.6
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendBirdSDK
+      version: 3.1.60
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendBirdSyncManager
+      version: 1.1.43
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendBirdUIKit
+      version: 3.36.0
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendBirdVideoChat
+      version: 0.9.2
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendBirdWebRTC
+      version: 1.8.1
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendbirdAuthSDK
+      version: 1.2.0
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendbirdChatSDK
+      version: 4.39.10
+      homepage: https://sendbird.com
+      deprecated: false
+    - pod: SendbirdLiveSDK
+      version: 1.2.6
+      homepage: https://sendbird.com
+      deprecated: false
+    signal_note: latest podspec homepage (domain) + authors (name); pods, versions and counts are context
+    detected_by: sweep-mobile-sdk-index.py
+    detected: '2026-10-21'
+  status: not-a-workflow
+  arazzo: null
+- slug: sendbird-brightcove-own
+  label: Brightcove (own)
+  partner: brightcove
+  partner_name: Brightcove (own)
+  category: Events, Conferencing & Learning
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.brightcove.com/partners/sendbird-live-chat
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: sendbird-google-play-developer-google-play-sdk-index
+  label: Google Play Developer (Google Play SDK Index)
+  partner: google-play
+  partner_name: Google Play Developer (Google Play SDK Index)
+  category: mobile SDK (marketing-and-engagement, social)
+  type: marketplace
+  marketplace: Google Play SDK Index
+  channel: partner-built
+  evidence: https://play.google.com/sdks/details/com-sendbird-sdk-sendbird-android-sdk
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null
