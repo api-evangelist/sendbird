@@ -19,6 +19,9 @@ checked:
 - https://play.google.com/sdks
 - https://search.maven.org/solrsearch/select
 - google-play/integrations/google-play-integration-edges.yml
+- https://hex.pm/api
+- https://packagist.org/packages
+- https://pub.dev/api
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -300,6 +303,63 @@ edges:
   category: mobile SDK (marketing-and-engagement, social)
   publisher_verified:
   - Registered in Google Play SDK Console
+- partner_name: pub.dev
+  partner: pub-dev
+  partner_match: register
+  type: register
+  direction: provider-built
+  category: official SDK (Dart/Flutter)
+  evidence: https://pub.dev/packages/sendbird_chat_sdk
+  channel: package-registry
+  relationship: distribution-channel
+  contract_reference:
+    register: pub.dev (public registry JSON)
+    spec_file: null
+    language: Dart/Flutter
+    packages:
+    - name: sendbird_chat_sdk
+      version: 4.10.4
+      released: '2026-09-10'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sendbird_chat_sdk
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sendbird.com
+      matched_by: domain
+    - name: sendbird_chat_widget
+      version: 1.0.4
+      released: '2024-01-31'
+      released_field: published
+      lapsed: true
+      page: https://pub.dev/packages/sendbird_chat_widget
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sendbird.com
+      matched_by: domain
+    - name: sendbird_sdk
+      version: 3.2.20
+      released: '2024-05-13'
+      released_field: published
+      lapsed: true
+      page: https://pub.dev/packages/sendbird_sdk
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sendbird.com
+      matched_by: domain
+    - name: sendbird_uikit
+      version: 1.5.0
+      released: '2026-07-15'
+      released_field: published
+      lapsed: false
+      page: https://pub.dev/packages/sendbird_uikit
+      repo_leg: not required (verified publisher)
+      publisher_leg: verified-publisher:sendbird.com
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-php-dart-elixir-package-registries.py
+    detected: '2026-10-22'
+  detected_by: sweep-php-dart-elixir-package-registries.py
+  first_seen: '2026-10-22'
 source:
 - https://github.com/PipedreamHQ/pipedream/tree/94800dd6de6640b942c65ea7ee655f71ac56d438/components/
 - https://zapier.com/api/v4/apps/
